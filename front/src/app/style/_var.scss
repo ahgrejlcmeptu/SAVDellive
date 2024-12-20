@@ -1,0 +1,38 @@
+@use "media";
+
+:root {
+  --conteiner: 1200px;
+  --conteiner-padding: 15px;
+  --radius-40: 40px;
+  --radius-30: 30px;
+  --radius-20: 20px;
+  --radius-10: 10px;
+
+  --main-white: #ffffff;
+
+  --main-color-1: #A074FF;
+  --main-color-1-hover: #8B5CEE;
+  --main-color-2: #F7F3FF;
+  --main-color-3: #BD9EFD;
+  --main-color-3-hover: #E8E0FF;
+
+  --text-color-1: #252525;
+  --text-color-1-rgb: 37,37,37;
+  --text-color-2: #767D7D;
+  --text-color-3: #A6A8A7;
+  --text-color-4: #DEDEDE;
+  --text-color-5: #858585;
+
+  --border-color-1: #F2F2F2;
+
+  --family: "Lato", serif;
+
+  --size-main: 16px;
+
+  @include media.respond-to(960) {
+    --conteiner-padding: 30px;
+  }
+  @include media.respond-to(360) {
+    --conteiner-padding: 20px;
+  }
+}

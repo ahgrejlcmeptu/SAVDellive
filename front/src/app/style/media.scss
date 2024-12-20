@@ -1,0 +1,75 @@
+$media0: 1919px;
+$mediaMin0: 1920px;
+
+$media1: 1199px;
+$mediaMin1: 1200px;
+$media2: 959px;
+$mediaMin2: 960px;
+$media3: 639px;
+$mediaMin3: 640px;
+
+$media4: 359px;
+$mediaMin4: 360px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 1200 {
+    @media (max-width: $media0) {
+      @content;
+    }
+  } @else if $breakpoint == 960 {
+    @media (max-width: $media1) {
+      @content;
+    }
+  } @else if $breakpoint == 640 {
+    @media (max-width: $media2) {
+      @content;
+    }
+  } @else if $breakpoint == 360 {
+    @media (max-width: $media3) {
+      @content;
+    }
+  } @else if $breakpoint == 320 {
+    @media (max-width: $media4) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-from($breakpoint) {
+  @if $breakpoint == 1200 {
+    @media (min-width: $mediaMin0) {
+      @content;
+    }
+  } @else if $breakpoint == 960 {
+    @media (min-width: $mediaMin1) {
+      @content;
+    }
+  } @else if $breakpoint == 640 {
+    @media (min-width: $mediaMin2) {
+      @content;
+    }
+  } @else if $breakpoint == 360 {
+    @media (min-width: $mediaMin3) {
+      @content;
+    }
+  } @else if $breakpoint == 320 {
+    @media (min-width: $mediaMin4) {
+      @content;
+    }
+  }
+}
+
+@mixin hover {
+  @media(hover) {
+    &:hover {
+      @content;
+    }
+  }
+  &:active {
+    @content;
+  }
+}
+
+@function sizeREM($context, $pixels: 16) {
+  @return calc($context/$pixels) + rem;
+}

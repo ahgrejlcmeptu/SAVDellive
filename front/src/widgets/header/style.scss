@@ -1,0 +1,151 @@
+@use "/src/app/style/media";
+
+.header {
+  &__hr {
+    background: var(--border-color-1);
+    height: 1px;
+    width: 100%;
+  }
+
+  &-top {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0;
+    font-size: media.sizeREM(15);
+    color: var(--text-color-3);
+    gap: 20px;
+
+    @include media.respond-to(960) {
+      padding: 10px 0;
+      justify-content: flex-start;
+    }
+    @include media.respond-to(640) {
+      gap: 15px;
+    }
+    @include media.respond-to(360) {
+      gap: 10px;
+    }
+
+    &__wrap {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      @include media.respond-to(960) {
+        gap: 20px;
+      }
+      @include media.respond-to(640) {
+        gap: 15px;
+      }
+      @include media.respond-to(360) {
+        gap: 10px;
+      }
+
+      &_right {
+        @include media.respond-to(960) {
+          order: -11;
+        }
+      }
+
+      &_controls {
+        display: none;
+        @include media.respond-to(960) {
+          display: flex;
+          margin-left: auto;
+        }
+      }
+    }
+
+    &__logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      svg {
+        width: 153px;
+        height: 40px;
+        fill: var(--text-color-5);
+        stroke: var(--main-color-1);
+        @include media.respond-to(960) {
+          width: 110px;
+          height: 30px;
+        }
+        @include media.respond-to(360) {
+          width: 87px;
+          height: 24px;
+        }
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include media.respond-to(960) {
+      gap: 10px;
+    }
+    @include media.respond-to(360) {
+      --size: 35px;
+    }
+
+    &_desktop {
+      @include media.respond-to(960) {
+        display: none;
+      }
+    }
+
+    &_favorites {
+      @include media.respond-to(360) {
+        display: none;
+      }
+    }
+
+    &_phone {
+      font-size: media.sizeREM(14);
+      @include media.respond-to(640) {
+        display: none;
+      }
+
+      span {
+        font-size: media.sizeREM(15);
+        color: var(--text-color-2);
+      }
+    }
+
+    &_city {
+      span {
+        color: var(--text-color-2);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        svg {
+          width: 9px;
+          height: 4px;
+          stroke: var(--text-color-2);
+        }
+      }
+    }
+
+    &_burger {
+      display: none;
+      @include media.respond-to(960) {
+        display: block;
+      }
+    }
+
+    &-body {
+      @include media.respond-to(360) {
+        display: none;
+      }
+    }
+  }
+
+  .socials {
+    @include media.respond-to(960) {
+      display: none;
+    }
+  }
+}

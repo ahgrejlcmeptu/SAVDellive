@@ -1,0 +1,27 @@
+---
+import '../app/style/app.scss'
+// import 'swiper/swiper-bundle.css'
+import TheHeader from '../widgets/header/TheHeader.vue'
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="stylesheet" href="/fonts/fonts.css">
+    <meta name="generator" content={Astro.generator}/>
+    <title>Astro Basics</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+</head>
+<body>
+<div class="wrapper">
+    <TheHeader client:load/>
+    <main>
+        <slot/>
+    </main>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,111 @@
+@use 'media';
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+html {
+  font-size: var(--size-main);
+}
+
+body {
+  font-family: var(--family);
+  color: var(--text-color-1);
+  font-size: 1rem;
+  line-height: normal;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, .text-55 {
+  font-size: media.sizeREM(55);
+}
+h2, .text-36 {
+  font-size: media.sizeREM(36);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(26);
+  }
+}
+h3, .text-20 {
+  font-size: media.sizeREM(20);
+  font-weight: 500;
+}
+
+h6, .text-18 {
+  font-size: media.sizeREM(18);
+  font-weight: 500;
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(16);
+  }
+}
+
+p {
+  color: var(--text-color-2);
+}
+
+.container {
+  max-width: var(--conteiner);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--conteiner-padding);
+  padding-right: var(--conteiner-padding);
+}
+
+.mb-50 {
+  margin-bottom: 50px;
+  @include media.respond-to(960) {
+    margin-bottom: 40px;
+  }
+  @include media.respond-to(360) {
+    margin-bottom: 30px;
+  }
+}
+
+.mb-100 {
+  margin-bottom: 100px;
+  @include media.respond-to(640) {
+    margin-bottom: 70px;
+  }
+  @include media.respond-to(360) {
+    margin-bottom: 60px;
+  }
+}
+
+.text-16 {
+  font-size: media.sizeREM(16);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(15);
+  }
+}
+.text-15 {
+  font-size: media.sizeREM(15);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(14);
+  }
+}
+.text-14 {
+  font-size: media.sizeREM(14);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(12);
+  }
+}
+
+.page-header {
+  margin-bottom: 30px;
+  &_center {
+    text-align: center;
+  }
+}
