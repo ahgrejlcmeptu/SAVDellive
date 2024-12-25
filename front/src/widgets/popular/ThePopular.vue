@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import AppCardProduct from "../../entites/card/AppCardProduct.vue";
-import AppLinkBottom from "../../spared/AppLinkBottom.vue";
-import {defineProps} from "vue";
+import AppCardProduct from "@entites/card/AppCardProduct.vue";
+import AppLinkBottom from "@spared/AppLinkBottom.vue";
+import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
+import {ref} from "vue";
 
-interface Props {
-    className?: string;
-}
-
-defineProps<Props>()
 const LIST = [
     {
         id: '1',
@@ -94,10 +90,28 @@ const LIST = [
         img: '/img/products/8.jpg'
     }
 ]
+const STATUS = [
+    {
+        id: '1',
+        name: 'Популярные',
+        icon: '/status.svg#popular'
+    },
+    {
+        id: '2',
+        name: 'Рекомендованные',
+        icon: '/status.svg#recommended'
+    },
+    {
+        id: '3',
+        name: 'Новинки',
+        icon: '/status.svg#new'
+    }
+]
+const active = ref(STATUS[0].id)
 </script>
 
 <template>
-
+    <AppTabsSlider :slides="STATUS" v-model="active" />
     <div class="popular">
         <AppCardProduct
                 class="card-product_mobile"
@@ -110,7 +124,7 @@ const LIST = [
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .popular {
   display: grid;
@@ -132,11 +146,11 @@ const LIST = [
   @include media.respond-to(360) {
     grid-gap: 10px;
     --card-width: 100%;
-      .card-product {
-          &:nth-child(n+5) {
-              display: none;
-          }
+    .card-product {
+      &:nth-child(n+5) {
+        display: none;
       }
+    }
   }
 }
 </style>

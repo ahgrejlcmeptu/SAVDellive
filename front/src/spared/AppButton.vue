@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {checkUndefined} from "../app/utils/verification.ts";
+import {checkUndefined} from "@app/utils/verification.ts";
 
 type Color = 'main';
 interface Props {
     type?: string;
     full?: string;
-    color?: Color;
+    color?: Color | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,13 +19,17 @@ const color = computed(() => 'btn_' + props.color)
 </script>
 
 <template>
-    <button :type="type" :class="['btn', color, {'btn_full': checkUndefined(full)}]" @click.prevent="$emit('action')">
+    <button
+        :type="type"
+        :class="['btn', color, {'btn_full': checkUndefined(full)}]"
+        @click.prevent="$emit('action')"
+    >
         <slot/>
     </button>
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 .btn {
     cursor: pointer;
     display: inline-flex;
@@ -37,7 +41,6 @@ const color = computed(() => 'btn_' + props.color)
     height: 40px;
     border-radius: var(--radius-10);
     font-weight: 500;
-    font-size: media.sizeREM(16);
     transition: .3s;
     background-color: var(--btn-background, transparent);
     border-color: var(--btn-border, transparent);

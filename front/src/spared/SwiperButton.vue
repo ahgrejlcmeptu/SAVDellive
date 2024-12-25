@@ -1,45 +1,64 @@
 <script setup lang="ts">
 import AppSvg from "./AppSvg.vue";
-import {defineProps} from 'vue';
+import {checkUndefined} from "../app/utils/verification.ts";
+
+type Color = ['white', 'gray'];
 
 interface Props {
     next?: any;
     prev?: any;
     tablet?: any;
+    color?: Color | string | undefined
 }
 
-defineProps<Props>();
-import {checkUndefined} from "../app/utils/verification.ts";
+withDefaults(defineProps<Props>(), {
+    color: 'gray'
+});
+
 </script>
 
 <template>
-    <div :class="['swiper-button', {
+    <div :class="['swiper-button', 'swiper-button_' + color,{
         'swiper-button-prev': checkUndefined(prev),
          'swiper-button-next': checkUndefined(next),
          'swiper-button_tablet': checkUndefined(tablet)
     }]">
-        <app-svg name="swiper"></app-svg>
+        <AppSvg name="swiper"/>
     </div>
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .swiper-button {
   cursor: pointer;
   width: var(--button-size, 40px);
   height: var(--button-size, 40px);
   border-radius: 50%;
-  border: 1px solid var(--main-white);
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 
+  &_gray {
+    background-color: var(--main-color-4);
+
+    svg {
+      fill: var(--text-color-2);
+    }
+  }
+
+  &_white {
+    border: 1px solid var(--main-white);
+
+    svg {
+      fill: var(--main-white);
+    }
+  }
+
   svg {
     width: 100%;
     height: 100%;
-    fill: var(--main-white);
   }
 
   &-prev {

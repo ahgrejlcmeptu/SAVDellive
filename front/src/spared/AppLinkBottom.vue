@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .link-bottom {
   margin-top: 40px;

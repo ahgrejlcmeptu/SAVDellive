@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AppSvg from "../../spared/AppSvg.vue";
-import AppIcon from "../../spared/AppIcon.vue";
-import AppItemValue from "../../spared/AppItemValue.vue";
-import AppSocials from "../../entites/socials/AppSocials.vue";
+import AppSvg from "@spared/AppSvg.vue";
+import AppIcon from "@spared/AppIcon.vue";
+import AppItemValue from "@spared/AppItemValue.vue";
+import AppSocials from "@entites/socials/AppSocials.vue";
 </script>
 
 <template>

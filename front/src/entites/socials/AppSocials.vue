@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppIcon from "../../spared/AppIcon.vue";
+import AppIcon from "@spared/AppIcon.vue";
 
 const LIST = [
     {

@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import {defineProps} from "vue";
-import AppCardCategory from "../../entites/card/AppCardCategory.vue";
+import AppCardCategory from "@entites/card/AppCardCategory.vue";
 
 interface Props {
-    className?: object;
     list: object;
 }
 
@@ -11,7 +9,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div :class="['categories_grid', className]">
+    <div class="categories_grid">
         <AppCardCategory
             v-for="item in list"
             :key="item.id"
@@ -21,7 +19,7 @@ defineProps<Props>()
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .categories_grid {
     display: grid;

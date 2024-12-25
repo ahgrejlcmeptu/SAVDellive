@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppSvg from "../../spared/AppSvg.vue";
+import AppSvg from "@spared/AppSvg.vue";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
 
@@ -80,7 +80,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .header-nav {
   display: flex;

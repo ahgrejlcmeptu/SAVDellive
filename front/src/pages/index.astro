@@ -1,21 +1,60 @@
 ---
-import Layout from '../progresses/Layout.astro';
-import TheBanner from '../widgets/banner/TheBanner.vue'
-import TheAdvantages from '../widgets/advantages/TheAdvantages.vue'
-import TheCategories from '../widgets/categories/TheCategories.vue'
-import ThePopular from '../widgets/popular/ThePopular.vue'
+import Layout from '@progresses/Layout.astro';
+import TheBanner from '@widgets/banner/TheBanner.vue'
+import TheAdvantages from '@widgets/advantages/TheAdvantages.vue'
+import TheCategories from '@widgets/categories/TheCategories.vue'
+import ThePopular from '@widgets/popular/ThePopular.vue'
+import TheStories from '@widgets/stories/TheStories.vue'
+import TheAbout from '@widgets/about/TheAbout.vue'
+import TheNews from '@widgets/news/TheNews.vue'
+import TheReviews from '@widgets/reviews/TheReviews.vue'
+import TheSeo from '@widgets/seo/TheSeo.vue'
 ---
 
 <Layout>
-    <TheBanner className="mb-50" client:load/>
-    <TheAdvantages className="container mb-50" client:load/>
-    <TheCategories className="container mb-100" client:load/>
+    <TheBanner class="mb-50" client:load/>
+    <TheAdvantages class="container mb-50" client:load/>
+    <TheCategories class="container mb-100" client:load/>
     <section class="mb-100">
         <div class="container">
             <div class="page-header page-header_center">
                 <h2>Популярные блюда недели</h2>
             </div>
             <ThePopular client:load/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header page-header_center">
+                <h2>Актуальная информация</h2>
+            </div>
+            <TheStories client:load/>
+        </div>
+    </section>
+    <section class="block-color mb-100">
+        <div class="container">
+            <TheAbout/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header page-header_center">
+                <h2>Новости и акции</h2>
+            </div>
+            <TheNews client:load/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header page-header_center">
+                <h2>Отзывы наших клиентов</h2>
+            </div>
+            <TheReviews client:load/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <TheSeo client:load/>
         </div>
     </section>
 </Layout>

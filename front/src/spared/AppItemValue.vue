@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 .item-value {
   position: absolute;
   font-size: media.sizeREM(11);

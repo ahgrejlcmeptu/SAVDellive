@@ -1,15 +1,14 @@
+<script setup>
+import AppSvg from "./AppSvg.vue";
+</script>
 <template>
     <div class="app-favorites">
-        <svg viewBox="0 0 20 18">
-            <path d="M10.1466 2.75656C17.289 -3.62771 25.859 8.84118 10.1466 17C-5.56763 8.84061 2.05137 -3.62832 10.1466 2.75656Z"
-                  stroke-width="1.5"/>
-        </svg>
-
+        <AppSvg name="card-favorites"/>
     </div>
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .app-favorites {
   position: absolute;

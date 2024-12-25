@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppSvg from "../../spared/AppSvg.vue";
-import HeaderNav from "../../entites/header/HeaderNav.vue";
+import AppSvg from "@spared/AppSvg.vue";
+import HeaderNav from "@entites/header/HeaderNav.vue";
 </script>
 
 <template>
@@ -23,7 +23,7 @@ import HeaderNav from "../../entites/header/HeaderNav.vue";
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .header-bottom {
   display: flex;

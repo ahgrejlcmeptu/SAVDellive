@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, ul, ol {
   margin: 0;
 }
 
@@ -85,7 +85,6 @@ p {
 }
 
 .text-16 {
-  font-size: media.sizeREM(16);
   @include media.respond-to(640) {
     font-size: media.sizeREM(15);
   }
@@ -108,4 +107,14 @@ p {
   &_center {
     text-align: center;
   }
+}
+
+.block-color {
+  background: var(--main-color-2);
+}
+
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
 }

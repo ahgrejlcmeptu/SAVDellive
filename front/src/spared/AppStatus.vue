@@ -7,7 +7,7 @@
 </template>
 
 <style lang="scss">
-@use '/src/app/style/media';
+@use '@style/media';
 
 .app-status {
   position: absolute;

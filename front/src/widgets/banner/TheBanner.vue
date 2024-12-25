@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import SwiperButton from "../../spared/SwiperButton.vue";
-import SwiperPagination from "../../spared/SwiperPagination.vue";
+import SwiperButton from "@spared/SwiperButton.vue";
+import SwiperPagination from "@spared/SwiperPagination.vue";
 import {Swiper, SwiperSlide} from "swiper/vue";
 import {Navigation, Pagination, EffectFade} from 'swiper/modules';
-import {defineProps} from 'vue';
-
-interface Props {
-    className: string;
-}
-
-defineProps<Props>()
 
 const LIST = [
     {
@@ -25,15 +18,15 @@ const LIST = [
 
 <template>
     <swiper
-            :class="['banner', className]"
+            class="banner"
             :modules="[Navigation, Pagination, EffectFade]"
             loop
             effect="fade"
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :navigation="{
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-    }"
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+            }"
     >
         <swiper-slide
                 v-for="item in LIST"
@@ -41,14 +34,14 @@ const LIST = [
         >
             <img :src="item.img" alt="">
         </swiper-slide>
-        <swiper-button tablet prev/>
-        <swiper-button tablet next/>
+        <swiper-button color="white" tablet prev/>
+        <swiper-button color="white" tablet next/>
         <swiper-pagination/>
     </swiper>
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .banner {
   width: calc(100% - 20px);

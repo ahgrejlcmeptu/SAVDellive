@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import AppCardCategory from "../../entites/card/AppCardCategory.vue";
+import AppCardCategory from "@entites/card/AppCardCategory.vue";
 import {Swiper, SwiperSlide} from "swiper/vue";
-import {defineProps} from "vue";
 
 interface Props {
-    className: object;
     list: object;
 }
 
@@ -14,7 +12,7 @@ defineProps<Props>()
 <template>
     <swiper
             slides-per-view="auto"
-            :class="[className, 'categories_slider']">
+            class="categories_slider">
         <swiper-slide
                 v-for="item in list"
                 :key="item.id"
@@ -25,7 +23,7 @@ defineProps<Props>()
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .categories_slider {
   overflow: visible;

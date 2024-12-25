@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import {computed, defineProps, markRaw, onMounted, ref} from 'vue';
+import {computed, markRaw, onMounted, ref} from 'vue';
 
-import CategoriesGrid from "../../features/categories/CategoriesGrid.vue";
-import CategoriesSlider from "../../features/categories/CategoriesSlider.vue";
+import CategoriesGrid from "@features/categories/CategoriesGrid.vue";
+import CategoriesSlider from "@features/categories/CategoriesSlider.vue";
 
-interface Props {
-    className?: string;
-}
-
-defineProps<Props>()
-const slider = ref(true)
+const slider = ref(false)
 const blocks = markRaw({
     grid: CategoriesGrid,
     slider: CategoriesSlider
@@ -64,7 +59,7 @@ const LIST = [
     },
 ]
 const updateVisibleItemsCount = () => {
-    if (typeof window !== 'undefined') { // Проверка, доступен ли window
+    if (typeof window !== 'undefined') {
         slider.value = window.innerWidth < 960;
     }
 }
@@ -75,5 +70,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <component :is="block" :list="LIST" :className="['categories', className]"></component>
+    <component :is="block" :list="LIST" class="categories"></component>
 </template>

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import AppFavorites from "../../spared/AppFavorites.vue";
-import AppStatus from "../../spared/AppStatus.vue";
-import AppButton from "../../spared/AppButton.vue";
-import {defineProps} from "vue";
-import AppSvg from "../../spared/AppSvg.vue";
+import AppFavorites from "@spared/AppFavorites.vue";
+import AppStatus from "@spared/AppStatus.vue";
+import AppButton from "@spared/AppButton.vue";
+import AppSvg from "@spared/AppSvg.vue";
 
 interface Props {
     data: {
@@ -55,7 +54,7 @@ defineProps<Props>()
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .card-product {
   position: relative;

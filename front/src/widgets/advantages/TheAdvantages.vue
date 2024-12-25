@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {defineProps} from 'vue';
 import {Swiper, SwiperSlide} from "swiper/vue";
-
-interface Props {
-    className: string;
-}
-
-defineProps<Props>()
 
 const LIST = [
     {
@@ -39,7 +32,7 @@ const LIST = [
 <template>
     <swiper
             slides-per-view="auto"
-            :class="['advantages', className]"
+            class="advantages"
     >
         <swiper-slide
                 class="advantages-item"
@@ -58,7 +51,7 @@ const LIST = [
 </template>
 
 <style lang="scss">
-@use "/src/app/style/media";
+@use "@style/media";
 
 .advantages {
   overflow: visible;

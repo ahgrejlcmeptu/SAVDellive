@@ -19,7 +19,14 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
+      "*": ["node_modules/*", "src/types/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@progresses/*": ["src/progresses/*"],
+      "@app/*": ["src/app/*"],
+      "@entites/*": ["src/entites/*"],
+      "@features/*": ["src/features/*"],
+      "@spared/*": ["src/spared/*"],
+      "@style/*": ["src/app/style/*"]
     }
   }
 }
