@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
 import HeaderNav from "@entites/header/HeaderNav.vue";
+import AppItemValue from "@spared/AppItemValue.vue";
 </script>
 
 <template>
@@ -10,9 +11,11 @@ import HeaderNav from "@entites/header/HeaderNav.vue";
             <div class="header-bottom__controls">
                 <div class="header-bottom__btn header-bottom__btn_favorites">
                     <app-svg name="favorites"></app-svg>
+                    <app-item-value>1</app-item-value>
                 </div>
                 <div class="header-bottom__btn header-bottom__btn_basket">
                     <app-svg name="basket"></app-svg>
+                    <app-item-value>1</app-item-value>
                 </div>
                 <div class="header-bottom__btn header-bottom__btn_auth">
                     <app-svg name="auth"></app-svg>
@@ -43,6 +46,7 @@ import HeaderNav from "@entites/header/HeaderNav.vue";
   }
 
   &__btn {
+    position: relative;
     cursor: pointer;
     padding: 0 5px;
     --color: var(--text-color-2);

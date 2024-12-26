@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderTop from "@features/header/HeaderTop.vue";
 import HeaderBottom from "@features/header/HeaderBottom.vue";
+
 </script>
 
 <template>

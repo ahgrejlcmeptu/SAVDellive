@@ -3,55 +3,102 @@ import AppSvg from "@spared/AppSvg.vue";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
 
-const LIST = [
+const NAV = {
+    menu: [
+        {
+            id: '1',
+            name: 'Роллы'
+        },
+        {
+            id: '2',
+            name: 'Наборы'
+        },
+        {
+            id: '3',
+            name: 'Суши'
+        },
+        {
+            id: '4',
+            name: 'Салаты'
+        },
+        {
+            id: '5',
+            name: 'Блюда гриль'
+        },
+        {
+            id: '6',
+            name: 'Горячие блюда'
+        },
+        {
+            id: '7',
+            name: 'Пицца'
+        },
+        {
+            id: '8',
+            name: 'Супы'
+        },
+        {
+            id: '9',
+            name: 'Десерты'
+        },
+        {
+            id: '10',
+            name: 'Напитки'
+        },
+        {
+            id: '11',
+            name: 'Соусы'
+        },
+    ],
+    links: [
+        {
+            id: '1',
+            name: 'О нас'
+        },
+        {
+            id: '2',
+            name: 'Доставка и оплата'
+        },
+        {
+            id: '3',
+            name: 'Отзывы'
+        },
+        {
+            id: '4',
+            name: 'Контакты'
+        },
+    ],
+    highlight: [
+        {
+            id: '01',
+            name: 'Акции',
+            highlight: true
+        },
+    ]
+}
+const MORE_NAV = [
     {
-        id: '1',
-        name: 'Акции',
-        highlight: true
+        id: '02',
+        name: 'Главная',
     },
     {
-        id: '2',
-        name: 'Бургеры',
-    },
-    {
-        id: '3',
-        name: 'Шашлыки',
-    },
-    {
-        id: '4',
-        name: 'Салаты',
-    },
-    {
-        id: '5',
-        name: 'Супы',
-    },
-    {
-        id: '6',
-        name: 'Роллы',
-    },
-    {
-        id: '7',
-        name: 'Горячее',
-    },
-    {
-        id: '8',
-        name: 'Тест 1',
-    },
-    {
-        id: '9',
-        name: 'Тест 2',
+        id: '03',
+        name: 'Наше меню',
+        menu: true
     },
 ]
 
 const full = ref(false)
 const filter = computed(() => {
-    return LIST.length > 7 && !full.value ? [LIST.slice(0, 7), LIST.slice(7)] : [LIST]
+    return !full.value ? [...NAV.highlight, ...MORE_NAV, ...NAV.links] : [...NAV.highlight, ...NAV.menu]
 })
 const updateVisibleItemsCount = () => {
     if (typeof window !== 'undefined') { // Проверка, доступен ли window
         full.value = window.innerWidth < 1200;
     }
 };
+const menu = ref(null)
+
 onMounted(() => {
     updateVisibleItemsCount();
     window.addEventListener('resize', () => {
@@ -67,14 +114,33 @@ onMounted(() => {
             slides-per-view="auto"
     >
         <swiper-slide
-                v-for="item in filter[0]"
+                v-for="item in filter"
                 :class="['header-nav__item', {'header-nav__item_highlight': item.highlight}]"
                 :key="item.id"
-        >{{ item.name }}
-        </swiper-slide>
-        <swiper-slide class="header-nav__item header-nav__item_more" v-if="filter.length > 1">
-            Ещё
-            <app-svg name="dropdown"></app-svg>
+        >
+            <a class="header-nav__link" href="#" v-if="!item.menu">
+                {{ item.name }}
+            </a>
+            <template v-else>
+                <v-menu>
+                    <template v-slot:activator="{ props }">
+                        <div class="header-nav__link" v-bind="props">
+                            {{ item.name }}
+                            <app-svg name="dropdown"></app-svg>
+                        </div>
+                    </template>
+                    <v-list>
+                        <div class="header-nav__item"
+                            v-for="item in NAV.menu"
+                            :key="item.id"
+                        >
+                            <a class="header-nav__link" href="#">{{ item.name }}</a>
+                        </div>
+                    </v-list>
+                </v-menu>
+            </template>
+
+
         </swiper-slide>
     </swiper>
 </template>
@@ -129,24 +195,22 @@ onMounted(() => {
       }
     }
 
-    &_more {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 27px;
-      border-radius: 50px;
-      background: var(--main-color-2);
-
-      svg {
-        width: 9px;
-        height: 4px;
-        stroke: var(--text-color-1);
-      }
+    svg {
+      width: 9px;
+      height: 4px;
+      stroke: var(--text-color-1);
     }
 
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
   }
 }
 </style>
