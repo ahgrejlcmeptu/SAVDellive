@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import SwiperButton from "@spared/SwiperButton.vue";
 import SwiperPagination from "@spared/SwiperPagination.vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
 import {Swiper, SwiperSlide} from "swiper/vue";
 import {Navigation, Pagination, EffectFade} from 'swiper/modules';
+
+interface Props {
+    className?: string
+}
+
+defineProps<Props>()
 
 const LIST = [
     {
@@ -17,8 +24,24 @@ const LIST = [
 </script>
 
 <template>
+    <app-slider
+            v-if="true"
+            :class="['banner', className]"
+            :slider="{loop: true, effect: 'fade' }"
+            :navigation="{color: 'white', tablet: true}"
+            :pagination="{}"
+    >
+        <swiper-slide
+                v-for="item in LIST"
+                :key="item.id"
+        >
+            <img :src="item.img" alt="">
+        </swiper-slide>
+    </app-slider>
+
     <swiper
-            class="banner"
+            v-else
+            :class="['banner', className]"
             :modules="[Navigation, Pagination, EffectFade]"
             loop
             effect="fade"

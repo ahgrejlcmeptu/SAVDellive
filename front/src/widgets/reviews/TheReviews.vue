@@ -2,6 +2,7 @@
 import AppCardReview from "@entites/card/AppCardReview.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import SwiperButton from "@spared/SwiperButton.vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
 import {Swiper, SwiperSlide} from "swiper/vue";
 import {onMounted, ref} from "vue";
 import {Navigation, Pagination} from 'swiper/modules';
@@ -80,7 +81,7 @@ const LIST = [
 </script>
 
 <template>
-    <div class="reviews">
+    <div class="reviews" v-if="false">
         <swiper-button tablet prev/>
         <swiper-button tablet next/>
         <swiper
@@ -93,7 +94,7 @@ const LIST = [
             }"
         >
             <swiper-slide
-                    v-for="item in LIST"
+                    v-for="item in [...LIST, ...LIST, ...LIST]"
                     :key="item.id"
             >
                 <AppCardReview
@@ -102,6 +103,9 @@ const LIST = [
             </swiper-slide>
         </swiper>
     </div>
+    <app-slider>
+        <swiper-slide v-for="i in [1,2,3,4,5]">{{i}}</swiper-slide>
+    </app-slider>
     <app-link-bottom><a href="#">Смотреть все</a></app-link-bottom>
 </template>
 
