@@ -1,6 +1,9 @@
 @use "@style/media";
 
 .header {
+  position: relative;
+  z-index: 5;
+
   &__hr {
     background: var(--border-color-1);
     height: 1px;

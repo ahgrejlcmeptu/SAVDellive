@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppCardCategory from "@entites/card/AppCardCategory.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 
 interface Props {
     list: object;
@@ -10,16 +11,14 @@ defineProps<Props>()
 </script>
 
 <template>
-    <swiper
-            slides-per-view="auto"
-            class="categories_slider">
+    <app-slider name=".categories_slider" class="categories_slider">
         <swiper-slide
                 v-for="item in list"
                 :key="item.id"
         >
             <AppCardCategory :data="item"/>
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">
@@ -33,7 +32,7 @@ defineProps<Props>()
     margin-right: 20px;
     @include media.respond-to(360px) {
       margin-right: 16px;
-        width: 150px;
+      width: 150px;
     }
 
     &:last-child {
@@ -49,16 +48,16 @@ defineProps<Props>()
       padding: 16px;
     }
 
-      img {
-          height: 180px;
-          bottom: -50px;
-          right: -80px;
-          @include media.respond-to(360) {
-              height: 130px;
-              bottom: -20px;
-              right: -60px;
-          }
+    img {
+      height: 180px;
+      bottom: -50px;
+      right: -80px;
+      @include media.respond-to(360) {
+        height: 130px;
+        bottom: -20px;
+        right: -60px;
       }
+    }
   }
 }
 </style>

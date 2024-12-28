@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppCardStory from "@entites/card/AppCardStory.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 
 const LIST = [
     {
@@ -51,11 +52,11 @@ const LIST = [
 </script>
 
 <template>
-    <swiper class="stories" slides-per-view="auto">
+    <app-slider name=".stories" class="stories">
         <swiper-slide v-for="item in LIST" :key="item.id">
             <AppCardStory :data="item"/>
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">

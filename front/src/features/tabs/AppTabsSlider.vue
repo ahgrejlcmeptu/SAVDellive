@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import AppTabsButton from "@entites/tabs/AppTabsButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 import {computed} from "vue";
 
 interface Data {
@@ -31,7 +32,7 @@ const model = computed({
 </script>
 
 <template>
-    <swiper class="tabs-slider" slides-per-view="auto">
+    <app-slider name=".tabs-slider" class="tabs-slider">
         <swiper-slide v-for="item in slides" :key="item.id">
             <app-tabs-button
                     :class="[{'active': model === item.id}]"
@@ -41,7 +42,7 @@ const model = computed({
                 <span>{{ item.name }}</span>
             </app-tabs-button>
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">

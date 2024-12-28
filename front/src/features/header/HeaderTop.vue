@@ -3,19 +3,51 @@ import AppSvg from "@spared/AppSvg.vue";
 import AppIcon from "@spared/AppIcon.vue";
 import AppItemValue from "@spared/AppItemValue.vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
+import AppDropdown from "@entites/dropdown/AppDropdown.vue";
+import {CDropdownItem} from '@coreui/vue';
+
+const CITY = [
+    {
+        id: 0,
+        name: 'Иркутск'
+    },
+    {
+        id: 1,
+        name: 'Ангарск'
+    },
+    {
+        id: 2,
+        name: 'Шелехов'
+    },
+    {
+        id: 3,
+        name: 'Братск'
+    },
+]
 </script>
 
 <template>
     <div class="container">
         <div class="header-top">
             <div class="header-top__wrap header-top__wrap_left">
-                <div class="header__item header__item_city">
-                    <AppIcon name="icon-pin"/>
-                    <div class="header__item-body">
-                        Ваш город <br>
-                        <span>Иркутск <app-svg name="dropdown"/></span>
-                    </div>
-                </div>
+                <app-dropdown class="header__item_city">
+                    <template v-slot:button>
+                        <div class="header__item">
+                            <AppIcon name="icon-pin"/>
+                            <div class="header__item-body">
+                                Ваш город <br>
+                                <span>Иркутск <app-svg name="dropdown"/></span>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-slot:list>
+                        <CDropdownItem
+                            href="#"
+                            v-for="item in CITY"
+                            :key="item.id"
+                        >{{ item.name }}</CDropdownItem>
+                    </template>
+                </app-dropdown>
                 <div class="header__item header__item_desktop">
                     <AppIcon name="icon-clock"/>
                     <div class="header__item-body">
@@ -30,7 +62,7 @@ import AppSocials from "@entites/socials/AppSocials.vue";
                 </a>
             </div>
             <div class="header-top__wrap header-top__wrap_right">
-                <app-socials />
+                <app-socials/>
                 <a class="header__item header__item_phone header__item_desktop" href="tel:+79086509000">
                     <AppIcon name="icon-phone"/>
                     <div class="header__item-body">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {Swiper, SwiperSlide} from "swiper/vue";
+import {SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
 
 const LIST = [
     {
@@ -30,10 +31,7 @@ const LIST = [
 </script>
 
 <template>
-    <swiper
-            slides-per-view="auto"
-            class="advantages"
-    >
+    <app-slider name=".advantages" class="advantages">
         <swiper-slide
                 class="advantages-item"
                 v-for="item in LIST"
@@ -47,7 +45,7 @@ const LIST = [
                 <p class="text-15">{{ item.description }}</p>
             </div>
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">

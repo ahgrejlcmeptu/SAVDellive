@@ -3,9 +3,7 @@ import AppCardReview from "@entites/card/AppCardReview.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import SwiperButton from "@spared/SwiperButton.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
-import {onMounted, ref} from "vue";
-import {Navigation, Pagination} from 'swiper/modules';
+import {SwiperSlide} from "swiper/vue";
 
 const LIST = [
     {
@@ -77,35 +75,44 @@ const LIST = [
             'языке,…',
         img: '/img/reviews/2.jpg'
     },
+
+    {
+        id: '7',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+    },
+    {
+        id: '8',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg'
+    },
 ]
 </script>
 
 <template>
-    <div class="reviews" v-if="false">
+    <div class="reviews">
         <swiper-button tablet prev/>
         <swiper-button tablet next/>
-        <swiper
-                :modules="[Navigation, Pagination]"
-                slides-per-view="auto"
-                loop
-                :navigation="{
-                prevEl: '.reviews .swiper-button-prev',
-                nextEl: '.reviews .swiper-button-next',
-            }"
+        <app-slider
+                :slider="{loop: true}"
+                name=".reviews"
         >
             <swiper-slide
-                    v-for="item in [...LIST, ...LIST, ...LIST]"
+                    v-for="item in LIST"
                     :key="item.id"
             >
                 <AppCardReview
                         :data="item"
                 />
             </swiper-slide>
-        </swiper>
+        </app-slider>
     </div>
-    <app-slider>
-        <swiper-slide v-for="i in [1,2,3,4,5]">{{i}}</swiper-slide>
-    </app-slider>
     <app-link-bottom><a href="#">Смотреть все</a></app-link-bottom>
 </template>
 
@@ -125,6 +132,7 @@ const LIST = [
 
   .swiper {
     overflow: visible;
+    margin: 0;
     @include media.respond-from(640) {
       @include media.respond-to(960) {
         width: 71%;
@@ -137,12 +145,22 @@ const LIST = [
     width: calc(50% - 15px);
     flex-grow: 1;
     margin-right: 30px;
+    transition: .3s transform;
     @include media.respond-to(960) {
       margin-right: 20px;
       width: 100%;
     }
     @include media.respond-to(360) {
       margin-right: 15px;
+    }
+
+    &-prev {
+      transform: translateX(-160px);
+    }
+    &-next {
+      + .swiper-slide {
+        transform: translateX(160px);
+      }
     }
   }
 }

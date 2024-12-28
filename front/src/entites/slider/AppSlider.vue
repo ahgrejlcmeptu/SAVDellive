@@ -1,27 +1,24 @@
-<script setup lang="ts">
+<script setup>
 import {Swiper} from "swiper/vue";
-import {Autoplay, EffectFade, Navigation, Pagination} from 'swiper/modules'
+import {Autoplay, EffectFade, Navigation, Pagination} from 'swiper';
 import SwiperPagination from "@spared/SwiperPagination.vue";
 import SwiperButton from "@spared/SwiperButton.vue";
+import {reactive} from "vue";
 
 const modules = [Navigation, Pagination, Autoplay, EffectFade]
+const props = defineProps(['slider', 'navigation', 'pagination', 'name'])
 
-defineProps(['slider', 'navigation', 'pagination'])
-
-const options = {
+const options = reactive({
     modules: modules,
-    pagination: {el: '.swiper-pagination', clickable: true},
+    slidesPerView: 'auto',
+    pagination: {el: `${props.name || ''} .swiper-pagination`, clickable: true},
     navigation: {
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-    }
-    // slideActiveClass: '-active',
-    // slideNextClass: '-next',
-    // slidePrevClass: '-previous',
-    // slideVisibleClass: '-visible',
-    // slideFullyVisibleClass: '-fully-visible',
-    // slidesPerView: 'auto',
-}
+        prevEl: `${props.name || ''} .swiper-button-prev`,
+        nextEl: `${props.name || ''} .swiper-button-next`,
+    },
+})
+
+
 </script>
 
 <template>

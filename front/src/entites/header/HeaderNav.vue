@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
-import {Swiper, SwiperSlide} from 'swiper/vue';
+import AppSlider from "@entites/slider/AppSlider.vue";
+import AppDropdown from "@entites/dropdown/AppDropdown.vue";
+import {SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
+import {CDropdownItem} from '@coreui/vue';
 
 const NAV = {
     menu: [
@@ -109,10 +112,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <swiper
-            class="header-nav"
-            slides-per-view="auto"
-    >
+    <app-slider name=".header-nav" class="header-nav">
         <swiper-slide
                 v-for="item in filter"
                 :class="['header-nav__item', {'header-nav__item_highlight': item.highlight}]"
@@ -122,27 +122,23 @@ onMounted(() => {
                 {{ item.name }}
             </a>
             <template v-else>
-                <v-menu>
-                    <template v-slot:activator="{ props }">
-                        <div class="header-nav__link" v-bind="props">
+                <app-dropdown>
+                    <template v-slot:button>
+                        <div class="header-nav__link" >
                             {{ item.name }}
                             <app-svg name="dropdown"></app-svg>
                         </div>
                     </template>
-                    <v-list>
-                        <div class="header-nav__item"
+                    <template v-slot:list>
+                        <CDropdownItem
                             v-for="item in NAV.menu"
                             :key="item.id"
-                        >
-                            <a class="header-nav__link" href="#">{{ item.name }}</a>
-                        </div>
-                    </v-list>
-                </v-menu>
+                        >{{ item.name }}</CDropdownItem>
+                    </template>
+                </app-dropdown>
             </template>
-
-
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">

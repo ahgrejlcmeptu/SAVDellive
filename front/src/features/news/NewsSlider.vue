@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppCardNews from "@entites/card/AppCardNews.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 
 interface Props {
     list: object
@@ -10,9 +11,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <swiper
-            slides-per-view="auto"
-            class="news_slider">
+    <app-slider name=".news_slider" class="news_slider">
         <swiper-slide
                 v-for="item in list"
                 :key="item.id"
@@ -21,7 +20,7 @@ defineProps<Props>()
                     :data="item"
             />
         </swiper-slide>
-    </swiper>
+    </app-slider>
 </template>
 
 <style lang="scss">

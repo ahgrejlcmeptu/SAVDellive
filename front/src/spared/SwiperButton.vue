@@ -39,6 +39,7 @@ withDefaults(defineProps<Props>(), {
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
+  transition: .3s;
 
   &_gray {
     background-color: var(--main-color-4);

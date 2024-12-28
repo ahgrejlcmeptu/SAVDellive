@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
-import {Swiper, SwiperSlide} from "swiper/vue";
+import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 import {computed, ref, watch} from "vue";
-import {EffectFade} from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import type {Swiper as SwiperType} from "swiper";
 
 interface TabData {
     id: string;
@@ -49,13 +49,15 @@ const onSwiperInit = (swiper: SwiperType) => slider.value = swiper;
 <template>
     <div class="seo">
         <AppTabsSlider :slides="TABS" v-model="activeTabs"/>
-        <swiper
+        <app-slider
                 @swiper="onSwiperInit"
                 class="seo__slider"
-                :modules="[EffectFade]"
-                effect="fade"
-                :allow-touch-move="false"
-                auto-height
+                name=".seo"
+                :slider="{
+                    effect: 'fade',
+                    'allow-touch-move': false,
+                    'auto-height': true
+                }"
         >
             <swiper-slide class="clearfix" v-for="item in DATA" :key="item.id">
                 <div class="seo__img">
@@ -66,14 +68,7 @@ const onSwiperInit = (swiper: SwiperType) => slider.value = swiper;
                     <div class="seo__description" v-html="item.description"></div>
                 </div>
             </swiper-slide>
-        </swiper>
-        <!--        <div class="seo__img">-->
-        <!--            <img :src="activeItem.img" :alt="activeItem.title">-->
-        <!--        </div>-->
-        <!--        <div class="seo__body">-->
-        <!--            <h2>{{ activeItem.title }}</h2>-->
-        <!--            <div class="seo__description" v-html="activeItem.description"></div>-->
-        <!--        </div>-->
+        </app-slider>
     </div>
 </template>
 
