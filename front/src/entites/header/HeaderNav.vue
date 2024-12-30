@@ -124,16 +124,17 @@ onMounted(() => {
             <template v-else>
                 <app-dropdown>
                     <template v-slot:button>
-                        <div class="header-nav__link" >
+                        <div class="header-nav__link">
                             {{ item.name }}
-                            <app-svg name="dropdown"></app-svg>
+                            <app-svg class="dropdown-arr" name="dropdown"></app-svg>
                         </div>
                     </template>
                     <template v-slot:list>
                         <CDropdownItem
-                            v-for="item in NAV.menu"
-                            :key="item.id"
-                        >{{ item.name }}</CDropdownItem>
+                                v-for="item in NAV.menu"
+                                :key="item.id"
+                        >{{ item.name }}
+                        </CDropdownItem>
                     </template>
                 </app-dropdown>
             </template>
@@ -152,6 +153,10 @@ onMounted(() => {
 
   .swiper-wrapper {
     align-items: center;
+  }
+
+  .dropdown-menu {
+    min-width: max-content;
   }
 
   &__item {

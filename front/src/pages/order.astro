@@ -1,0 +1,17 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheOrder from '@widgets/order/TheOrder.vue'
+---
+
+<Layout>
+<section class="mb-100">
+    <div class="container">
+        <div class="page-header">
+            <AppBreadcrumb list={[{label: 'Оформление заявки на покупку'}]}/>
+            <h1 class="text-36">Оформление заявки на покупку</h1>
+        </div>
+        <TheOrder client:only/>
+    </div>
+</section>
+</Layout>

@@ -13,10 +13,10 @@ import AppItemValue from "@spared/AppItemValue.vue";
                     <app-svg name="favorites"></app-svg>
                     <app-item-value>1</app-item-value>
                 </div>
-                <div class="header-bottom__btn header-bottom__btn_basket">
+                <a href="/order" class="header-bottom__btn header-bottom__btn_basket">
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
-                </div>
+                </a>
                 <div class="header-bottom__btn header-bottom__btn_auth">
                     <app-svg name="auth"></app-svg>
                 </div>

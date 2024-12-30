@@ -5,6 +5,7 @@ import AppItemValue from "@spared/AppItemValue.vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
 import AppDropdown from "@entites/dropdown/AppDropdown.vue";
 import {CDropdownItem} from '@coreui/vue';
+import {ref} from "vue";
 
 const CITY = [
     {
@@ -23,7 +24,32 @@ const CITY = [
         id: 3,
         name: 'Братск'
     },
+    {
+        id: 4,
+        name: 'Усолье - Сибирское'
+    },
+    {
+        id: 5,
+        name: 'Москва'
+    },
+    {
+        id: 6,
+        name: 'Санкт-Петербург'
+    },
+    {
+        id: 7,
+        name: 'Черемхово'
+    },
+    {
+        id: 8,
+        name: 'Улан-Удэ'
+    }
 ]
+
+const cityActive = ref(CITY[0])
+
+const onCity = (item: any) => cityActive.value = item
+
 </script>
 
 <template>
@@ -36,16 +62,18 @@ const CITY = [
                             <AppIcon name="icon-pin"/>
                             <div class="header__item-body">
                                 Ваш город <br>
-                                <span>Иркутск <app-svg name="dropdown"/></span>
+                                <span>{{cityActive.name}} <app-svg class="dropdown-arr" name="dropdown"/></span>
                             </div>
                         </div>
                     </template>
                     <template v-slot:list>
                         <CDropdownItem
-                            href="#"
-                            v-for="item in CITY"
-                            :key="item.id"
-                        >{{ item.name }}</CDropdownItem>
+                                v-for="item in CITY"
+                                :key="item.id"
+                                :class="{active: item.id === cityActive.id}"
+                                @click="onCity(item)"
+                        >{{ item.name }}
+                        </CDropdownItem>
                     </template>
                 </app-dropdown>
                 <div class="header__item header__item_desktop">
@@ -80,10 +108,10 @@ const CITY = [
                     <AppIcon name="icon-favorites"/>
                     <app-item-value>1</app-item-value>
                 </div>
-                <div class="header__item header__item_basket">
+                <a class="header__item header__item_basket" href="/order">
                     <AppIcon name="icon-basket"/>
                     <app-item-value>100</app-item-value>
-                </div>
+                </a>
                 <div class="header__item header__item_phone">
                     <AppIcon name="icon-phone"/>
                 </div>

@@ -1,0 +1,17 @@
+.cards {
+  &-move,
+  &-enter-from,
+  &-leave-to {
+    transition: .3s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &-leave-active {
+    position: absolute;
+  }
+}

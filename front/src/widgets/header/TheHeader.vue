@@ -8,7 +8,7 @@ import HeaderBottom from "@features/header/HeaderBottom.vue";
     <header class="header">
         <HeaderTop/>
         <div class="header__hr"></div>
-        <HeaderBottom/>
+<!--        <HeaderBottom/>-->
     </header>
 </template>
 

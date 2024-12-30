@@ -73,3 +73,17 @@ $mediaMin4: 360px;
 @function sizeREM($context, $pixels: 16) {
   @return calc($context/$pixels) + rem;
 }
+
+@mixin scroll {
+  &::-webkit-scrollbar {
+    width: var(--scroll-width, 4px);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--main-color-2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--main-color-1);
+  }
+}

@@ -23,6 +23,13 @@ body {
 
 .wrapper {
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex-grow: 1;
+  }
 }
 
 a {
