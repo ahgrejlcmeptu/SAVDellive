@@ -125,3 +125,8 @@ p {
   display: table;
   clear: both;
 }
+
+.scroll-container {
+  padding-right: 5px;
+  @include media.scroll;
+}
