@@ -75,12 +75,14 @@ $mediaMin4: 360px;
 }
 
 @mixin scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
-    width: var(--scroll-width, 4px);
+    width: var(--scroll-width, 2px);
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--main-color-2);
+    background: var(--text-color-4);
   }
 
   &::-webkit-scrollbar-thumb {

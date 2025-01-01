@@ -23,6 +23,9 @@ import OrderForm from "@features/order/OrderForm.vue";
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  @include media.respond-to(960) {
+    gap: 30px 20px;
+  }
 
   &__left {
     display: flex;
@@ -35,7 +38,7 @@ import OrderForm from "@features/order/OrderForm.vue";
   &__right {
     width: 470px;
     @include media.respond-to(960) {
-      width: 440px;
+      width: 400px;
     }
     @include media.respond-to(640) {
       width: 100%;

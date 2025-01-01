@@ -59,6 +59,7 @@ const onBlur = () => isFocus.value = false
   }
 
   input {
+    background: transparent;
     width: 100%;
     height: 50px;
     border-radius: var(--radius-10);

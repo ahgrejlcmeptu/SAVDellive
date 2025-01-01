@@ -2,7 +2,7 @@
 import {computed} from "vue";
 import {checkUndefined} from "@app/utils/verification.ts";
 
-type Color = 'main';
+type Color = 'main' | 'gray'
 interface Props {
     type?: string;
     full?: string;
@@ -55,6 +55,12 @@ const color = computed(() => 'btn_' + props.color)
         --btn-color: var(--btn-color-hover)
     }
 
+    svg {
+        transition: .3s;
+        fill: var(--btn-color);
+        stroke: var(--btn-color);
+    }
+
     &_full {
         width: 100%;
     }
@@ -63,6 +69,12 @@ const color = computed(() => 'btn_' + props.color)
         --btn-background: var(--main-color-1);
         --btn-color: var(--main-white);
         --btn-background-hover: var(--main-color-1-hover);
+        --btn-color-hover: var(--main-white);
+    }
+    &_gray {
+        --btn-background: var(--border-color-2);
+        --btn-color: var(--text-color-3);
+        --btn-background-hover: var(--main-color-1);
         --btn-color-hover: var(--main-white);
     }
 }

@@ -34,6 +34,7 @@ defineProps<{
 
 .breadcrumb {
   margin-bottom: 10px;
+    margin-top: 20px;
 
   ol {
     list-style: none;
