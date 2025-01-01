@@ -34,6 +34,9 @@ const LIST = [
 
 <template>
     <div class="order-list">
+        <div class="page-header">
+            <h2>Состав заказа / 4 шт.</h2>
+        </div>
         <AppCardOrder
                 v-for="item in LIST"
                 :key="item.id"
@@ -46,6 +49,12 @@ const LIST = [
 @use "@style/media";
 
 .order-list {
+  .page-header {
+    display: none;
+    @include media.respond-to(640) {
+      display: block;
+    }
+  }
   .card-order {
     margin-bottom: 30px;
     @include media.respond-to(640) {

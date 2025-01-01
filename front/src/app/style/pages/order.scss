@@ -1,0 +1,29 @@
+@use "@style/media";
+
+.order {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  @include media.respond-to(960) {
+    gap: 30px 20px;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 40%;
+    flex-grow: 1;
+  }
+
+  &__right {
+    width: 470px;
+    @include media.respond-to(960) {
+      width: 400px;
+    }
+    @include media.respond-to(640) {
+      width: 100%;
+      order: -1
+    }
+  }
+}

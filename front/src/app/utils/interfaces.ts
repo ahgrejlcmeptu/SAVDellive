@@ -8,6 +8,14 @@ export interface CardOrder {
     weight?: string
 }
 
+export interface CardAdditional {
+    id: string | number
+    name: string
+    price: number
+    img?: string
+    weight?: string
+}
+
 export interface Input {
     type?: string
     name?: string
