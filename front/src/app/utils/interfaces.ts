@@ -57,3 +57,10 @@ export interface FormOrder {
     day?: string
     hour?: string
 }
+
+export interface Successfully {
+    id: string | number
+    name: string
+    img?: string
+    video?: string
+}

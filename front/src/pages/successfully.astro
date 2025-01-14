@@ -1,0 +1,26 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheSuccessfully from "@widgets/successfully/TheSuccessfully.vue";
+import TheNews from "@widgets/news/TheNews.vue";
+---
+
+<Layout>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <AppBreadcrumb list={[{label: 'Информация о заказе'}]}/>
+                <h1 class="text-36">Ваш заказ №32309 принят</h1>
+            </div>
+            <TheSuccessfully client:only/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <h2>Новости и акции</h2>
+            </div>
+            <TheNews client:only/>
+        </div>
+    </section>
+</Layout>
