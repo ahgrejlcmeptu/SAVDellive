@@ -63,4 +63,5 @@ export interface Successfully {
     name: string
     img?: string
     video?: string
+    circle?: string
 }
