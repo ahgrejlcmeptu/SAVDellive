@@ -1,0 +1,8 @@
+@keyframes rotation {
+  from {
+    transform: translate(var(--translateX, 0), var(--translateY, 0)) rotate(0deg);
+  }
+  to {
+    transform: translate(var(--translateX, 0), var(--translateY, 0)) rotate(360deg);
+  }
+}

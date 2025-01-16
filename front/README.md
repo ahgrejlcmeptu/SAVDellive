@@ -54,9 +54,10 @@ time
 20.12 - 3.52
 21.12 - ?
 14.01 - 1.00
+17.01 - 2.00
 
 git add .
-git commit -m "14.01"
+git commit -m "17.01"
 git push
 
 11.06

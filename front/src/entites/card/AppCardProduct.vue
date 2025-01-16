@@ -1,24 +1,22 @@
 <script setup lang="ts">
+import AppCurrency from "@spared/AppCurrency.vue";
 import AppFavorites from "@spared/AppFavorites.vue";
 import AppStatus from "@spared/AppStatus.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
+import type {Card} from "@app/utils/interfaces";
+import type {PropType} from "vue";
 
-interface Props {
+defineProps({
     data: {
-        id: any;
-        name: string;
-        category: any;
-        status: any;
-        description: string;
-        price: number;
-        oldPrice?: number;
-        weight: number;
-        img: string;
+        type: Object as PropType<Card>,
+        required: true
+    },
+    successfully: {
+        type: Boolean,
+        required: false
     }
-}
-
-defineProps<Props>()
+})
 </script>
 
 <template>
@@ -37,13 +35,13 @@ defineProps<Props>()
                     <p class="text-16">{{ data.description }}</p>
                 </div>
                 <div class="card-product__main">
-                    <div class="card-product__price text-20">{{ data.price }}</div>
-                    <s class="card-product__oldPrice text-14" v-if="data.oldPrice">{{ data.oldPrice }}</s>
-                    <s class="card-product__weight text-14" v-if="data.weight">{{ data.weight }}</s>
+                    <div class="card-product__price text-20">{{ data.price }} <AppCurrency /></div>
+                    <s class="card-product__oldPrice text-14" v-if="data.oldPrice">{{ data.oldPrice }} <AppCurrency /></s>
+                    <div class="card-product__weight text-14" v-if="data.weight">{{ data.weight }}</div>
                 </div>
             </div>
         </div>
-        <div class="card-product__footer">
+        <div class="card-product__footer" v-if="!successfully">
             <app-button full>
                 <AppSvg name="plus"/>
                 В корзину
@@ -59,40 +57,59 @@ defineProps<Props>()
 .card-product {
   position: relative;
   transition: .3s;
-  border-radius: var(--radius-30) var(--radius-30) 0 0;
+  border-radius: var(--radius-30);
   display: flex;
   flex-direction: column;
+
+  &:has(.card-product__footer) {
+    border-radius: var(--radius-30) var(--radius-30) 0 0;
+
+    .card-product {
+        &__group {
+            border-bottom-width: 0;
+            border-radius: var(--radius-30) var(--radius-30) 0 0;
+            @media(hover) {
+                border-radius: var(--radius-30);
+                border-bottom-width: 1px;
+            }
+        }
+        &__img {
+            border-radius: var(--radius-30) var(--radius-30) 0 0;
+            @include media.respond-to(360) {
+                border-radius: var(--radius-30) 0 0 0;
+            }
+        }
+    }
+  }
 
   @include media.respond-to(640) {
     --radius-30: var(--radius-20)
   }
 
   @include media.hover {
-    box-shadow: 0 0 20px rgba(#000, .1);
-    .card-product {
-      &__group {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-      }
+    &:has(.card-product__footer) {
+      box-shadow: 0 0 20px rgba(#000, .1);
 
-      &__footer {
-        opacity: 1;
+      .card-product {
+        &__group {
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+        &__footer {
+          opacity: 1;
+        }
       }
     }
   }
 
   &__group {
+    border-radius: var(--radius-30);
     flex-grow: 1;
-    border-radius: var(--radius-30) var(--radius-30) 0 0;
     border: 1px solid var(--border-color-1);
     background-color: var(--main-white);
-    border-bottom-width: 0;
     display: flex;
     flex-direction: column;
-    @media(hover) {
-      border-radius: var(--radius-30);
-      border-bottom-width: 1px;
-    }
   }
 
   &__top {
@@ -104,6 +121,9 @@ defineProps<Props>()
       display: block;
       width: 100%;
       border-radius: var(--radius-30) var(--radius-30) 0 0;
+        @include media.respond-to(360) {
+            border-radius: var(--radius-30) 0 0 var(--radius-30);
+        }
     }
   }
 
@@ -185,6 +205,7 @@ defineProps<Props>()
 
       .app-favorites {
         top: 15px;
+
         svg {
           width: 15px;
           height: 14px;
@@ -202,29 +223,36 @@ defineProps<Props>()
           position: relative;
           top: 0;
         }
+
         &__group {
           flex-direction: row;
         }
+
         &__top {
           width: 47%;
           flex-shrink: 0;
         }
+
         &__img {
           height: 100%;
+
           img {
             height: 100%;
             object-fit: cover;
           }
         }
+
         &__header {
           h6 {
             font-size: media.sizeREM(14);
             padding-right: 23px;
           }
+
           p {
             font-size: media.sizeREM(11);
           }
         }
+
         &__body {
           width: 50%;
           flex-grow: 1;
@@ -234,6 +262,7 @@ defineProps<Props>()
         &__price {
           font-size: media.sizeREM(15);
         }
+
         &__oldPrice,
         &__weight {
           font-size: media.sizeREM(12);

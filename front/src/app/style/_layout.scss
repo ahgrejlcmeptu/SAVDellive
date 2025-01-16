@@ -50,6 +50,10 @@ h3, .text-20 {
   font-size: media.sizeREM(20);
   font-weight: 500;
 }
+h4, .text-26 {
+  font-size: media.sizeREM(26);
+  font-weight: 700;
+}
 
 h6, .text-18 {
   font-size: media.sizeREM(18);
@@ -61,6 +65,11 @@ h6, .text-18 {
 
 p {
   color: var(--text-color-2);
+  
+  a {
+    color: var(--main-color-1);
+    text-decoration: underline;
+  }
 }
 
 .container {
@@ -69,6 +78,12 @@ p {
   margin-right: auto;
   padding-left: var(--conteiner-padding);
   padding-right: var(--conteiner-padding);
+}
+.mb-30 {
+  margin-bottom: 30px;
+  @include media.respond-to(360) {
+    margin-bottom: 20px;
+  }
 }
 
 .mb-50 {
@@ -129,4 +144,17 @@ p {
 .scroll-container {
   padding-right: 5px;
   @include media.scroll;
+}
+
+.scroll-container_x {
+  padding-bottom: 5px;
+  @include media.scroll-x;
+  @include media.respond-to(360) {
+    width: 100vw;
+    padding-left: var(--conteiner-padding);
+    padding-right: var(--conteiner-padding);
+    position: relative;
+    left: calc(var(--conteiner-padding) * -1);
+
+  }
 }

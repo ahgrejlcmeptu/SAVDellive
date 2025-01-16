@@ -1,3 +1,14 @@
+export interface Card {
+    id: string | number;
+    name: string;
+    category: any;
+    status: any;
+    description: string;
+    price: number;
+    oldPrice?: number;
+    weight: number | string;
+    img: string;
+}
 export interface CardOrder {
     id: string | number
     name: string

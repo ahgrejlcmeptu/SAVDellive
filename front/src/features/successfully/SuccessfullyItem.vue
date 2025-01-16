@@ -49,8 +49,16 @@ defineProps({
   &_big {
     margin: 0 12px;
 
+    + * {
+      flex-grow: 0.7;
+    }
+
     .successfully-item__circle {
       --item-size: 122px;
+      @include media.respond-to(640) {
+        --item-size: 92px;
+        --play-size: 30px;
+      }
     }
 
     .successfully-item__name {
@@ -88,6 +96,9 @@ defineProps({
     background: var(--main-white);
     display: flex;
     position: relative;
+    @include media.respond-to(640) {
+      --item-size: 32px
+    }
   }
 
   &__img {
@@ -98,12 +109,14 @@ defineProps({
   }
 
   &__text {
-    width: 140%;
+    width: 135%;
     position: absolute;
-    margin-left: -3px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    --translateX: -50%;
+    --translateY: -50%;
+    animation: rotation 10s linear infinite reverse;
   }
 
   &__value {
@@ -111,6 +124,9 @@ defineProps({
     font-weight: 600;
     font-size: media.sizeREM(20);
     color: var(--text-color-2);
+    @include media.respond-to(640) {
+      font-size: media.sizeREM(14);
+    }
   }
 
   &__name {
@@ -123,6 +139,9 @@ defineProps({
     text-align: center;
     font-size: media.sizeREM(15);
     white-space: pre-line;
+    @include media.respond-to(640) {
+      font-size: media.sizeREM(12);
+    }
   }
 
   &__progress {
