@@ -8,6 +8,7 @@ export interface Card {
     oldPrice?: number;
     weight: number | string;
     img: string;
+    amount?: number
 }
 export interface CardOrder {
     id: string | number
@@ -75,4 +76,11 @@ export interface Successfully {
     img?: string
     video?: string
     circle?: string
+}
+
+export interface SeoTabs {
+    id: string;
+    title: string;
+    description: string;
+    img: string;
 }

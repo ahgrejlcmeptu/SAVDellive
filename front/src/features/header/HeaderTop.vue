@@ -3,8 +3,8 @@ import AppSvg from "@spared/AppSvg.vue";
 import AppIcon from "@spared/AppIcon.vue";
 import AppItemValue from "@spared/AppItemValue.vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
-import AppDropdown from "@entites/dropdown/AppDropdown.vue";
-import {CDropdownItem} from '@coreui/vue';
+// import AppDropdown from "@entites/dropdown/AppDropdown.vue";
+// import {CDropdownItem} from '@coreui/vue';
 import {ref} from "vue";
 
 const CITY = [
@@ -56,26 +56,26 @@ const onCity = (item: any) => cityActive.value = item
     <div class="container">
         <div class="header-top">
             <div class="header-top__wrap header-top__wrap_left">
-                <app-dropdown class="header__item_city">
-                    <template v-slot:button>
-                        <div class="header__item">
-                            <AppIcon name="icon-pin"/>
-                            <div class="header__item-body">
-                                Ваш город <br>
-                                <span>{{cityActive.name}} <app-svg class="dropdown-arr" name="dropdown"/></span>
-                            </div>
-                        </div>
-                    </template>
-                    <template v-slot:list>
-                        <CDropdownItem
-                                v-for="item in CITY"
-                                :key="item.id"
-                                :class="{active: item.id === cityActive.id}"
-                                @click="onCity(item)"
-                        >{{ item.name }}
-                        </CDropdownItem>
-                    </template>
-                </app-dropdown>
+<!--                <app-dropdown class="header__item_city">-->
+<!--                    <template v-slot:button>-->
+<!--                        <div class="header__item">-->
+<!--                            <AppIcon name="icon-pin"/>-->
+<!--                            <div class="header__item-body">-->
+<!--                                Ваш город <br>-->
+<!--                                <span>{{cityActive.name}} <app-svg class="dropdown-arr" name="dropdown"/></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </template>-->
+<!--                    <template v-slot:list>-->
+<!--&lt;!&ndash;                        <CDropdownItem&ndash;&gt;-->
+<!--&lt;!&ndash;                                v-for="item in CITY"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :key="item.id"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :class="{active: item.id === cityActive.id}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                @click="onCity(item)"&ndash;&gt;-->
+<!--&lt;!&ndash;                        >{{ item.name }}&ndash;&gt;-->
+<!--&lt;!&ndash;                        </CDropdownItem>&ndash;&gt;-->
+<!--                    </template>-->
+<!--                </app-dropdown>-->
                 <div class="header__item header__item_desktop">
                     <AppIcon name="icon-clock"/>
                     <div class="header__item-body">

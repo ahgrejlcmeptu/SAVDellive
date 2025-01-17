@@ -42,7 +42,8 @@ const ORDER = [
         price: 159,
         oldPrice: 259,
         weight: '140 гр.',
-        img: '/img/products/1.jpg'
+        img: '/img/products/1.jpg',
+        amount: 3
     },
     {
         id: '2',
@@ -52,7 +53,8 @@ const ORDER = [
         description: 'Котлета говяжья, салат, помидор, сыр, соус…',
         price: '259',
         weight: '140 гр.',
-        img: '/img/products/2.jpg'
+        img: '/img/products/2.jpg',
+        amount: 1
     },
     {
         id: '3',
@@ -63,7 +65,8 @@ const ORDER = [
         price: 159,
         oldPrice: 259,
         weight: '140 гр.',
-        img: '/img/products/3.jpg'
+        img: '/img/products/3.jpg',
+        amount: 1
     },
     {
         id: '4',
@@ -73,7 +76,8 @@ const ORDER = [
         description: 'Рыбные палочки, панировка, морковь, лук…',
         price: 159,
         weight: '140 гр.',
-        img: '/img/products/4.jpg'
+        img: '/img/products/4.jpg',
+        amount: 1
     },
     {
         id: '5',
@@ -84,7 +88,8 @@ const ORDER = [
         price: 159,
         oldPrice: 259,
         weight: '140 гр.',
-        img: '/img/products/5.jpg'
+        img: '/img/products/5.jpg',
+        amount: 1
     },
     {
         id: '6',
@@ -94,7 +99,8 @@ const ORDER = [
         description: 'Рис, курица, лук, петрушка, соус терияки…',
         price: 159,
         weight: '140 гр.',
-        img: '/img/products/6.jpg'
+        img: '/img/products/6.jpg',
+        amount: 1
     },
     {
         id: '7',
@@ -105,9 +111,11 @@ const ORDER = [
         price: 159,
         oldPrice: 259,
         weight: '140 гр.',
-        img: '/img/products/7.jpg'
+        img: '/img/products/7.jpg',
+        amount: 1
     }
 ]
+const length = ORDER.reduce((amount, item) => amount + +item.amount , 0)
 ---
 
 <Layout>
@@ -124,7 +132,7 @@ const ORDER = [
     <section class="mb-100">
         <div class="container">
             <div class="page-header">
-                <h4>Состав заказа / {ORDER.length} шт.</h4>
+                <h4>Состав заказа / {length} шт.</h4>
             </div>
             <TheSuccessfullyOrder percent={PERCENT} data={ORDER} client:only />
         </div>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
-import AppDropdown from "@entites/dropdown/AppDropdown.vue";
+// import AppDropdown from "@entites/dropdown/AppDropdown.vue";
 import {SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
-import {CDropdownItem} from '@coreui/vue';
+// import {CDropdownItem} from '@coreui/vue';
 
 const NAV = {
     menu: [
@@ -60,7 +60,8 @@ const NAV = {
         },
         {
             id: '2',
-            name: 'Доставка и оплата'
+            name: 'Доставка и оплата',
+            href: '/delivery'
         },
         {
             id: '3',
@@ -68,7 +69,8 @@ const NAV = {
         },
         {
             id: '4',
-            name: 'Контакты'
+            name: 'Контакты',
+            href: '/contacts'
         },
     ],
     highlight: [
@@ -118,25 +120,25 @@ onMounted(() => {
                 :class="['header-nav__item', {'header-nav__item_highlight': item.highlight}]"
                 :key="item.id"
         >
-            <a class="header-nav__link" href="#" v-if="!item.menu">
+            <a class="header-nav__link" :href="item.href" v-if="!item.menu">
                 {{ item.name }}
             </a>
             <template v-else>
-                <app-dropdown>
-                    <template v-slot:button>
-                        <div class="header-nav__link">
-                            {{ item.name }}
-                            <app-svg class="dropdown-arr" name="dropdown"></app-svg>
-                        </div>
-                    </template>
-                    <template v-slot:list>
-                        <CDropdownItem
-                                v-for="item in NAV.menu"
-                                :key="item.id"
-                        >{{ item.name }}
-                        </CDropdownItem>
-                    </template>
-                </app-dropdown>
+<!--                <app-dropdown>-->
+<!--                    <template v-slot:button>-->
+<!--                        <div class="header-nav__link">-->
+<!--                            {{ item.name }}-->
+<!--                            <app-svg class="dropdown-arr" name="dropdown"></app-svg>-->
+<!--                        </div>-->
+<!--                    </template>-->
+<!--                    <template v-slot:list>-->
+<!--&lt;!&ndash;                        <CDropdownItem&ndash;&gt;-->
+<!--&lt;!&ndash;                                v-for="item in NAV.menu"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :key="item.id"&ndash;&gt;-->
+<!--&lt;!&ndash;                        >{{ item.name }}&ndash;&gt;-->
+<!--&lt;!&ndash;                        </CDropdownItem>&ndash;&gt;-->
+<!--                    </template>-->
+<!--                </app-dropdown>-->
             </template>
         </swiper-slide>
     </app-slider>

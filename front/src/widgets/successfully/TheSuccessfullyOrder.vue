@@ -6,7 +6,7 @@ import {computed} from "vue";
 const props = defineProps(['data', 'percent'])
 
 const bonus = computed(() => {
-    const total = props.data.reduce((sum, item) => sum + +item.price , 0)
+    const total = props.data.reduce((sum, item) => sum + (+item.price * item.amount) , 0)
     return Math.floor(total * props.percent / 100)
 })
 </script>

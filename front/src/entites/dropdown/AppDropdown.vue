@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import {CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem} from '@coreui/vue';
+// import {CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem} from '@coreui/vue';
 
 </script>
 
 <template>
-    <CDropdown>
-        <CDropdownToggle>
-            <slot name="button"/>
-        </CDropdownToggle>
-        <CDropdownMenu>
-            <div class="dropdown-menu__list">
-                <slot name="list"/>
-            </div>
-        </CDropdownMenu>
-    </CDropdown>
+<!--    <CDropdown>-->
+<!--        <CDropdownToggle>-->
+<!--            <slot name="button"/>-->
+<!--        </CDropdownToggle>-->
+<!--        <CDropdownMenu>-->
+<!--            <div class="dropdown-menu__list">-->
+<!--                <slot name="list"/>-->
+<!--            </div>-->
+<!--        </CDropdownMenu>-->
+<!--    </CDropdown>-->
 </template>
 
 <style lang="scss">

@@ -1,0 +1,65 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheContacts from "@widgets/contacts/TheContacts.vue";
+import AppMap from "@features/map/AppMap.vue";
+import TheSeo from "@widgets/seo/TheSeo.vue";
+
+const CONTACTS = [
+    {
+        id: 1,
+        label: 'Адрес',
+        value: 'г. Иркутск, ул. Академика Курчатова, 3, 407 офис',
+    },
+    {
+        id: 2,
+        label: 'Телефон',
+        value: ['+7 924 636 5121'],
+        link: 'tel'
+    },
+    {
+        id: 3,
+        label: 'Реквизиты',
+        value: 'ИП «Тихонов Павел Сергеевич» <br> Адрес: 664048, г. Иркутск, <br> Ленинский округ, Баумана, 219/2, 22 <br> Тел.: +7 924 636 5121 <br> ИНН: 381607759706 <br> ОГРНИП: 315385000057281',
+        big: true
+    },
+    {
+        id: 4,
+        label: 'Режим Работы',
+        value: ['пн-пт: с 09:00 до 18:00', 'пн-пт: с 09:00 до 18:00'],
+        mode: true
+    },
+    {
+        id: 5,
+        label: 'E-Mail',
+        value: ['info@mirsaitov.net'],
+        link: 'mailto'
+    },
+]
+const SEO = [
+    {
+        id: '1',
+        title: 'Условия доставки',
+        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
+        img: '/img/seo.jpg'
+    }
+]
+---
+
+<Layout>
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <AppBreadcrumb list={[{label: 'Контакты'}]}/>
+                <h1 class="text-36">Контакты</h1>
+            </div>
+            <TheContacts data={CONTACTS} class="mb-100"/>
+            <AppMap class="map_contacts"/>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <TheSeo data={SEO} client:load/>
+        </div>
+    </section>
+</Layout>
