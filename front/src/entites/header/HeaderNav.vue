@@ -56,7 +56,8 @@ const NAV = {
     links: [
         {
             id: '1',
-            name: 'О нас'
+            name: 'О нас',
+            href: '/about'
         },
         {
             id: '2',
@@ -65,12 +66,18 @@ const NAV = {
         },
         {
             id: '3',
-            name: 'Отзывы'
+            name: 'Отзывы',
+            href: '/reviews'
         },
         {
             id: '4',
             name: 'Контакты',
             href: '/contacts'
+        },
+        {
+            id: '5',
+            name: 'Новости',
+            href: '/news'
         },
     ],
     highlight: [

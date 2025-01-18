@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppCardAdditional from "@entites/card/AppCardAdditional.vue";
+import AppCardAdditional from "@features/card/AppCardAdditional.vue";
 const LIST = [
     {
         id: 1,

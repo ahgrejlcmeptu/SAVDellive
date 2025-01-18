@@ -31,9 +31,6 @@ defineProps<Props>()
   &__img {
     border-radius: var(--radius-30);
     overflow: hidden;
-    @include media.respond-to(360) {
-      border-radius: var(--radius-20);
-    }
 
     img {
       display: block;

@@ -1,40 +1,15 @@
 <script setup lang="ts">
 import {SwiperSlide} from "swiper/vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
+defineProps(['data'])
 
-const LIST = [
-    {
-        id: 1,
-        title: 'Качество ингредиентов',
-        description: 'Уделяем особое внимание качеству ингредиентов',
-        img: '/img/advantages/1.svg'
-    },
-    {
-        id: 2,
-        title: 'Опыт работы',
-        description: '10 лет работаем в сфере доставки',
-        img: '/img/advantages/2.svg'
-    },
-    {
-        id: 3,
-        title: 'Личная парковка',
-        description: 'Имеем свой собственный автопарк',
-        img: '/img/advantages/3.svg'
-    },
-    {
-        id: 4,
-        title: 'Спецпредложения',
-        description: 'Лояльная система бонусов и подарков',
-        img: '/img/advantages/4.svg'
-    }
-]
 </script>
 
 <template>
     <app-slider name=".advantages" class="advantages">
         <swiper-slide
                 class="advantages-item"
-                v-for="item in LIST"
+                v-for="item in data"
                 :key="item.id"
         >
             <div class="advantages-item__img">

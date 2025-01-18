@@ -1,102 +1,15 @@
 <script setup lang="ts">
-import AppCardReview from "@entites/card/AppCardReview.vue";
+import AppCardReview from "@features/card/AppCardReview.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import SwiperButton from "@spared/SwiperButton.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
 
-const LIST = [
-    {
-        id: '1',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '2',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '3',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '4',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-
-    {
-        id: '5',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '6',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '7',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '8',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-
-    {
-        id: '7',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '8',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-]
+defineProps(['data'])
 </script>
 
 <template>
-    <div class="reviews">
+    <div class="reviews text-16">
         <swiper-button tablet prev/>
         <swiper-button tablet next/>
         <app-slider
@@ -104,7 +17,7 @@ const LIST = [
                 name=".reviews"
         >
             <swiper-slide
-                    v-for="item in LIST"
+                    v-for="item in data"
                     :key="item.id"
             >
                 <AppCardReview

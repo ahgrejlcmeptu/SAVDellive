@@ -1,39 +1,49 @@
 ---
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
-import TheContacts from "@widgets/contacts/TheContacts.vue";
-import AppMap from "@features/map/AppMap.vue";
+import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
 import TheSeo from "@widgets/seo/TheSeo.vue";
 
-const CONTACTS = [
+
+const NEWS = [
     {
-        id: 1,
-        label: 'Адрес',
-        value: 'г. Иркутск, ул. Академика Курчатова, 3, 407 офис',
+        id: '1',
+        name: 'Скидка на первый заказ',
+        description: 'Делай первый заказ и экономь',
+        img: '/img/news/1.jpg',
     },
     {
-        id: 2,
-        label: 'Телефон',
-        value: ['+7 924 636 5121'],
-        link: 'tel'
+        id: '2',
+        name: 'Новое меню',
+        description: 'Запустили новое меню и приглашаем\n' +
+            'вас отведать его первыми',
+        img: '/img/news/2.jpg',
     },
     {
-        id: 3,
-        label: 'Реквизиты',
-        value: 'ИП «Тихонов Павел Сергеевич» <br> Адрес: 664048, г. Иркутск, <br> Ленинский округ, Баумана, 219/2, 22 <br> Тел.: +7 924 636 5121 <br> ИНН: 381607759706 <br> ОГРНИП: 315385000057281',
-        big: true
+        id: '3',
+        name: 'Две пиццы по цене одной',
+        description: 'Специальное предложение для любителей пиццы',
+        img: '/img/news/3.jpg',
     },
     {
-        id: 4,
-        label: 'Режим Работы',
-        value: ['пн-пт: с 09:00 до 18:00', 'пн-пт: с 09:00 до 18:00'],
-        mode: true
+        id: '4',
+        name: 'Винный ужин',
+        description: 'Джазовая мелодия в сочетании с курсами\n' +
+            'из вина и блюд от шефа',
+        img: '/img/news/4.jpg',
     },
     {
-        id: 5,
-        label: 'E-Mail',
-        value: ['info@mirsaitov.net'],
-        link: 'mailto'
+        id: '5',
+        name: 'Скидка 10% на самовывоз',
+        description: 'На все заказы действует скидка 10%\n' +
+            'при самовывозе из ресторана',
+        img: '/img/news/5.jpg',
+    },
+    {
+        id: '6',
+        name: 'Фотоотчет с корпоратива',
+        description: 'Показываем как мы отмечали корпоратив нашей большой командой',
+        img: '/img/news/6.jpg',
     },
 ]
 const SEO = [
@@ -46,15 +56,14 @@ const SEO = [
 ]
 ---
 
-<Layout title="Контакты">
+<Layout title="Новости и акции">
     <section class="mb-100">
         <div class="container">
             <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Контакты'}]}/>
-                <h1 class="text-36">Контакты</h1>
+                <AppBreadcrumb list={[{label: 'Новости и акции'}]}/>
+                <h1 class="text-36">Новости и акции</h1>
             </div>
-            <TheContacts data={CONTACTS} class="mb-100"/>
-            <AppMap class="map_contacts" client:only/>
+            <TheNewsGrid data={NEWS} client:load/>
         </div>
     </section>
     <section class="mb-100">

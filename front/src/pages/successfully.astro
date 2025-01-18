@@ -3,7 +3,7 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheSuccessfully from "@widgets/successfully/TheSuccessfully.vue";
 import TheSuccessfullyOrder from "@widgets/successfully/TheSuccessfullyOrder.vue";
-import TheNews from "@widgets/news/TheNews.vue";
+import NewsBlock from '@progresses/NewsBlock.vue'
 import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue"
 
 const description = {
@@ -118,7 +118,7 @@ const ORDER = [
 const length = ORDER.reduce((amount, item) => amount + +item.amount , 0)
 ---
 
-<Layout>
+<Layout title="Ваш заказ принят">
     <section class="mb-50">
         <div class="container">
             <div class="page-header">
@@ -142,7 +142,7 @@ const length = ORDER.reduce((amount, item) => amount + +item.amount , 0)
             <div class="page-header">
                 <h2>Новости и акции</h2>
             </div>
-            <TheNews data={NEWS} client:only/>
+            <NewsBlock data={NEWS} client:only/>
         </div>
     </section>
 </Layout>

@@ -2,53 +2,98 @@
 import Layout from '@progresses/Layout.astro';
 import TheBanner from '@widgets/banner/TheBanner.vue'
 import TheAdvantages from '@widgets/advantages/TheAdvantages.vue'
-import TheCategories from '@widgets/categories/TheCategories.vue'
+import CategoriesBlock from '@progresses/CategoriesBlock.vue'
 import ThePopular from '@widgets/popular/ThePopular.vue'
 import TheStories from '@widgets/stories/TheStories.vue'
 import TheAbout from '@widgets/about/TheAbout.vue'
-import TheNews from '@widgets/news/TheNews.vue'
+import NewsBlock from '@progresses/NewsBlock.vue'
 import TheReviews from '@widgets/reviews/TheReviews.vue'
 import TheSeo from '@widgets/seo/TheSeo.vue'
 
-const NEWS = [
+const BANNERS = [
+    {
+        id: 1,
+        img: '/img/banners/desktop/1.jpg',
+        mobile: '/img/banners/mobile/1.jpg'
+    },
+    {
+        id: 2,
+        img: '/img/banners/desktop/2.jpg',
+        mobile: '/img/banners/mobile/2.jpg'
+    },
+    {
+        id: 3,
+        img: '/img/banners/desktop/3.jpg',
+        mobile: '/img/banners/mobile/3.jpg'
+    }
+]
+const ADVANTAGES = [
+    {
+        id: 1,
+        title: 'Качество ингредиентов',
+        description: 'Уделяем особое внимание качеству ингредиентов',
+        img: '/img/advantages/1.svg'
+    },
+    {
+        id: 2,
+        title: 'Опыт работы',
+        description: '10 лет работаем в сфере доставки',
+        img: '/img/advantages/2.svg'
+    },
+    {
+        id: 3,
+        title: 'Личная парковка',
+        description: 'Имеем свой собственный автопарк',
+        img: '/img/advantages/3.svg'
+    },
+    {
+        id: 4,
+        title: 'Спецпредложения',
+        description: 'Лояльная система бонусов и подарков',
+        img: '/img/advantages/4.svg'
+    }
+]
+const CATEGORIES = [
     {
         id: '1',
-        name: 'Скидка на первый заказ',
-        description: 'Делай первый заказ и экономь',
-        img: '/img/news/1.jpg',
+        name: 'Шашлыки',
+        amount: '4 блюда',
+        img: '/img/categories/1.png',
+        href: "#"
     },
     {
         id: '2',
-        name: 'Новое меню',
-        description: 'Запустили новое меню и приглашаем\n' +
-            'вас отведать его первыми',
-        img: '/img/news/2.jpg',
+        name: 'Бургеры',
+        amount: '4 блюда',
+        img: '/img/categories/2.png',
+        href: "#"
     },
     {
         id: '3',
-        name: 'Две пиццы по цене одной',
-        description: 'Специальное предложение для любителей пиццы',
-        img: '/img/news/3.jpg',
+        name: 'Салаты',
+        amount: '4 блюда',
+        img: '/img/categories/3.png',
+        href: "#"
     },
     {
         id: '4',
-        name: 'Винный ужин',
-        description: 'Джазовая мелодия в сочетании с курсами\n' +
-            'из вина и блюд от шефа',
-        img: '/img/news/4.jpg',
+        name: 'Горячие блюда',
+        amount: '4 блюда',
+        img: '/img/categories/4.png',
+        href: "#"
     },
     {
         id: '5',
-        name: 'Скидка 10% на самовывоз',
-        description: 'На все заказы действует скидка 10%\n' +
-            'при самовывозе из ресторана',
-        img: '/img/news/5.jpg',
+        name: 'Супы',
+        amount: '4 блюда',
+        img: '/img/categories/5.png',
+        href: "#"
     },
     {
         id: '6',
-        name: 'Фотоотчет с корпоратива',
-        description: 'Показываем как мы отмечали корпоратив нашей большой командой',
-        img: '/img/news/6.jpg',
+        name: 'Все блюда',
+        href: "#",
+        all: true
     },
 ]
 const POPULAR = [
@@ -180,6 +225,198 @@ const POPULAR = [
         img: '/img/products/4.jpg'
     },
 ]
+const STATUS_POPULAR = [
+    {
+        id: 1,
+        name: 'Популярные',
+        icon: '/status.svg#popular'
+    },
+    {
+        id: 2,
+        name: 'Рекомендованные',
+        icon: '/status.svg#recommended'
+    },
+    {
+        id: 3,
+        name: 'Новинки',
+        icon: '/status.svg#new'
+    }
+]
+const STORIES = [
+    {
+        id: 1,
+        img: '/img/stories/1.jpg',
+        name: 'Счастливые\n' +
+            'часы'
+    },
+
+    {
+        id: 3,
+        img: '/img/stories/2.jpg',
+        name: 'Акции, \n' +
+            'спецпредложения…'
+    },
+    {
+        id: 4,
+        img: '/img/stories/3.jpg',
+        name: 'Отзывы'
+    },
+    {
+        id: 5,
+        img: '/img/stories/4.jpg',
+        name: 'Банкетное\n' +
+            'меню'
+    },
+    {
+        id: 6,
+        img: '/img/stories/5.jpg',
+        name: 'Доставка'
+    },
+    {
+        id: 7,
+        img: '/img/stories/6.jpg',
+        name: 'Рестораны'
+    },
+    {
+        id: 8,
+        img: '/img/stories/7.jpg',
+        name: 'Корпоративы'
+    },
+    {
+        id: 9,
+        img: '/img/stories/tg.svg',
+        name: 'Мессенджеры'
+    },
+]
+const NEWS = [
+    {
+        id: '1',
+        name: 'Скидка на первый заказ',
+        description: 'Делай первый заказ и экономь',
+        img: '/img/news/1.jpg',
+    },
+    {
+        id: '2',
+        name: 'Новое меню',
+        description: 'Запустили новое меню и приглашаем\n' +
+            'вас отведать его первыми',
+        img: '/img/news/2.jpg',
+    },
+    {
+        id: '3',
+        name: 'Две пиццы по цене одной',
+        description: 'Специальное предложение для любителей пиццы',
+        img: '/img/news/3.jpg',
+    },
+    {
+        id: '4',
+        name: 'Винный ужин',
+        description: 'Джазовая мелодия в сочетании с курсами\n' +
+            'из вина и блюд от шефа',
+        img: '/img/news/4.jpg',
+    },
+    {
+        id: '5',
+        name: 'Скидка 10% на самовывоз',
+        description: 'На все заказы действует скидка 10%\n' +
+            'при самовывозе из ресторана',
+        img: '/img/news/5.jpg',
+    },
+    {
+        id: '6',
+        name: 'Фотоотчет с корпоратива',
+        description: 'Показываем как мы отмечали корпоратив нашей большой командой',
+        img: '/img/news/6.jpg',
+    },
+]
+const REVIEWS = [
+    {
+        id: '1',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+        video: '/video/video.mp4'
+    },
+    {
+        id: '2',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg',
+        video: '/video/video.mp4'
+    },
+    {
+        id: '3',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+    },
+    {
+        id: '4',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg'
+    },
+
+    {
+        id: '5',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+        video: '/video/video.mp4'
+    },
+    {
+        id: '6',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg',
+        video: '/video/video.mp4'
+    },
+    {
+        id: '7',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+    },
+    {
+        id: '8',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg'
+    },
+
+    {
+        id: '7',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/1.jpg',
+    },
+    {
+        id: '8',
+        name: 'Дмитрий Малых',
+        date: '15.05.20',
+        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+            'языке,…',
+        img: '/img/reviews/2.jpg'
+    },
+]
 const SEO = [
     {
         id: '1',
@@ -200,18 +437,19 @@ const SEO = [
         img: '/img/seo.jpg'
     }
 ]
+
 ---
 
-<Layout>
-    <TheBanner class-name="mb-50" client:load/>
-    <TheAdvantages class="container mb-50" client:load/>
-    <TheCategories class="container mb-100" client:load/>
+<Layout title="Главная">
+    <TheBanner data={BANNERS} class="mb-50" client:load/>
+    <TheAdvantages data={ADVANTAGES} class="container mb-50" client:load/>
+    <CategoriesBlock data={CATEGORIES} class="container mb-100" client:load/>
     <section class="mb-100">
         <div class="container">
             <div class="page-header page-header_center">
                 <h2>Популярные блюда недели</h2>
             </div>
-            <ThePopular list={POPULAR} client:load/>
+            <ThePopular list={POPULAR} status={STATUS_POPULAR} client:load/>
         </div>
     </section>
     <section class="mb-100">
@@ -219,7 +457,7 @@ const SEO = [
             <div class="page-header page-header_center">
                 <h2>Актуальная информация</h2>
             </div>
-            <TheStories client:load/>
+            <TheStories data={STORIES} client:load/>
         </div>
     </section>
     <section class="block-color mb-100">
@@ -232,7 +470,7 @@ const SEO = [
             <div class="page-header page-header_center">
                 <h2>Новости и акции</h2>
             </div>
-            <TheNews data={NEWS} client:load/>
+            <NewsBlock data={NEWS} client:load/>
         </div>
     </section>
     <section class="mb-100">
@@ -240,7 +478,7 @@ const SEO = [
             <div class="page-header page-header_center">
                 <h2>Отзывы наших клиентов</h2>
             </div>
-            <TheReviews client:load/>
+            <TheReviews data={REVIEWS} client:load/>
         </div>
     </section>
     <section class="mb-100">

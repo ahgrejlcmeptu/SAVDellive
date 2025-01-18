@@ -2,7 +2,7 @@
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheContacts from "@widgets/contacts/TheContacts.vue";
-import AppMap from "@features/map/AppMap.vue";
+import MapDelivery from "@features/map/MapDelivery.vue";
 import TheSeo from "@widgets/seo/TheSeo.vue";
 
 const CONTACTS = [
@@ -35,6 +35,10 @@ const CONTACTS = [
         value: 'Оплатить заказ можно наличными или по карте при получение заказа',
     },
 ]
+const DELIVERY = {
+    label: 'Карта доставки',
+    img: '/img/map.jpg'
+}
 const SEO = [
     {
         id: '1',
@@ -45,15 +49,15 @@ const SEO = [
 ]
 ---
 
-<Layout>
+<Layout title="Доставка и оплата">
     <section class="mb-100">
         <div class="container">
             <div class="page-header">
                 <AppBreadcrumb list={[{label: 'Доставка и оплата'}]}/>
                 <h1 class="text-36">Доставка и оплата</h1>
             </div>
-            <TheContacts data={CONTACTS} class="mb-100"/>
-            <AppMap class="map_contacts"/>
+            <TheContacts data={CONTACTS} class="mb-50"/>
+            <MapDelivery data={DELIVERY}/>
         </div>
     </section>
     <section class="mb-100">

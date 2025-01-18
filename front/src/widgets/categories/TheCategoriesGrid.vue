@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppCardCategory from "@entites/card/AppCardCategory.vue";
+import AppCardCategory from "@features/card/AppCardCategory.vue";
 
 interface Props {
     list: object;

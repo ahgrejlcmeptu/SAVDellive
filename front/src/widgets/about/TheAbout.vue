@@ -27,11 +27,14 @@
 .about {
   position: relative;
   padding: 100px 0;
+  min-height: 570px;
   @include media.respond-to(960) {
     padding: 50px 0;
+    min-height: 510px;
   }
   @include media.respond-to(640) {
     font-size: media.sizeREM(15);
+    min-height: auto;
   }
   @include media.respond-to(360) {
     padding: 40px 0;

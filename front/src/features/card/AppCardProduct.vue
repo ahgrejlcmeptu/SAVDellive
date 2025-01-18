@@ -4,7 +4,7 @@ import AppFavorites from "@spared/AppFavorites.vue";
 import AppStatus from "@spared/AppStatus.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import type {Card} from "@app/utils/interfaces";
+import type {Card} from "@app/utils/interfaces.ts";
 import type {PropType} from "vue";
 
 defineProps({
@@ -80,10 +80,6 @@ defineProps({
             }
         }
     }
-  }
-
-  @include media.respond-to(640) {
-    --radius-30: var(--radius-20)
   }
 
   @include media.hover {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {Input} from "@app/utils/interfaces.ts";
+import type {Input} from "@app/utils/interfaces";
 import {computed, ref} from "vue";
 
 const props = withDefaults(defineProps<Input>(), {
@@ -21,10 +21,20 @@ const onBlur = () => isFocus.value = false
 </script>
 
 <template>
-    <div :class="['input', {'input_focus': isFocus || model}]">
+    <div :class="['input', {'input_focus': isFocus || model}, color ? 'input_' + color : '']">
         <div class="input__item">
             <div class="input__label" v-if="label">{{ label }}</div>
+            <textarea
+                    v-if="type === 'textarea'"
+                    :name="name"
+                    :placeholder="placeholder"
+                    v-model.trim="model"
+                    @focus="onFocus"
+                    @blur="onBlur"
+                    :readonly="readonly"
+            ></textarea>
             <input
+                    v-else
                     :type="type"
                     :name="name"
                     :placeholder="placeholder"
@@ -41,8 +51,13 @@ const onBlur = () => isFocus.value = false
 @use "@style/media";
 
 .input {
+    --input-height: 50px;
 
-  .input__item {
+  &_white {
+        --input-border: var(--main-white);
+  }
+
+  &__item {
     position: relative;
   }
 
@@ -51,29 +66,35 @@ const onBlur = () => isFocus.value = false
     position: absolute;
     font-size: media.sizeREM(15);
     left: 20px;
-    top: 50%;
+    top: calc(var(--input-height) / 2);
     transform: translateY(-50%);
     color: var(--text-color-2);
     transition: .3s;
     pointer-events: none;
   }
 
-  input {
+  input, textarea {
     background: transparent;
     width: 100%;
-    height: 50px;
+    height: var(--input-height);
     border-radius: var(--radius-10);
-    border: 1px solid var(--border-color-2);
+    border: 1px solid var(--input-border, var(--border-color-2));
     padding: 15px 20px;
     display: block;
     transition: .3s;
     outline: none;
     color: var(--text-color-2);
     font-size: media.sizeREM(15);
+    background: var(--main-white);
 
     &::placeholder {
       color: var(--text-color-2);
     }
+  }
+
+  textarea {
+    height: 120px;
+    resize: none;
   }
 
   &_focus {
@@ -93,7 +114,7 @@ const onBlur = () => isFocus.value = false
       }
     }
 
-    input {
+    input, textarea {
       background: var(--main-color-2);
       border-color: var(--main-color-1);
     }

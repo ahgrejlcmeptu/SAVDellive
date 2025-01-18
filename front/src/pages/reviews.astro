@@ -1,0 +1,87 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheReviewsForm from "@widgets/reviews/TheReviewsForm.vue";
+import TheReviewsList from "@widgets/reviews/TheReviewsList.vue";
+import TheSeo from "@widgets/seo/TheSeo.vue";
+
+const REVIEWS = [
+    {
+        id: '1',
+        review: {
+            name: 'Дмитрий Малых',
+            date: '15.05.20',
+            description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+                'языке,…',
+            img: '/img/reviews/1.jpg',
+            video: '/video/video.mp4'
+        },
+        ask: {
+            name: 'Менеджер',
+            date: '15.05.20',
+            description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+                'языке,…',
+            img: '/img/reviews/1.jpg'
+        },
+    },
+    {
+        id: '2',
+        review: {
+            name: 'Дмитрий Малых',
+            date: '15.05.20',
+            description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+                'языке,…',
+            img: '/img/reviews/2.jpg',
+            video: '/video/video.mp4'
+        },
+    },
+    {
+        id: '3',
+        review: {
+            name: 'Дмитрий Малых',
+            date: '15.05.20',
+            description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+                'языке,…',
+            img: '/img/reviews/1.jpg',
+        },
+    },
+    {
+        id: '4',
+        review: {
+            name: 'Дмитрий Малых',
+            date: '15.05.20',
+            description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
+                'языке,…',
+            img: '/img/reviews/2.jpg'
+        }
+    },
+]
+const SEO = [
+    {
+        id: '1',
+        title: 'Условия доставки',
+        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
+        img: '/img/seo.jpg'
+    }
+]
+---
+
+<Layout title="Отзывы">
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <AppBreadcrumb list={[{label: 'Отзывы'}]}/>
+                <h1 class="text-36">Отзывы наших постоянных клиентов</h1>
+            </div>
+            <div class="content-flex">
+                <TheReviewsForm client:load/>
+                <TheReviewsList data={REVIEWS} client:load/>
+            </div>
+        </div>
+    </section>
+    <section class="mb-100">
+        <div class="container">
+            <TheSeo data={SEO} client:load/>
+        </div>
+    </section>
+</Layout>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {computed, markRaw, onMounted, ref} from "vue";
-import NewsGrid from "@features/news/NewsGrid.vue";
-import NewsSlider from "@features/news/NewsSlider.vue";
+import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
+import TheNewsSlider from "@widgets/news/TheNewsSlider.vue";
 defineProps(['data'])
 
 const slider = ref(false)
 const blocks = markRaw({
-    grid: NewsGrid,
-    slider: NewsSlider
+    grid: TheNewsGrid,
+    slider: TheNewsSlider
 })
 
 
@@ -26,5 +26,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <component :is="block" :list="data" class="news"></component>
+    <component :is="block" :data="data" class="news"></component>
 </template>

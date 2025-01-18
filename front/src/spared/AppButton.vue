@@ -6,6 +6,7 @@ type Color = 'main' | 'gray'
 interface Props {
     type?: string;
     full?: string;
+    size?: string;
     color?: Color | undefined;
 }
 
@@ -21,7 +22,7 @@ const color = computed(() => 'btn_' + props.color)
 <template>
     <button
         :type="type"
-        :class="['btn', color, {'btn_full': checkUndefined(full)}]"
+        :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big'}]"
         @click.prevent="$emit('action')"
     >
         <slot/>
@@ -63,6 +64,10 @@ const color = computed(() => 'btn_' + props.color)
 
     &_full {
         width: 100%;
+        display: flex;
+    }
+    &_big {
+        height: 50px;
     }
 
     &_main {

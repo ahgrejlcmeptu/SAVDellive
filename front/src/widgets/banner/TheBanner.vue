@@ -2,42 +2,21 @@
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
 
-interface Props {
-    className?: string
-}
+defineProps(['data'])
 
-defineProps<Props>()
 
-const LIST = [
-    {
-        id: 1,
-        img: '/img/banners/desktop/1.jpg',
-        mobile: '/img/banners/mobile/1.jpg'
-    },
-    {
-        id: 2,
-        img: '/img/banners/desktop/2.jpg',
-        mobile: '/img/banners/mobile/2.jpg'
-    },
-    {
-        id: 3,
-        img: '/img/banners/desktop/3.jpg',
-        mobile: '/img/banners/mobile/3.jpg'
-    }
-]
 </script>
 
 <template>
     <app-slider
-            v-if="true"
-            :class="['banner', className]"
+            class="banner"
             :slider="{loop: true, effect: 'fade' }"
             name=".banner"
             :navigation="{color: 'white', tablet: true}"
             :pagination="{}"
     >
         <swiper-slide
-                v-for="item in LIST"
+                v-for="item in data"
                 :key="item.id"
         >
             <picture v-if="true">

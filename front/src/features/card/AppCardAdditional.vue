@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppCurrency from "@spared/AppCurrency.vue";
-import type {CardAdditional} from "@app/utils/interfaces";
+import type {CardAdditional} from "@app/utils/interfaces.ts";
 import AppSvg from "@spared/AppSvg.vue";
 
 const props = defineProps<{

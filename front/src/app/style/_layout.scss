@@ -128,11 +128,21 @@ p {
     font-size: media.sizeREM(12);
   }
 }
+.size-14 {
+  font-size: media.sizeREM(14);
+}
+.text-11 {
+  font-size: media.sizeREM(11);
+}
 
 .page-header {
   margin-bottom: 30px;
   &_center {
     text-align: center;
+  }
+
+  p {
+    margin-top: 15px;
   }
 }
 
@@ -162,4 +172,10 @@ p {
     left: calc(var(--conteiner-padding) * -1);
 
   }
+}
+
+.content-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }

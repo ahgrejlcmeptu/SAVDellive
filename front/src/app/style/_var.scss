@@ -18,6 +18,7 @@
   --main-color-3-hover: #E8E0FF;
   --main-color-4: #F8F8F8;
   --main-color-5: #F1ECFF;
+  --main-color-6: #F9F6FF;
 
   --main-error-1: #FCEAF3;
   --main-error-2: #FF0000;
@@ -38,6 +39,9 @@
 
   @include media.respond-to(960) {
     --conteiner-padding: 30px;
+  }
+  @include media.respond-to(640) {
+    --radius-30: 20px;
   }
   @include media.respond-to(360) {
     --conteiner-padding: 20px;

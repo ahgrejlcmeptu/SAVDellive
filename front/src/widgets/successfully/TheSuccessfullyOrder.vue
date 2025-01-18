@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppCardProduct from "@entites/card/AppCardProduct.vue";
-import AppCardSuccessfully from "@entites/card/AppCardSuccessfully.vue";
+import AppCardProduct from "@features/card/AppCardProduct.vue";
+import AppCardSuccessfully from "@features/card/AppCardSuccessfully.vue";
 import {computed} from "vue";
 
 const props = defineProps(['data', 'percent'])

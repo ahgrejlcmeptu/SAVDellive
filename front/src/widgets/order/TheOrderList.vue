@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppCardOrder from "@entites/card/AppCardOrder.vue";
+import AppCardOrder from "@features/card/AppCardOrder.vue";
 
 const LIST = [
     {

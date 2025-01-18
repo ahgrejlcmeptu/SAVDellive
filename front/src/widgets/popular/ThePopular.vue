@@ -1,33 +1,18 @@
 <script setup lang="ts">
-import AppCardProduct from "@entites/card/AppCardProduct.vue";
+import AppCardProduct from "@features/card/AppCardProduct.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
 import {computed, ref} from "vue";
-const props = defineProps(['list'])
+const props = defineProps(['list', 'status'])
 
-const STATUS = [
-    {
-        id: 1,
-        name: 'Популярные',
-        icon: '/status.svg#popular'
-    },
-    {
-        id: 2,
-        name: 'Рекомендованные',
-        icon: '/status.svg#recommended'
-    },
-    {
-        id: 3,
-        name: 'Новинки',
-        icon: '/status.svg#new'
-    }
-]
-const active = ref(STATUS[0].id)
+
+const active = ref(props.status[0].id)
 const filter = computed(() => props.list.filter(({status}) => status.includes(active.value)).slice(0, 8))
+
 </script>
 
 <template>
-    <AppTabsSlider :slides="STATUS" v-model="active" />
+    <AppTabsSlider :slides="status" v-model="active" />
     <TransitionGroup tag="div" class="popular" name="cards">
         <AppCardProduct
                 class="card-product_mobile"

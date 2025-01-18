@@ -31,10 +31,20 @@ export interface CardAdditional {
 export interface Input {
     type?: string
     name?: string
+    color?: string
     placeholder?: string
     modelValue: string | number
     readonly?: boolean
     label?: string
+}
+
+export interface Checkbox {
+    type?: string
+    name?: string
+    modelValue: any
+    value: string | number | boolean
+    readonly?: boolean
+    required?: any
 }
 
 export interface Select {
@@ -43,7 +53,7 @@ export interface Select {
 }
 
 export interface Radio {
-    name: string
+    name?: string
     value: string
     modelValue: string | number
     readonly?: boolean
@@ -83,4 +93,9 @@ export interface SeoTabs {
     title: string;
     description: string;
     img: string;
+}
+
+export interface MapDelivery {
+    label?: string
+    img: string
 }

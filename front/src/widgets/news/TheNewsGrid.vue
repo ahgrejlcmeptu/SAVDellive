@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AppCardNews from "@entites/card/AppCardNews.vue";
+import AppCardNews from "@features/card/AppCardNews.vue";
 
 interface Props {
-    list: object
+    data: object
 }
 
 defineProps<Props>()
@@ -11,7 +11,7 @@ defineProps<Props>()
 <template>
     <div class="news_grid">
         <AppCardNews
-                v-for="item in list"
+                v-for="item in data"
                 :key="item.id"
                 :data="item"
         />
@@ -23,14 +23,17 @@ defineProps<Props>()
 
 .news_grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(var(--width, 30%), 1fr));
   gap: 30px;
   @include media.respond-to(960) {
     gap: 30px 20px;
   }
+  @include media.respond-to(640) {
+      --width: 40%;
+  }
   @include media.respond-to(360) {
-    gap: 15px 20px;
-    --width: 260px;
+    gap: 20px;
+    --width: 100%;
   }
 }
 </style>
