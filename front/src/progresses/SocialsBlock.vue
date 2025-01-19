@@ -24,5 +24,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <component :is="block" :data="data" class="news"></component>
+    <component :is="block" :data="data"></component>
 </template>

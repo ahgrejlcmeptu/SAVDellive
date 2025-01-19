@@ -3,9 +3,10 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import SocialsBlock from "@progresses/SocialsBlock.vue";
 import TheSeo from "@widgets/seo/TheSeo.vue";
-import TheReviews from "../widgets/reviews/TheReviews.vue";
-import TheGallery from "../widgets/gallery/TheGallery.vue";
-import AppDescriptionColumn from "../features/description/AppDescriptionColumn.vue";
+import TheReviews from "@widgets/reviews/TheReviews.vue";
+import TheGallery from "@widgets/gallery/TheGallery.vue";
+import TheTeam from "@widgets/team/TheTeam.vue";
+import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue";
 
 const description = {
     description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях</p>',
@@ -26,6 +27,36 @@ const GALLERY = [
         id: 3,
         img: '/img/about.jpg',
         poster: '/img/about.jpg',
+    }
+]
+const TEAM = [
+    {
+        id: 1,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 2,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 3,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 3,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 4,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 5,
+        img: '/img/team.jpg'
+    },
+    {
+        id: 6,
+        img: '/img/team.jpg'
     }
 ]
 const REVIEWS = [
@@ -171,7 +202,7 @@ const SEO = [
                 <h2>Наша команда</h2>
             </div>
             <AppDescriptionColumn class="mb-30" data={description}/>
-
+            <TheTeam data={TEAM} client:load/>
         </div>
     </section>
     <section class="mb-100">
