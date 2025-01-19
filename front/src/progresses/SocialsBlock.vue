@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import {computed, markRaw, onMounted, ref} from "vue";
-import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
-import TheNewsSlider from "@widgets/news/TheNewsSlider.vue";
+import TheSocialsGrid from "@widgets/socials/TheSocialsGrid.vue";
+import TheSocialsSlider from "@widgets/socials/TheSocialsSlider.vue";
 defineProps(['data'])
 
 const slider = ref(false)
 const blocks = markRaw({
-    grid: TheNewsGrid,
-    slider: TheNewsSlider
+    grid: TheSocialsGrid,
+    slider: TheSocialsSlider
 })
 
 

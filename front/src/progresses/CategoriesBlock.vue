@@ -12,9 +12,7 @@ const blocks = markRaw({
 })
 
 
-const block = computed(() => {
-    return slider.value ? blocks.slider : blocks.grid;
-})
+const block = computed(() => slider.value ? blocks.slider : blocks.grid)
 
 
 const updateVisibleItemsCount = () => {

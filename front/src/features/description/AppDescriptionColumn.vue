@@ -4,7 +4,7 @@ defineProps(['data'])
 
 <template>
     <div class="description-column">
-        <h3>{{ data.title }}</h3>
+        <h3 v-if="data.title">{{ data.title }}</h3>
         <div class="description-column__block" v-html="data.description"></div>
     </div>
 </template>
@@ -26,6 +26,10 @@ defineProps(['data'])
 
       p {
           margin-bottom: 15px;
+          -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+          break-inside: avoid;
+          line-height: 160%;
           &:last-child {
               margin-bottom: 0;
           }

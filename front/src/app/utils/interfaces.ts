@@ -99,3 +99,10 @@ export interface MapDelivery {
     label?: string
     img: string
 }
+
+export type Social = {
+    id: number;
+    img: string;
+    link?: string;
+    linkImg?: string;
+};
