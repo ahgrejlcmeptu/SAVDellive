@@ -1,0 +1,30 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
+
+const USER = {
+    id: 1,
+    img: '/img/user.jpg',
+    name: 'Екатерина',
+    phone: '+7 914 888 8888',
+    bonus: 200
+}
+---
+
+<Layout title="Личный кабинет">
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <AppBreadcrumb list={[{label: 'Личный кабинет'}]}/>
+                <h1 class="text-36">Личный кабинет</h1>
+            </div>
+            <div class="content-flex">
+                <TheLkNavbar data={USER} client:only/>
+                <div class="content-flex__right">
+
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

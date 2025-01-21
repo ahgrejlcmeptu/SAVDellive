@@ -1,0 +1,61 @@
+@use 'media';
+
+h1, .text-55 {
+  font-size: media.sizeREM(55);
+}
+h2, .text-36 {
+  font-size: media.sizeREM(36);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(26);
+  }
+}
+h3, .text-20 {
+  font-size: media.sizeREM(20);
+  font-weight: 500;
+}
+h4, .text-26 {
+  font-size: media.sizeREM(26);
+  font-weight: 700;
+}
+
+h6, .text-18 {
+  font-size: media.sizeREM(18);
+  font-weight: 500;
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(16);
+  }
+}
+
+p {
+  color: var(--text-color-2);
+
+  a {
+    color: var(--main-color-1);
+    text-decoration: underline;
+  }
+}
+
+.text-16 {
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(15);
+  }
+}
+.text-15 {
+  font-size: media.sizeREM(15);
+  line-height: 150%;
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(14);
+  }
+}
+.text-14 {
+  font-size: media.sizeREM(14);
+  @include media.respond-to(640) {
+    font-size: media.sizeREM(12);
+  }
+}
+.size-14 {
+  font-size: media.sizeREM(14);
+}
+.text-11 {
+  font-size: media.sizeREM(11);
+}
