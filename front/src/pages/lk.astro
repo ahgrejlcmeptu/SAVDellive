@@ -2,13 +2,15 @@
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
+import TheBonuses from '@widgets/bonuses/TheBonuses.vue'
 
 const USER = {
     id: 1,
     img: '/img/user.jpg',
     name: 'Екатерина',
     phone: '+7 914 888 8888',
-    bonus: 200
+    bonus: 200,
+    discount: 1,
 }
 ---
 
@@ -22,7 +24,7 @@ const USER = {
             <div class="content-flex">
                 <TheLkNavbar data={USER} client:only/>
                 <div class="content-flex__right">
-
+                    <TheBonuses data={USER} class="mb-30" client:only/>
                 </div>
             </div>
         </div>
