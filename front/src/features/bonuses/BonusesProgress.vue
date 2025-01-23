@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppCurrency from "@spared/AppCurrency.vue";
 import {computed} from "vue";
+import {localeNumber} from "@app/utils/locale.ts";
 
 const PERCENTS = [
     {
@@ -39,7 +40,7 @@ const progress = computed((): number => {
                     :key="item.id"
             >
                 <div class="bonuses-progress__value text-18">{{ item.value }}%</div>
-                <div class="bonuses-progress__total text-12">от {{ item.total.toLocaleString() }}
+                <div class="bonuses-progress__total text-12">от {{ localeNumber(item.total)}}
                     <AppCurrency/>
                 </div>
             </div>

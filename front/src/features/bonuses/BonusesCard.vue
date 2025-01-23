@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
+import {localeNumber} from "@app/utils/locale.ts";
 defineProps<{
     bonus: number,
     discount: number
@@ -16,7 +17,7 @@ defineProps<{
             <div class="text-18">{{discount}}%</div>
         </div>
         <div class="bonuses-card__available">
-            <div class="text-30">{{bonus.toLocaleString()}}</div>
+            <div class="text-30">{{localeNumber(bonus)}}</div>
             <div class="text-12">доступных <br> бонусов</div>
         </div>
     </div>

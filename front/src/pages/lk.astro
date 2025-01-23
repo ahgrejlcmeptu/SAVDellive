@@ -3,6 +3,7 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
 import TheBonuses from '@widgets/bonuses/TheBonuses.vue'
+import TheHistory from '@widgets/history/TheHistory.vue'
 
 const USER = {
     id: 1,
@@ -11,6 +12,35 @@ const USER = {
     phone: '+7 914 888 8888',
     bonus: 200,
     discount: 1,
+    history: [
+        {
+            id: 1,
+            date: 1619280000000,
+            number: 1245,
+            total: 968,
+            status: 'Завершён',
+            bonus: {
+                increment: 123,
+                decrement: 90
+            },
+            list: [
+                {
+                    id: 1,
+                    img: '/img/products/1.jpg',
+                    name: 'Бургер',
+                    price: 238,
+                    amount: 2
+                },
+                {
+                    id: 2,
+                    img: '/img/products/2.jpg',
+                    name: 'Wok',
+                    price: 238,
+                    amount: 1
+                }
+            ]
+        }
+    ]
 }
 ---
 
@@ -25,6 +55,7 @@ const USER = {
                 <TheLkNavbar data={USER} client:only/>
                 <div class="content-flex__right">
                     <TheBonuses data={USER} class="mb-30" client:only/>
+                    <TheHistory data={USER.history} client:only/>
                 </div>
             </div>
         </div>
