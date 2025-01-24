@@ -46,6 +46,7 @@ const color = computed(() => 'btn_' + props.color)
     background-color: var(--btn-background, transparent);
     border-color: var(--btn-border, transparent);
     color: var(--btn-color);
+    padding: 0 var(--btn-paddin, 30px);
     @include media.respond-to(360) {
         font-size: media.sizeREM(15);
     }
@@ -68,6 +69,7 @@ const color = computed(() => 'btn_' + props.color)
     }
     &_big {
         height: 50px;
+        font-size: 1rem;
     }
 
     &_main {
