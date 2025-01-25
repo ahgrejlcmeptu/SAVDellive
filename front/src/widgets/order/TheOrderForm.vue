@@ -455,6 +455,8 @@ watch(
     svg {
       width: 22px;
       height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--text-color-3);
       stroke: var(--text-color-3);
     }
   }

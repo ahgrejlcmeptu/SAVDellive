@@ -84,7 +84,9 @@ const setHeight = () => {
                 </i>
                 {{ item.name }}
             </div>
-            <div class="lk-navbar__select" v-if="isMobile"><AppSvg name="dropdown"/></div>
+            <div class="lk-navbar__select" v-if="isMobile">
+                <AppSvg name="dropdown"/>
+            </div>
         </div>
     </div>
 </template>
@@ -99,6 +101,7 @@ const setHeight = () => {
   border: 1px solid var(--border-color-1);
   overflow: hidden;
   padding-bottom: 25px;
+  align-self: flex-start;
 
   @include media.respond-to(640) {
     width: 100%;
@@ -237,6 +240,7 @@ const setHeight = () => {
     height: 50px;
     display: flex;
     align-items: center;
+
     svg {
       width: 9px;
       height: 4px;

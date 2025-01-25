@@ -1,0 +1,34 @@
+---
+import Layout from '@progresses/Layout.astro';
+import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
+import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
+import TheLkPersonal from '@widgets/lk/TheLkPersonal.vue'
+
+const USER = {
+    id: 1,
+    img: '/img/user.jpg',
+    name: 'Екатерина',
+    surname: 'Золинa',
+    phone: '+7 914 888 8888',
+    email: 'info@dellive.ru',
+    login: 'testLogin',
+    bonus: 200,
+}
+---
+
+<Layout title="Личный кабинет">
+    <section class="mb-100">
+        <div class="container">
+            <div class="page-header">
+                <AppBreadcrumb list={[{label: 'Персональные данные'}]}/>
+                <h1 class="text-36">Персональные данные</h1>
+            </div>
+            <div class="content-flex">
+                <TheLkNavbar data={USER} client:only/>
+                <div class="content-flex__right">
+                    <TheLkPersonal data={USER} client:only/>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

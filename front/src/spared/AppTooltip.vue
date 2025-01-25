@@ -23,6 +23,7 @@ onMounted(() => {
 
 <style lang="scss">
 @use "@style/media";
+
 .tooltip {
   position: relative;
 
@@ -41,6 +42,12 @@ onMounted(() => {
     bottom: 100%;
     margin-bottom: 20px;
     width: 376px;
+    max-width: 100vw;
+
+    @include media.respond-to(640) {
+      left: calc(var(--conteiner-padding) * -1);
+      padding: 20px var(--conteiner-padding);
+    }
 
     &:before {
       content: '';
@@ -49,13 +56,17 @@ onMounted(() => {
       left: 35px;
       border-width: 15px;
       border-style: solid;
-      border-color: var(--main-white) transparent transparent transparent ;
+      border-color: var(--main-white) transparent transparent transparent;
+      @include media.respond-to(640) {
+        left: calc(var(--conteiner-padding) - 1px);
+      }
     }
 
     h6 {
       font-size: media.sizeREM(14);
       font-weight: 700;
       margin-bottom: 8px;
+
       span {
         color: var(--main-color-1)
       }
@@ -66,9 +77,11 @@ onMounted(() => {
       font-size: media.sizeREM(14);
       line-height: 150%;
       margin-bottom: 8px;
+
       &:last-child {
         margin-bottom: 0;
       }
+
       a {
         text-decoration: underline;
       }
