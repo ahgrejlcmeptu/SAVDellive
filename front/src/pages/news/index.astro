@@ -1,19 +1,21 @@
 ---
-import Layout from '@progresses/Layout.astro';
-import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
-import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
-import TheSeo from "@widgets/seo/TheSeo.vue";
+import Layout from '../../progresses/Layout.astro';
+import AppBreadcrumb from '../../features/breadcrumb/AppBreadcrumb.vue'
+import TheNewsGrid from "../../widgets/news/TheNewsGrid.vue";
+import TheSeo from "../../widgets/seo/TheSeo.vue";
 
 
 const NEWS = [
     {
         id: '1',
+        href: 'news-1',
         name: 'Скидка на первый заказ',
         description: 'Делай первый заказ и экономь',
         img: '/img/news/1.jpg',
     },
     {
         id: '2',
+        href: 'news-2',
         name: 'Новое меню',
         description: 'Запустили новое меню и приглашаем\n' +
             'вас отведать его первыми',
@@ -21,6 +23,7 @@ const NEWS = [
     },
     {
         id: '3',
+        href: 'news-3',
         name: 'Две пиццы по цене одной',
         description: 'Специальное предложение для любителей пиццы',
         img: '/img/news/3.jpg',

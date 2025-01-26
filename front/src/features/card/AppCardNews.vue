@@ -2,6 +2,7 @@
 interface Props {
     data: {
         id: string | number
+        href?: string
         name: string
         description: string
         img: string
@@ -12,7 +13,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <a class="card-news" :href="data.id">
+    <a class="card-news" :href="'/news/' + data.href">
 <span class="card-news__img">
     <img :src="data.img" :alt="data.name">
 </span>

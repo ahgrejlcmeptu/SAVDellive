@@ -2,8 +2,8 @@
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
-import TheBonuses from '@widgets/bonuses/TheBonuses.vue'
-import TheHistory from '@widgets/history/TheHistory.vue'
+import TheProducts from '@widgets/products/TheProducts.vue'
+
 
 const USER = {
     id: 1,
@@ -99,20 +99,64 @@ const USER = {
         }
     ]
 }
+// const USER = null
+const POPULAR = [
+    {
+        id: '1',
+        name: 'Корейский ',
+        category: '1',
+        status: [1],
+        description: 'Мини-кукуруза, лук, морковь, капуста…',
+        price: 159,
+        oldPrice: 259,
+        weight: 140,
+        img: '/img/products/1.jpg'
+    },
+    {
+        id: '2',
+        name: 'Бургер',
+        category: '1',
+        status: [1, 2],
+        description: 'Котлета говяжья, салат, помидор, сыр, соус…',
+        price: '259',
+        weight: 140,
+        img: '/img/products/2.jpg'
+    },
+    {
+        id: '3',
+        name: 'Мисо-суп',
+        category: '1',
+        status: [1, 2],
+        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
+        price: 159,
+        oldPrice: 259,
+        weight: 140,
+        img: '/img/products/3.jpg'
+    },
+    {
+        id: '4',
+        name: 'Рыбные палочки',
+        category: '1',
+        status: [1],
+        description: 'Рыбные палочки, панировка, морковь, лук…',
+        price: 159,
+        weight: 140,
+        img: '/img/products/4.jpg'
+    }
+]
 ---
 
-<Layout title="Личный кабинет">
+<Layout title="Избранные товары">
     <section class="mb-100">
         <div class="container">
             <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Личный кабинет'}]}/>
-                <h1 class="text-36">Личный кабинет</h1>
+                <AppBreadcrumb list={[{label: 'Избранные товары'}]}/>
+                <h1 class="text-36">Избранные товары</h1>
             </div>
             <div class="content-flex">
                 <TheLkNavbar data={USER} client:only/>
                 <div class="content-flex__right">
-                    <TheBonuses data={USER} class="mb-30" client:only/>
-                    <TheHistory data={USER.history} client:only/>
+                    <TheProducts data={POPULAR} client:only/>
                 </div>
             </div>
         </div>

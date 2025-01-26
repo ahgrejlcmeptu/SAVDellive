@@ -63,7 +63,7 @@ const setHeight = () => {
 </script>
 
 <template>
-    <div class="lk-navbar text-15">
+    <div class="lk-navbar text-15" v-if="data">
         <div class="lk-navbar__top">
             <div class="lk-navbar__img">
                 <img :src="data.img" alt="">

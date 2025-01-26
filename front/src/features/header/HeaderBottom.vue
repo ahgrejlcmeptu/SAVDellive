@@ -9,10 +9,10 @@ import AppItemValue from "@spared/AppItemValue.vue";
         <div class="header-bottom">
             <HeaderNav/>
             <div class="header-bottom__controls">
-                <div class="header-bottom__btn header-bottom__btn_favorites">
+                <a href="/favorites" class="header-bottom__btn header-bottom__btn_favorites">
                     <app-svg name="favorites"></app-svg>
                     <app-item-value>1</app-item-value>
-                </div>
+                </a>
                 <a href="/order" class="header-bottom__btn header-bottom__btn_basket">
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
