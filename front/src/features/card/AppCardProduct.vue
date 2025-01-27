@@ -4,7 +4,8 @@ import AppFavorites from "@spared/AppFavorites.vue";
 import AppStatus from "@spared/AppStatus.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import type {Card} from "@app/utils/interfaces.ts";
+import AppAmount from "@spared/AppAmount.vue";
+import type {Card} from "@app/utils/interfaces";
 import type {PropType} from "vue";
 
 defineProps({
@@ -45,7 +46,7 @@ defineProps({
             <app-button full>
                 <AppSvg name="plus"/>
                 В корзину
-                <div class="card-product__amount">1</div>
+                <AppAmount :value="1"/>
             </app-button>
         </div>
     </div>
@@ -181,19 +182,6 @@ defineProps({
         stroke: var(--main-white);
       }
     }
-  }
-
-  &__amount {
-    min-width: 18px;
-    height: 18px;
-    padding: 3px 6px;
-    text-align: center;
-    border-radius: 50%;
-    background-color: #EDE4FF;
-    font-size: media.sizeREM(11);
-    font-weight: 500;
-    color: var(--main-color-1);
-    opacity: .8;
   }
 
   &_mobile {
