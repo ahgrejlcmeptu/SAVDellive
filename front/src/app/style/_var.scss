@@ -45,9 +45,10 @@
   @include media.respond-to(640) {
     --radius-30: 20px;
     --radius-20: 16px;
+    --conteiner-padding: 20px;
   }
   @include media.respond-to(360) {
-    --conteiner-padding: 20px;
+    --conteiner-padding: 15px;
   }
   @include media.respond-to(320) {
     --conteiner-padding: 10px;

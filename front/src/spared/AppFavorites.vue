@@ -12,8 +12,8 @@ import AppSvg from "./AppSvg.vue";
 
 .app-favorites {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: var(--favorites-pos, 20px);
+  right: var(--favorites-pos, 20px);
   cursor: pointer;
   z-index: 1;
 

@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
 <div class="app-status"><slot/></div>
 </template>
@@ -10,9 +6,6 @@
 @use '@style/media';
 
 .app-status {
-  position: absolute;
-  top: 20px;
-  left: 27px;
   text-transform: uppercase;
   font-size: media.sizeREM(11);
   line-height:  media.sizeREM(18);;

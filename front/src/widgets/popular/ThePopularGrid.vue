@@ -13,7 +13,7 @@ const filter = computed(() => props.list.filter(({status}) => status.includes(ac
 
 <template>
     <AppTabsSlider :slides="status" v-model="active" />
-    <TransitionGroup tag="div" class="popular" name="cards">
+    <TransitionGroup tag="div" class="popular-grid" name="cards">
         <AppCardProduct
                 class="card-product_mobile"
                 v-for="item in filter"
@@ -28,7 +28,7 @@ const filter = computed(() => props.list.filter(({status}) => status.includes(ac
 @use "@style/media";
 @use "@style/transition";
 
-.popular {
+.popular-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--card-width, 20%), 1fr));
   grid-gap: 30px;

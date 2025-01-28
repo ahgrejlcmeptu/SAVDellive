@@ -92,6 +92,7 @@ const MORE_NAV = [
     {
         id: '02',
         name: 'Главная',
+        href: '/'
     },
     {
         id: '03',

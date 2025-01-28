@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppFavorites from "@spared/AppFavorites.vue";
-import AppStatus from "@spared/AppStatus.vue";
+import AppStatus from "@spared/status/AppStatus.vue";
+import AppStatusList from "@spared/status/AppStatusList.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
 import AppAmount from "@spared/AppAmount.vue";
 import type {Card} from "@app/utils/interfaces";
 import type {PropType} from "vue";
+
 
 defineProps({
     data: {
@@ -25,7 +27,9 @@ defineProps({
         <AppFavorites/>
         <div class="card-product__group">
             <div class="card-product__top">
-                <app-status v-if="data.oldPrice">Акция</app-status>
+                <app-status-list>
+                    <app-status v-if="data.oldPrice">Акция</app-status>
+                </app-status-list>
                 <div class="card-product__img">
                     <img :src="data.img" :alt="data.name">
                 </div>
