@@ -8,6 +8,7 @@ interface Props {
     type?: string;
     full?: string;
     size?: string;
+    href?: string;
     color?: Color | undefined;
     disabled?: boolean | undefined
 }
@@ -31,9 +32,13 @@ const onClick = () => {
             :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big'}]"
             @click.prevent="onClick"
             :disabled="disabled"
+            v-if="!href"
     >
         <slot/>
     </button>
+    <a :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big'}]" :href="href" v-else>
+        <slot/>
+    </a>
 </template>
 
 <style lang="scss">

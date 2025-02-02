@@ -5,9 +5,9 @@ import AppSvg from "@spared/AppSvg.vue";
 import AppCatalogTabs from "@spared/catalog/AppCatalogTabs.vue";
 import AppCatalogTab from "@spared/catalog/AppCatalogTab.vue";
 import {SwiperSlide} from "swiper/vue";
-import {computed, reactive} from "vue";
+import {computed, onMounted, reactive, watch} from "vue";
 
-const props = defineProps(['catalog'])
+const props = defineProps(['catalog', 'declaration'])
 const filter = reactive({
     categories: null
 })
@@ -20,12 +20,27 @@ const filterItems = computed(() => {
     })
 })
 
+watch(
+    () => filter.categories,
+    (val) => {
+        const currentUrl = new URL(window.location.href);
+        const params = new URLSearchParams(currentUrl.search);
+        val ? params.set('categories', val) : params.delete('categories')
+        currentUrl.search = params.toString();
+        window.history.pushState({path: currentUrl.pathname + currentUrl.search}, '', currentUrl);
+    }
+)
+
+onMounted(() => {
+    const currentUrl = new URL(window.location.href);
+    const params = new URLSearchParams(currentUrl.search);
+    filter.categories = params.get('categories')
+})
 
 </script>
 
 <template>
     <div class="catalog">
-        {{filter}}
         <div class="catalog__header mb-50">
             <app-catalog-tabs>
                 <SwiperSlide
@@ -34,7 +49,6 @@ const filterItems = computed(() => {
                 >
                     <app-catalog-tab
                             :value="item.name"
-                            name="categories"
                             v-model="filter.categories"
                     >{{ item.name }}
                     </app-catalog-tab>
@@ -49,12 +63,13 @@ const filterItems = computed(() => {
         </div>
         <div
                 class="catalog__group mb-50"
-                v-for="group in filterItems"
+                v-for="(group, idx) in filterItems"
                 :key="group.id"
         >
             <div class="page-header">
                 <h2>{{ group.name }}</h2>
             </div>
+            <ThePopularGrid :list="[declaration, ...group.products]" v-if="declaration && idx === 0"/>
             <ThePopularGrid :list="group.products"/>
         </div>
     </div>

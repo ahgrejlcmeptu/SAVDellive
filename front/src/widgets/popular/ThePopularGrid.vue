@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import AppCardProduct from "@features/card/AppCardProduct.vue";
+import AppCardDeclaration from "@features/card/AppCardDeclaration.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
 import {computed, ref} from "vue";
+
 const props = defineProps(['list', 'status', 'link'])
 
 
@@ -15,14 +17,19 @@ const filter = computed(() => {
 </script>
 
 <template>
-    <AppTabsSlider v-if="status" :slides="status" v-model="active" />
+    <AppTabsSlider v-if="status" :slides="status" v-model="active"/>
     <TransitionGroup tag="div" class="popular-grid" name="cards">
-        <AppCardProduct
-                class="card-product_mobile"
+        <template
                 v-for="item in filter"
                 :key="item.id"
-                :data="item"
-        />
+        >
+            <AppCardProduct
+                    v-if="item.type !== 'declaration'"
+                    class="card-product_mobile"
+                    :data="item"
+            />
+            <AppCardDeclaration v-else :data="item"/>
+        </template>
     </TransitionGroup>
     <app-link-bottom v-if="status"><a :href="link || '/catalog'">Смотреть все</a></app-link-bottom>
 </template>

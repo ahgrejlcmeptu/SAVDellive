@@ -4,6 +4,14 @@ import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheSeo from "@widgets/seo/TheSeo.vue";
 import TheCatalog from "@widgets/catalog/TheCatalog.vue";
 
+const DECLARATION = {
+    type: 'declaration',
+    title: 'Обновлённое летнее меню',
+    description: 'Мы обновили летнее меню, оно стало ещё аппетитнее',
+    img: '/img/DECLARATION.jpg',
+    btnHref: '#',
+    btnText: 'Подробнее'
+}
 const CATALOG = [
     {
       id: 1,
@@ -340,7 +348,7 @@ const SEO = [
                 <AppBreadcrumb list={[{label: 'Каталог товаров'}]}/>
                 <h1 class="text-36">Каталог товаров</h1>
             </div>
-            <TheCatalog catalog={CATALOG} client:load/>
+            <TheCatalog catalog={CATALOG} declaration={DECLARATION} client:load/>
         </div>
     </section>
     <section class="mb-100">
