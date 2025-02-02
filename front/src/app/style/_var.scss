@@ -9,6 +9,7 @@
   --radius-10: 10px;
   --radius-8: 8px;
   --radius-2: 2px;
+  --gap-page: 30px;
 
   --main-white: #ffffff;
   --gradient: rgba(130, 225, 255, 0.25) 7.78%, rgba(159, 186, 255, 0.25) 48.74%, rgba(214, 182, 255, 0.25) 92.35%;
@@ -41,6 +42,7 @@
 
   @include media.respond-to(960) {
     --conteiner-padding: 30px;
+    --gap-page: 20px;
   }
   @include media.respond-to(640) {
     --radius-30: 20px;
@@ -49,6 +51,7 @@
   }
   @include media.respond-to(360) {
     --conteiner-padding: 15px;
+    --gap-page: 15px;
   }
   @include media.respond-to(320) {
     --conteiner-padding: 10px;
