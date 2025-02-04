@@ -4,7 +4,7 @@ import {onMounted, onUnmounted, ref} from "vue";
 const show = ref(false)
 const handleClick = (event: Event) => {
     if (event.target.closest('.app-dropdown__toggle')) show.value = !show.value
-    if (event.target.closest('.app-dropdown-item')) show.value = false
+    if (event.target.closest('.app-dropdown-item') || event.target.closest('[data-dropdown-close]')) show.value = false
 }
 const handleMousedown = (event: Event) => {
     if (!event.target.closest('.app-dropdown.show')) show.value = false
@@ -29,6 +29,7 @@ onUnmounted(() => {
             <div class="app-dropdown__list">
                 <slot name="list"/>
             </div>
+            <slot name="footer"/>
         </div>
     </div>
 </template>
@@ -45,6 +46,7 @@ onUnmounted(() => {
 
   &__menu {
     z-index: 4;
+    //max-width: calc(100vw - 20px);
     //min-width: calc(100% + 20px);
     position: absolute;
     background: var(--main-white);
@@ -59,6 +61,7 @@ onUnmounted(() => {
     flex-direction: column;
     width: max-content;
     padding: 5px;
+    color: var(--text-color-2);
   }
 
   &__list {
