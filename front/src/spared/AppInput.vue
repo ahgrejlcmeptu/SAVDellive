@@ -59,6 +59,9 @@ const onBlur = () => isFocus.value = false
 
   &__item {
     position: relative;
+      @include media.hover {
+          --input-border: var(--main-color-1)
+      }
   }
 
   &__label {

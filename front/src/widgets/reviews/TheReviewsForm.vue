@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppInput from "@spared/AppInput.vue";
+import AppFile from "@entites/AppFile.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppCheckbox from "@spared/AppCheckbox.vue";
 import {reactive} from "vue";
@@ -8,12 +9,16 @@ const form = reactive({
     name: '',
     phone: '',
     review: '',
+    file: null,
     politic: true
 })
+const submit = () => {
+    console.log(555)
+}
 </script>
 
 <template>
-    <form class="reviews-form">
+    <form @submit.prevent="submit" class="reviews-form">
         <div class="page-header page-header_center">
             <h3>Оставить отзыв</h3>
             <p class="text-16">Оставьте пожалуйста свой отзыв <br>
@@ -24,6 +29,7 @@ const form = reactive({
             <AppInput class="_w50" color="white" v-model="form.name" label="Ваше имя"/>
             <AppInput class="_w50" color="white" type="tel" v-model="form.phone" placeholder="+7 ___ ___ __ __"/>
             <AppInput color="white" type="textarea" v-model="form.review" label="Напишите отзыв"/>
+            <AppFile color="white" v-model="form.file" placeholder="Загрузить видео"/>
         </div>
         <div class="reviews-form__footer">
             <app-button type="submit" full size="big">Отправить заявку</app-button>
@@ -84,7 +90,7 @@ const form = reactive({
     }
   }
 
-  .input {
+  .input, .input-file {
     width: 100%;
     flex-grow: 1;
 
@@ -99,6 +105,10 @@ const form = reactive({
 
   .page-header {
     margin-bottom: 20px;
+
+      p {
+          margin-top: 10px;
+      }
   }
 }
 </style>

@@ -2,7 +2,6 @@
 import {SwiperSlide} from "swiper/vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 defineProps(['data'])
-
 </script>
 
 <template>

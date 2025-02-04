@@ -30,7 +30,7 @@ const onClick = () => {
     <button
             :type="type"
             :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big'}]"
-            @click.prevent="onClick"
+            @click="onClick"
             :disabled="disabled"
             v-if="!href"
     >
@@ -108,13 +108,20 @@ const onClick = () => {
     --btn-color-hover: var(--main-white);
   }
 
+  &_light {
+    --btn-background: var(--main-color-2);
+    --btn-color: var(--text-color-3);
+    --btn-background-hover: var(--main-color-1);
+    --btn-color-hover: var(--main-white);
+  }
+
   &_border {
     border-width: 1px;
     border-style: solid;
     --btn-border: var(--border-color-2);
     --btn-color: var(--text-color-3);
     --btn-background-hover: var(--main-color-1);
-    --btn-border-hover:  var(--main-color-1);
+    --btn-border-hover: var(--main-color-1);
     --btn-color-hover: var(--main-white);
   }
 }
