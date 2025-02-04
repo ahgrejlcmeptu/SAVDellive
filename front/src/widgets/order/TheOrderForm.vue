@@ -326,7 +326,7 @@ watch(
                 </div>
                 <div class="order-form__list-item">
                     <span>Доставка</span>
-                    <span>0<AppCurrency/></span>
+                    <span>0 <AppCurrency/></span>
                 </div>
                 <div class="order-form__list-item order-form__list-item_total">
                     <span class="text-18">Итог</span>

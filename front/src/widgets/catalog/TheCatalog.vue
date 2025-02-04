@@ -6,6 +6,8 @@ import AppCatalogTabs from "@spared/catalog/AppCatalogTabs.vue";
 import AppCatalogTab from "@spared/catalog/AppCatalogTab.vue";
 import {SwiperSlide} from "swiper/vue";
 import {computed, onMounted, reactive, watch} from "vue";
+import AppDropdown from "@spared/dropdown/AppDropdown.vue";
+import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 
 const props = defineProps(['catalog', 'declaration'])
 const filter = reactive({
@@ -55,10 +57,17 @@ onMounted(() => {
                 </SwiperSlide>
             </app-catalog-tabs>
             <div class="catalog__filter">
-                <app-button>
-                    <AppSvg name="filter"/>
-                    Фильтр по ингредиентам
-                </app-button>
+                <app-dropdown>
+                    <template v-slot:button>
+                        <app-button>
+                            <AppSvg name="filter"/>
+                            Фильтр по ингредиентам
+                        </app-button>
+                    </template>
+                    <template v-slot:list>
+                        <p>sdfsdfdf</p>
+                    </template>
+                </app-dropdown>
             </div>
         </div>
         <div
@@ -70,7 +79,7 @@ onMounted(() => {
                 <h2>{{ group.name }}</h2>
             </div>
             <ThePopularGrid :list="[declaration, ...group.products]" v-if="declaration && idx === 0"/>
-            <ThePopularGrid :list="group.products"/>
+            <ThePopularGrid :list="group.products" v-else/>
         </div>
     </div>
 </template>
@@ -98,6 +107,11 @@ onMounted(() => {
       margin-bottom: 0;
     }
 
+  }
+
+  .app-dropdown__menu {
+    width: 100%;
+    left: 0;
   }
 }
 </style>

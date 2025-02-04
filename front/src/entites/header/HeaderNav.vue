@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
-// import AppDropdown from "@entites/dropdown/AppDropdown.vue";
+import AppDropdown from "@spared/dropdown/AppDropdown.vue";
+import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 import {SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
-// import {CDropdownItem} from '@coreui/vue';
 
 const NAV = {
     menu: [
@@ -132,21 +132,21 @@ onMounted(() => {
                 {{ item.name }}
             </a>
             <template v-else>
-<!--                <app-dropdown>-->
-<!--                    <template v-slot:button>-->
-<!--                        <div class="header-nav__link">-->
-<!--                            {{ item.name }}-->
-<!--                            <app-svg class="dropdown-arr" name="dropdown"></app-svg>-->
-<!--                        </div>-->
-<!--                    </template>-->
-<!--                    <template v-slot:list>-->
-<!--&lt;!&ndash;                        <CDropdownItem&ndash;&gt;-->
-<!--&lt;!&ndash;                                v-for="item in NAV.menu"&ndash;&gt;-->
-<!--&lt;!&ndash;                                :key="item.id"&ndash;&gt;-->
-<!--&lt;!&ndash;                        >{{ item.name }}&ndash;&gt;-->
-<!--&lt;!&ndash;                        </CDropdownItem>&ndash;&gt;-->
-<!--                    </template>-->
-<!--                </app-dropdown>-->
+                <app-dropdown>
+                    <template v-slot:button>
+                        <div class="header-nav__link">
+                            {{ item.name }}
+                            <app-svg class="dropdown-arr" name="dropdown"></app-svg>
+                        </div>
+                    </template>
+                    <template v-slot:list>
+                        <app-dropdown-item
+                                v-for="item in NAV.menu"
+                                :key="item.id"
+                        >{{ item.name }}
+                        </app-dropdown-item>
+                    </template>
+                </app-dropdown>
             </template>
         </swiper-slide>
     </app-slider>
