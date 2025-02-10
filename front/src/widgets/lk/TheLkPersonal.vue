@@ -33,7 +33,7 @@ const form = reactive({
             <div class="lk-personal__inputs">
                 <AppInput class="_w50" name="name" v-model="form.name" label="Имя"/>
                 <AppInput class="_w50" name="surname" v-model="form.surname" label="Фамилия"/>
-                <AppInput class="_w50" type="tel" name="phone" v-model="form.phone" label="Телефон"/>
+                <AppInput mask="phone" class="_w50" type="tel" name="phone" v-model="form.phone" label="Телефон"/>
                 <AppInput class="_w50" type="email" name="email" v-model="form.email" label="E-mail"/>
             </div>
         </div>

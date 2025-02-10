@@ -185,7 +185,7 @@ watch(
             <div class="order-form__group">
                 <div class="order-form__column order-form__column_tablet">
                     <AppInput v-model="form.name" label="Ваше имя"/>
-                    <AppInput type="tel" v-model="form.phone" placeholder="+7 ___ ___ __ __"/>
+                    <AppInput mask="phone" type="tel" v-model="form.phone" placeholder="+7(___)___-__-__"/>
                 </div>
             </div>
             <div class="order-form__group">

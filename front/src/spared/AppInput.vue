@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {Input} from "@app/utils/interfaces";
+import {vMaska} from "maska/vue"
 import {computed, ref} from "vue";
 
 const props = withDefaults(defineProps<Input>(), {
@@ -8,6 +9,11 @@ const props = withDefaults(defineProps<Input>(), {
 
 const emits = defineEmits(['update:modelValue'])
 const isFocus = ref(false)
+const options = ref({
+    phone: {
+        mask: "+7(9##)##-##-###",
+    }
+})
 const model = computed({
     get() {
         return props.modelValue;
@@ -24,6 +30,7 @@ const onBlur = () => isFocus.value = false
     <div :class="['input', {'input_focus': isFocus || model}, color ? 'input_' + color : '']">
         <div class="input__item">
             <div class="input__label" v-if="label">{{ label }}</div>
+            <template v-if="!mask">
             <textarea
                     v-if="type === 'textarea'"
                     :name="name"
@@ -33,15 +40,26 @@ const onBlur = () => isFocus.value = false
                     @blur="onBlur"
                     :readonly="readonly"
             ></textarea>
+                <input
+                        v-else
+                        :type="type"
+                        :name="name"
+                        :placeholder="placeholder"
+                        v-model.trim="model"
+                        @focus="onFocus"
+                        @blur="onBlur"
+                        :readonly="readonly"
+                >
+            </template>
             <input
-                    v-else
-                    :type="type"
-                    :name="name"
-                    :placeholder="placeholder"
-                    v-model.trim="model"
-                    @focus="onFocus"
-                    @blur="onBlur"
-                    :readonly="readonly"
+                v-else
+                :type="type"
+                :name="name"
+                :placeholder="placeholder"
+                v-model.trim="model"
+                @focus="onFocus"
+                @blur="onBlur"
+                v-maska="options[mask]"
             >
         </div>
     </div>
@@ -51,17 +69,17 @@ const onBlur = () => isFocus.value = false
 @use "@style/media";
 
 .input {
-    --input-height: 50px;
+  --input-height: 50px;
 
   &_white {
-        --input-border: var(--main-white);
+    --input-border: var(--main-white);
   }
 
   &__item {
     position: relative;
-      @include media.hover {
-          --input-border: var(--main-color-1)
-      }
+    @include media.hover {
+      --input-border: var(--main-color-1)
+    }
   }
 
   &__label {

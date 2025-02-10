@@ -1,38 +1,42 @@
 <script setup lang="ts">
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
+import {checkUndefined} from "@app/utils/verification.ts";
 
 const props = defineProps(['value', 'name', 'color', 'placeholder', 'modelValue', 'multiple'])
 const emits = defineEmits(['update:modelValue'])
 const model = computed({
     get() {
-        return props.modelValue;
+        return props.modelValue || [];
     },
     set(value) {
         emits("update:modelValue", value);
     }
 })
+const modalValue = computed((): string => model.value.map(({name}) => name).join(', '))
 const input = ref(null)
 
-const onChange = (file) => {
+const onChange = (file: any): void => {
+    const names = []
     for (let i = 0; i < file.files.length; i++) {
         const item = file.files[i]
-        console.log(item)
-        // files.value.push(item)
+        names.push(item)
     }
-
-    console.log(input.value.value)
+    model.value = names
 }
+onMounted(() => {
+    console.log(props.multiple)
+})
 </script>
 
 <template>
     <div :class="['input-file', color ? 'input-file_' + color : '']">
         <label class="input-file__item">
-            <span>{{placeholder}}</span>
-            <input ref="input" type="file" :name="name" @change="({target}) => onChange(target)" :multiple>
+            <span>{{ modalValue || placeholder }}</span>
+            <input ref="input" type="file" :name="name" @change="({target}) => onChange(target)" :multiple="checkUndefined(multiple)">
             <app-button color="light">
-                <AppSvg name="download" />
+                <AppSvg name="download"/>
             </app-button>
         </label>
     </div>
@@ -82,6 +86,7 @@ const onChange = (file) => {
       width: 40px;
       height: auto;
       pointer-events: none;
+
       svg {
         width: 17px;
         height: 17px;

@@ -28,7 +28,7 @@ export interface CardAdditional {
     weight?: string
 }
 
-export interface Input {
+export type Input = {
     type?: string
     name?: string
     color?: string
@@ -36,6 +36,7 @@ export interface Input {
     modelValue: string | number
     readonly?: boolean
     label?: string
+    mask?: string
 }
 
 export interface Checkbox {

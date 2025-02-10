@@ -27,7 +27,7 @@ const submit = () => {
 
         <div class="reviews-form__inputs">
             <AppInput class="_w50" color="white" v-model="form.name" label="Ваше имя"/>
-            <AppInput class="_w50" color="white" type="tel" v-model="form.phone" placeholder="+7 ___ ___ __ __"/>
+            <AppInput mask="phone" class="_w50" color="white" type="tel" v-model="form.phone" placeholder="+7(___)___-__-__"/>
             <AppInput color="white" type="textarea" v-model="form.review" label="Напишите отзыв"/>
             <AppFile color="white" v-model="form.file" placeholder="Загрузить видео"/>
         </div>
