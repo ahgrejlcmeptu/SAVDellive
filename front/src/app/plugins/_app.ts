@@ -1,6 +1,7 @@
-import type { App } from 'vue';
-// import { MaskInput } from 'vue-3-mask';
+import type {App} from 'vue';
+// import {createPinia} from 'pinia'
 
 export default (app: App) => {
-    // app.use(MaskInput)
+    // const pinia = createPinia()
+    // app.use(pinia)
 };

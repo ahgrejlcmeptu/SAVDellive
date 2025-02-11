@@ -20,6 +20,8 @@ import AppSvg from "@spared/AppSvg.vue";
 import {markRaw, reactive, ref, watch} from "vue";
 import type {FormOrder} from "@app/utils/interfaces";
 import AppSelectItem from "@spared/select/AppSelectItem.vue";
+import AppOrderFormList from "@spared/order/AppOrderFormList.vue";
+import AppOrderFormItem from "@spared/order/AppOrderFormItem.vue";
 
 const FILIALS = [
     {
@@ -311,28 +313,15 @@ watch(
                 259 Б доступно для списания
             </div>
             <AppInputSubmit v-model="form.bonus" label="Сколько списать?"/>
-            <div class="order-form__list">
-                <div class="order-form__list-item">
-                    <span>3 товара</span><span>2120 <AppCurrency/></span>
-                </div>
-                <div class="order-form__list-item">
-                    <span>Начислим бонусы</span><span>+10 Б</span>
-                </div>
-                <div class="order-form__list-item">
-                    <span>Скидка</span><span>-150 <AppCurrency/></span>
-                </div>
-                <div class="order-form__list-item">
-                    <span>Бонусы</span><span>-50 Б</span>
-                </div>
-                <div class="order-form__list-item">
-                    <span>Доставка</span>
-                    <span>0 <AppCurrency/></span>
-                </div>
-                <div class="order-form__list-item order-form__list-item_total">
-                    <span class="text-18">Итог</span>
-                    <span class="text-20">1920 <AppCurrency/></span>
-                </div>
-            </div>
+            <app-order-form-list>
+                <app-order-form-item><span>3 товара</span><span>2120 <AppCurrency/></span></app-order-form-item>
+                <app-order-form-item><span>Начислим бонусы</span><span>+10 Б</span></app-order-form-item>
+                <app-order-form-item><span>Скидка</span><span>-150 <AppCurrency/></span></app-order-form-item>
+                <app-order-form-item><span>Бонусы</span><span>-50 Б</span></app-order-form-item>
+                <app-order-form-item><span>Доставка</span><span>0 <AppCurrency/></span></app-order-form-item>
+                <app-order-form-item class="order-form__list-item_total"><span class="text-18">Итог</span><span class="text-20">1920 <AppCurrency/></span>
+                </app-order-form-item>
+            </app-order-form-list>
             <app-notifications type="error">Бесплатная доставка осуществляется от 1000 ₽.
                 С условиями доставки вы можете ознакомиться
                 <a href="#" target="_blank">по ссылке</a></app-notifications>
@@ -451,48 +440,13 @@ watch(
     align-items: center;
     gap: 5px;
     font-size: media.sizeREM(14);
-
-    svg {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid var(--text-color-3);
-      stroke: var(--text-color-3);
-    }
   }
 
   &__list {
     margin-bottom: 20px;
-    font-size: media.sizeREM(14);
-    line-height: media.sizeREM(18);
 
     &-item {
-      display: flex;
-      justify-content: space-between;
       margin-bottom: 5px;
-      gap: 4px;
-
-      span:first-child {
-        order: -1
-      }
-
-      &:before {
-        content: '';
-        display: block;
-        width: 10%;
-        flex-grow: 1;
-        border-bottom: 1px dotted var(--border-color-2);
-        pointer-events: none;
-        transform: translateY(-4px);
-      }
-
-      &_total {
-        margin-top: 15px;
-
-        &:before {
-          display: none;
-        }
-      }
     }
   }
 

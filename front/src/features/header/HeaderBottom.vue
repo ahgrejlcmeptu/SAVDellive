@@ -2,6 +2,8 @@
 import AppSvg from "@spared/AppSvg.vue";
 import HeaderNav from "@entites/header/HeaderNav.vue";
 import AppItemValue from "@spared/AppItemValue.vue";
+import {popupOpen} from "@app/store/popup.ts";
+
 </script>
 
 <template>
@@ -13,10 +15,10 @@ import AppItemValue from "@spared/AppItemValue.vue";
                     <app-svg name="favorites"></app-svg>
                     <app-item-value>1</app-item-value>
                 </a>
-                <a href="/order" class="header-bottom__btn header-bottom__btn_basket">
+                <div class="header-bottom__btn header-bottom__btn_basket" @click="popupOpen('basket')">
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
-                </a>
+                </div>
                 <div class="header-bottom__btn header-bottom__btn_auth">
                     <app-svg name="auth"></app-svg>
                 </div>

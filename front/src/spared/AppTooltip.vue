@@ -27,8 +27,25 @@ onMounted(() => {
 .tooltip {
   position: relative;
 
+  &.full {
+    .tooltip__btn svg {
+      background: var(--main-color-2);
+      stroke: var(--main-color-1);
+      border: none;
+    }
+  }
+
   &__btn {
     cursor: pointer;
+
+    svg {
+      display: block;
+      width: var(--tooltip-size, 22px);
+      height: var(--tooltip-size, 22px);
+      border-radius: 50%;
+      border: 1px solid var(--text-color-3);
+      stroke: var(--text-color-3);
+    }
   }
 
   &__body {

@@ -37,8 +37,10 @@ a {
   color: inherit;
   transition: .3s color;
 
-  @include media.hover {
-    color: var(--main-color-1)
+  &:not(.btn) {
+    @include media.hover {
+      color: var(--main-color-1)
+    }
   }
 }
 
@@ -49,12 +51,14 @@ a {
   padding-left: var(--conteiner-padding);
   padding-right: var(--conteiner-padding);
 }
+
 .mb-30 {
   margin-bottom: 30px;
   @include media.respond-to(360) {
     margin-bottom: 20px;
   }
 }
+
 .mb-40 {
   margin-bottom: 40px;
 }
@@ -80,9 +84,9 @@ a {
 }
 
 
-
 .page-header {
   margin-bottom: 30px;
+
   &_center {
     text-align: center;
   }

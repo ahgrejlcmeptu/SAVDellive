@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useField, useForm} from 'vee-validate';
 import {toTypedSchema} from '@vee-validate/zod';
-import * as zod from 'zod';
+import {z} from 'zod';
 
 import AppInput from "@spared/AppInput.vue";
 import AppFile from "@entites/AppFile.vue";
@@ -10,12 +10,14 @@ import AppCheckbox from "@spared/AppCheckbox.vue";
 import {ref} from "vue";
 
 const form = ref(null)
+const testInput = ref(null)
 const validationSchema = toTypedSchema(
-    zod.object({
-        phone: zod.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
-        politic: zod.boolean().default(true)
+    z.object({
+        phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
+        politic: z.boolean().default(true)
     })
 );
+// .optional() .refine
 const {handleSubmit, errors} = useForm({
     validationSchema,
 });
@@ -27,7 +29,7 @@ const {value: file} = useField('file');
 const {value: politic} = useField('politic');
 
 const onSubmit = handleSubmit(values => {
-    for(let [name, value] of new FormData(form.value)) {
+    for (let [name, value] of new FormData(form.value)) {
         console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
     }
 });
@@ -43,7 +45,7 @@ const onSubmit = handleSubmit(values => {
 
         <div class="reviews-form__inputs">
             <AppInput class="_w50" color="white" v-model="name" name="name" label="Ваше имя"/>
-            <AppInput mask="phone" class="_w50" color="white" type="tel" v-model="phone" name="phone"
+            <AppInput ref="testInput" mask="phone" class="_w50" color="white" type="tel" v-model="phone" name="phone"
                       placeholder="+7(___)___-__-__" :error="errors.phone"/>
             <AppInput color="white" type="textarea" v-model="review" name="review" label="Напишите отзыв"/>
             <AppFile color="white" v-model="file" name="file" placeholder="Загрузить видео"/>

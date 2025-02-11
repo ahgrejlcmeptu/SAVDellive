@@ -25,9 +25,6 @@ const onChange = (file: any): void => {
     }
     model.value = names
 }
-onMounted(() => {
-    console.log(props.multiple)
-})
 </script>
 
 <template>

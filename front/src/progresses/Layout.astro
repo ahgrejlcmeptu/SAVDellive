@@ -2,6 +2,7 @@
 import '@style/app.scss'
 import TheHeader from '@widgets/header/TheHeader.vue'
 import TheFooter from '@widgets/footer/TheFooter.vue'
+import ThePopupBasket from '@widgets/popup/ThePopupBasket.vue'
 
 const {title} = Astro.props
 ---
@@ -24,6 +25,7 @@ const {title} = Astro.props
         <slot/>
     </main>
     <TheFooter client:load/>
+    <ThePopupBasket client:only/>
 </div>
 </body>
 </html>

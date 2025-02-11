@@ -46,7 +46,7 @@ const form = reactive({
                 <AppInput class="_w50" type="password" name="password" v-model="form.password" label="Пароль"/>
             </div>
             <div class="lk-personal__info">
-                <app-tooltip>
+                <app-tooltip class="full">
                     <template v-slot:btn>
                         <AppSvg name="question"/>
                     </template>
@@ -94,13 +94,8 @@ const form = reactive({
     }
   }
 
-  .tooltip__btn svg {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--main-color-2);
-    stroke: var(--main-color-1);
-    display: block;
+  .tooltip__btn {
+    --tooltip-size: 26px;
   }
 
   &__inputs {
