@@ -8,12 +8,13 @@ import AppSvg from "@spared/AppSvg.vue";
 import AppTooltip from "@spared/AppTooltip.vue";
 import AppInputSubmit from "@entites/inputSubmit/AppInputSubmit.vue";
 import AppCardBasket from "@features/card/AppCardBasket.vue";
+import BasketAdditive from "@features/basket/BasketAdditive.vue";
 import {ref} from "vue";
 import {useStore} from "@nanostores/vue";
-import {basketTotal, basketDiscount, basketItems} from "@app/store/basket";
+import {basketTotal, basketItems} from "@app/store/basket";
+import {localeNumber} from "@app/utils/toLocale.ts";
 
 const $basketTotal = useStore(basketTotal)
-const $basketDiscount = useStore(basketDiscount)
 const $basketItems = useStore(basketItems)
 
 const promo = ref(null)
@@ -29,17 +30,18 @@ const promo = ref(null)
         <div class="basket__body">
             <div class="basket__item basket__list">
                 <AppCardBasket
-                  v-for="item in $basketItems"
-                  :key="item.id"
-                  :data="item"
+                        v-for="item in $basketItems"
+                        :key="item.id"
+                        :data="item"
                 />
             </div>
-            <div class="basket__item">
+            <div class="basket__item basket__item_container">
                 <div class="popup-header">
                     <div class="text-20">Не забудьте добавить к заказу</div>
                 </div>
+                <BasketAdditive/>
             </div>
-            <div class="basket__item">
+            <div class="basket__item basket__item_container">
                 <span>Промокод</span>
                 <AppInputSubmit v-model="promo" label="Напишите промокод"/>
             </div>
@@ -61,7 +63,7 @@ const promo = ref(null)
                 </app-tooltip>
                 </span><span>+10 Б</span></app-order-form-item>
                 <app-order-form-item class="order-form__list-item_total"><span class="text-18">Итого</span><span
-                        class="text-20">1920 <AppCurrency/></span>
+                        class="text-20">{{ localeNumber($basketTotal) }} <AppCurrency/></span>
                 </app-order-form-item>
             </app-order-form-list>
             <app-button href="/order" full>Оформить заказ</app-button>
@@ -70,6 +72,8 @@ const promo = ref(null)
 </template>
 
 <style lang="scss">
+@use "@style/media";
+
 .basket {
   --popup-content: 567px;
   display: flex;
@@ -78,6 +82,10 @@ const promo = ref(null)
 
   &.popup-content {
     padding: 60px 0 0;
+    @include media.respond-to(360) {
+      padding-top: 20px;
+      --padding: var(--conteiner-padding);
+    }
   }
 
   &__header {
@@ -91,20 +99,48 @@ const promo = ref(null)
     display: flex;
     flex-direction: column;
     gap: 50px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    --scroll-width: 5px;
+    @include media.scroll;
+    @include media.respond-to(360) {
+      --padding: 0;
+    }
 
     .input-submit {
       margin-top: 10px;
     }
   }
 
+  &__item {
+    &_container {
+      @include media.respond-to(360) {
+        padding: 0 var(--conteiner-padding);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   &__footer {
     margin-top: auto;
     padding: 30px var(--padding);
     background: var(--main-color-2);
+    @include media.respond-to(360) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
   }
 
   .order-form__list {
     margin-bottom: 30px;
+    @include media.respond-to(360) {
+      margin-bottom: 20px;
+    }
   }
 
   .order-form__list-item_total {

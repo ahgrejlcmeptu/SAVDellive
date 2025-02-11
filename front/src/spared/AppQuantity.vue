@@ -20,12 +20,14 @@ const model = computed({
 const increment = () => {
     model.value++
 }
-const decrement = () => model.value--
+const decrement = () => {
+    model.value--
+}
 </script>
 
 <template>
     <div class="app-quantity">
-        <div class="app-quantity__button app-quantity__button_decrement" v-if="model >= 1" @click="decrement">
+        <div class="app-quantity__button app-quantity__button_decrement" v-if="model > 1" @click="decrement">
             <AppSvg name="minus"/>
         </div>
         <div class="app-quantity__value text-18">{{model}}</div>

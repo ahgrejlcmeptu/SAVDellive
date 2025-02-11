@@ -6,11 +6,11 @@ import {atom, map, computed} from 'nanostores';
 export const basketItems = map({
     1: {
         id: 1,
-        name: 'test',
+        name: 'Мисо-суп',
         amount: 1,
         img: '/img/products/1.jpg',
-        price: 259,
-        info: '1 порция, 200 гр.'
+        price: 1259,
+        info: '8 шт. 140 гр.'
     },
     2: {
         id: 2,
@@ -18,22 +18,22 @@ export const basketItems = map({
         amount: 1,
         img: '/img/products/1.jpg',
         price: 259,
-        info: '1 порция, 200 гр.'
+        info: '8 шт. 140 гр.'
     },
     3: {
         id: 3,
         name: 'test',
-        amount: 1,
+        amount: 2,
         img: '/img/products/1.jpg',
         price: 259,
-        info: '1 порция, 200 гр.'
+        info: '8 шт. 140 гр.'
     }
 });
-export const basketLength = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + item.quantity, 0) || 0);
-export const basketTotal = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + (item.quantity * item.price), 0) || 0)
+export const basketLength = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + item.amount, 0) || 0);
+export const basketTotal = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + (item.amount * item.price), 0) || 0)
 export const basketDiscount = atom(0)
 const basket = () =>  Object.values(basketItems.value).reduce((val, i) => {
-    val[i.id] = i.quantity
+    val[i.id] = i.amount
     return val
 }, {})
 
