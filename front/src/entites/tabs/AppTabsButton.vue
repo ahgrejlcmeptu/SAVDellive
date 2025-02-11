@@ -26,6 +26,7 @@ defineEmits(['action'])
   background: none;
   --color: var(--text-color-3);
   color: var(--color);
+  fill: currentColor;
 
   @include media.hover {
     --color: var(--main-color-1);
@@ -51,8 +52,6 @@ defineEmits(['action'])
   svg {
     width: 20px;
     height: 20px;
-    stroke: var(--color);
-    fill: var(--color);
   }
 
 }

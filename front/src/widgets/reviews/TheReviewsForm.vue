@@ -62,6 +62,12 @@ const onSubmit = handleSubmit(values => {
 <style lang="scss">
 @use "@style/media";
 
+input.test {
+    &:valid {
+        background: none;
+    }
+}
+
 .reviews-form {
   align-self: flex-start;
   padding: 30px;

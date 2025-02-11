@@ -7,7 +7,14 @@ import AppCurrency from "@spared/AppCurrency.vue";
 import AppSvg from "@spared/AppSvg.vue";
 import AppTooltip from "@spared/AppTooltip.vue";
 import AppInputSubmit from "@entites/inputSubmit/AppInputSubmit.vue";
+import AppCardBasket from "@features/card/AppCardBasket.vue";
 import {ref} from "vue";
+import {useStore} from "@nanostores/vue";
+import {basketTotal, basketDiscount, basketItems} from "@app/store/basket";
+
+const $basketTotal = useStore(basketTotal)
+const $basketDiscount = useStore(basketDiscount)
+const $basketItems = useStore(basketItems)
 
 const promo = ref(null)
 </script>
@@ -20,13 +27,20 @@ const promo = ref(null)
             </div>
         </div>
         <div class="basket__body">
-            <div class="basket__item"></div>
+            <div class="basket__item basket__list">
+                <AppCardBasket
+                  v-for="item in $basketItems"
+                  :key="item.id"
+                  :data="item"
+                />
+            </div>
             <div class="basket__item">
                 <div class="popup-header">
                     <div class="text-20">Не забудьте добавить к заказу</div>
                 </div>
             </div>
             <div class="basket__item">
+                <span>Промокод</span>
                 <AppInputSubmit v-model="promo" label="Напишите промокод"/>
             </div>
         </div>
@@ -77,6 +91,10 @@ const promo = ref(null)
     display: flex;
     flex-direction: column;
     gap: 50px;
+
+    .input-submit {
+      margin-top: 10px;
+    }
   }
 
   &__footer {

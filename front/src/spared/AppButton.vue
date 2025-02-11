@@ -60,6 +60,8 @@ const onClick = () => {
   border-color: var(--btn-border, transparent);
   color: var(--btn-color);
   padding: 0 var(--btn-paddin, 30px);
+  fill: currentColor;
+  stroke: currentColor;
   @include media.respond-to(360) {
     font-size: media.sizeREM(15);
   }
@@ -74,12 +76,6 @@ const onClick = () => {
     opacity: .5;
     filter: grayscale(1);
     cursor: no-drop;
-  }
-
-  svg {
-    transition: .3s;
-    fill: var(--btn-color);
-    stroke: var(--btn-color);
   }
 
   &_full {
