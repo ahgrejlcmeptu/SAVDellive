@@ -12,6 +12,15 @@ const isFocus = ref(false)
 const options = ref({
     phone: {
         mask: "+7(9##)##-##-###",
+    },
+    test: {
+        mask: '+7 %## ### ## ##',
+        eager: true,
+        tokens: {
+            '%': {
+                pattern: /[1-6]|[9]/,
+            },
+        },
     }
 })
 const model = computed({
@@ -52,16 +61,17 @@ const onBlur = () => isFocus.value = false
                 >
             </template>
             <input
-                v-else
-                :type="type"
-                :name="name"
-                :placeholder="placeholder"
-                v-model.trim="model"
-                @focus="onFocus"
-                @blur="onBlur"
-                v-maska="options[mask]"
+                    v-else
+                    :type="type"
+                    :name="name"
+                    :placeholder="placeholder"
+                    v-model.trim="model"
+                    @focus="onFocus"
+                    @blur="onBlur"
+                    v-maska="options[mask]"
             >
         </div>
+        <div class="input__error" v-if="error">{{ error }}</div>
     </div>
 </template>
 
@@ -116,6 +126,12 @@ const onBlur = () => isFocus.value = false
   textarea {
     height: 120px;
     resize: none;
+  }
+
+  &__error {
+    font-size: 12px;
+    color: var(--main-error-2);
+    margin-top: 3px;
   }
 
   &_focus {

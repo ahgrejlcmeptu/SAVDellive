@@ -1,24 +1,40 @@
 <script setup lang="ts">
+import {useField, useForm} from 'vee-validate';
+import {toTypedSchema} from '@vee-validate/zod';
+import * as zod from 'zod';
+
 import AppInput from "@spared/AppInput.vue";
 import AppFile from "@entites/AppFile.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppCheckbox from "@spared/AppCheckbox.vue";
-import {reactive} from "vue";
+import {ref} from "vue";
 
-const form = reactive({
-    name: '',
-    phone: '',
-    review: '',
-    file: null,
-    politic: true
-})
-const submit = () => {
-    console.log(555)
-}
+const form = ref(null)
+const validationSchema = toTypedSchema(
+    zod.object({
+        phone: zod.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
+        politic: zod.boolean().default(true)
+    })
+);
+const {handleSubmit, errors} = useForm({
+    validationSchema,
+});
+
+const {value: name} = useField('name');
+const {value: phone} = useField('phone');
+const {value: review} = useField('review');
+const {value: file} = useField('file');
+const {value: politic} = useField('politic');
+
+const onSubmit = handleSubmit(values => {
+    for(let [name, value] of new FormData(form.value)) {
+        console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+    }
+});
 </script>
 
 <template>
-    <form @submit.prevent="submit" class="reviews-form">
+    <form ref="form" @submit="onSubmit" class="reviews-form">
         <div class="page-header page-header_center">
             <h3>Оставить отзыв</h3>
             <p class="text-16">Оставьте пожалуйста свой отзыв <br>
@@ -26,15 +42,16 @@ const submit = () => {
         </div>
 
         <div class="reviews-form__inputs">
-            <AppInput class="_w50" color="white" v-model="form.name" label="Ваше имя"/>
-            <AppInput mask="phone" class="_w50" color="white" type="tel" v-model="form.phone" placeholder="+7(___)___-__-__"/>
-            <AppInput color="white" type="textarea" v-model="form.review" label="Напишите отзыв"/>
-            <AppFile color="white" v-model="form.file" placeholder="Загрузить видео"/>
+            <AppInput class="_w50" color="white" v-model="name" name="name" label="Ваше имя"/>
+            <AppInput mask="phone" class="_w50" color="white" type="tel" v-model="phone" name="phone"
+                      placeholder="+7(___)___-__-__" :error="errors.phone"/>
+            <AppInput color="white" type="textarea" v-model="review" name="review" label="Напишите отзыв"/>
+            <AppFile color="white" v-model="file" name="file" placeholder="Загрузить видео"/>
         </div>
         <div class="reviews-form__footer">
             <app-button type="submit" full size="big">Отправить заявку</app-button>
-            <app-checkbox v-model="form.politic" name="politic" :value="true" required>Я ознакомлен <a href="#"
-                                                                                                       target="_blank">
+            <app-checkbox v-model="politic" name="politic" :value="true" required>Я ознакомлен <a href="#"
+                                                                                                  target="_blank">
                 с политикой <br>конфиденциальности</a></app-checkbox>
         </div>
     </form>
@@ -106,9 +123,9 @@ const submit = () => {
   .page-header {
     margin-bottom: 20px;
 
-      p {
-          margin-top: 10px;
-      }
+    p {
+      margin-top: 10px;
+    }
   }
 }
 </style>

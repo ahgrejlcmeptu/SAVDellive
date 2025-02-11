@@ -33,10 +33,11 @@ export type Input = {
     name?: string
     color?: string
     placeholder?: string
-    modelValue: string | number
+    modelValue: any
     readonly?: boolean
     label?: string
     mask?: string
+    error?: string
 }
 
 export interface Checkbox {
