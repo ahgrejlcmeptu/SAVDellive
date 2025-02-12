@@ -134,3 +134,22 @@ a {
     flex-grow: 1;
   }
 }
+
+.page-form {
+  position: relative;
+  &.active {
+    .page-form__send {
+      opacity: 0;
+      overflow: hidden;
+    }
+  }
+  &__ok {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    p {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -22,7 +22,7 @@ const input = ref(null)
 
 <template>
     <label ref="input" :class="['app-checkbox', {'app-checkbox_required': checkUndefined(required)}]">
-        <input :type="type" :name="name" :value="value" v-model="model">
+        <input :type="type" :name="name" :value="value" v-model="model" :required='checkUndefined(required)'>
         <span class="app-checkbox__box">
             <AppSvg name="check"></AppSvg>
         </span>

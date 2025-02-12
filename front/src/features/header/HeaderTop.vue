@@ -6,6 +6,7 @@ import AppSocials from "@entites/socials/AppSocials.vue";
 import AppDropdown from "@spared/dropdown/AppDropdown.vue";
 import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 import {ref} from "vue";
+import {popupOpen} from "@app/store/popup.ts";
 
 const CITY = [
     {
@@ -88,9 +89,9 @@ const onCity = (item: any) => cityActive.value = item
             </div>
             <div class="header-top__wrap header-top__wrap_right">
                 <app-socials/>
-                <a class="header__item header__item_phone header__item_desktop" href="tel:+79086509000">
+                <a class="header__item header__item_phone header__item_desktop" href="tel:+79086509000" @click.prevent="popupOpen('call')">
                     <AppIcon name="icon-phone"/>
-                    <div class="header__item-body">
+                    <div class="header__item-body" >
                         <span>+7 908 650-90-00</span>
                         <br>
                         Заказать звонок

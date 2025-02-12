@@ -4,7 +4,6 @@
 
 <template>
     <div class="app-dropdown-item"><slot/></div>
-
 </template>
 
 <style lang="scss">

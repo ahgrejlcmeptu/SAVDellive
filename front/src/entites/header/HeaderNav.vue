@@ -10,35 +10,31 @@ const NAV = {
     menu: [
         {
             id: '1',
-            name: 'Роллы'
+            name: 'Бургеры',
         },
         {
             id: '2',
-            name: 'Наборы'
+            name: 'Шашлыки'
         },
         {
             id: '3',
-            name: 'Суши'
-        },
-        {
-            id: '4',
             name: 'Салаты'
         },
         {
+            id: '4',
+            name: 'Супы'
+        },
+        {
             id: '5',
-            name: 'Блюда гриль'
+            name: 'Горячее'
         },
         {
             id: '6',
-            name: 'Горячие блюда'
+            name: 'Роллы'
         },
         {
             id: '7',
             name: 'Пицца'
-        },
-        {
-            id: '8',
-            name: 'Супы'
         },
         {
             id: '9',
@@ -143,7 +139,7 @@ onMounted(() => {
                         <app-dropdown-item
                                 v-for="item in NAV.menu"
                                 :key="item.id"
-                        >{{ item.name }}
+                        ><a :href="'/catalog?categories='+item.name">{{ item.name }}</a>
                         </app-dropdown-item>
                     </template>
                 </app-dropdown>

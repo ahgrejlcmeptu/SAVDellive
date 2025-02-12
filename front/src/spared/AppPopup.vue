@@ -94,5 +94,14 @@ const close = () => {
       text-align: center;
     }
   }
+
+  &__inputs {
+    margin-bottom: 10px;
+  }
+
+  .app-checkbox {
+    margin-top: 10px;
+      justify-content: center;
+  }
 }
 </style>

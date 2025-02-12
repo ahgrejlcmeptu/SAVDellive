@@ -8,8 +8,10 @@ import AppFile from "@entites/AppFile.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppCheckbox from "@spared/AppCheckbox.vue";
 import {ref} from "vue";
+import AppSocials from "@entites/socials/AppSocials.vue";
 
 const form = ref(null)
+const active = ref<boolean>(false)
 const testInput = ref(null)
 const validationSchema = toTypedSchema(
     z.object({
@@ -32,29 +34,47 @@ const onSubmit = handleSubmit(values => {
     for (let [name, value] of new FormData(form.value)) {
         console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
     }
+    active.value = true
+    form.value.reset()
+    setTimeout(() => {
+        active.value = false
+    }, import.meta.env.PUBLIC_FORM_TIMEOUT)
 });
 </script>
 
 <template>
-    <form ref="form" @submit="onSubmit" class="reviews-form">
-        <div class="page-header page-header_center">
-            <h3>Оставить отзыв</h3>
-            <p class="text-16">Оставьте пожалуйста свой отзыв <br>
-                о нас, Ваше мнение для нас очень важно.</p>
-        </div>
+    <form ref="form" @submit="onSubmit" :class="['reviews-form page-form', {active}]">
+        <div class="page-form__send">
+            <div class="page-header page-header_center">
+                <h3>Оставить отзыв</h3>
+                <p class="text-16">Оставьте пожалуйста свой отзыв <br>
+                    о нас, Ваше мнение для нас очень важно.</p>
+            </div>
 
-        <div class="reviews-form__inputs">
-            <AppInput class="_w50" color="white" v-model="name" name="name" label="Ваше имя"/>
-            <AppInput ref="testInput" mask="phone" class="_w50" color="white" type="tel" v-model="phone" name="phone"
-                      placeholder="+7(___)___-__-__" :error="errors.phone"/>
-            <AppInput color="white" type="textarea" v-model="review" name="review" label="Напишите отзыв"/>
-            <AppFile color="white" v-model="file" name="file" placeholder="Загрузить видео"/>
+            <div class="reviews-form__inputs">
+                <AppInput class="_w50" color="white" v-model="name" name="name" label="Ваше имя"/>
+                <AppInput ref="testInput" mask="phone" class="_w50" color="white" type="tel" v-model="phone"
+                          name="phone"
+                          placeholder="+7(___)___-__-__" :error="errors.phone"/>
+                <AppInput color="white" type="textarea" v-model="review" name="review" label="Напишите отзыв"/>
+                <AppFile color="white" v-model="file" name="file" placeholder="Загрузить видео"/>
+            </div>
+            <div class="reviews-form__footer">
+                <app-button type="submit" full size="big">Отправить заявку</app-button>
+                <app-checkbox v-model="politic" name="politic" :value="true" required>Я ознакомлен <a href="#"
+                                                                                                      target="_blank">
+                    с политикой <br>конфиденциальности</a></app-checkbox>
+            </div>
         </div>
-        <div class="reviews-form__footer">
-            <app-button type="submit" full size="big">Отправить заявку</app-button>
-            <app-checkbox v-model="politic" name="politic" :value="true" required>Я ознакомлен <a href="#"
-                                                                                                  target="_blank">
-                с политикой <br>конфиденциальности</a></app-checkbox>
+        <div class="page-form__ok" v-if="active">
+            <div class="page-header">
+                <h4>Ваша заявка
+                    успешно отправлена</h4>
+                <p class="text-15">В течение нескольких минут вам перезвонит наш сотрудник. Пожалуйста, оставайтесь на связи</p>
+            </div>
+            <p class="text-15">Присоединяйтесь к нашим сообществам
+                в социальных сетях. Там вас ждут скидки, розыгрыши и последние новости</p>
+            <app-socials/>
         </div>
     </form>
 </template>
@@ -63,9 +83,9 @@ const onSubmit = handleSubmit(values => {
 @use "@style/media";
 
 input.test {
-    &:valid {
-        background: none;
-    }
+  &:valid {
+    background: none;
+  }
 }
 
 .reviews-form {
