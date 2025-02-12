@@ -11,7 +11,6 @@ import AppSocials from "@entites/socials/AppSocials.vue";
 
 const form = ref<null | HTMLElement>(null)
 const active = ref<boolean>(false)
-const testInput = ref(null)
 const validationSchema = toTypedSchema(
     z.object({
         phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
@@ -27,7 +26,7 @@ const {value: politic} = useField('politic');
 
 const onSubmit = handleSubmit(values => {
     for (let [name, value] of new FormData(form.value)) {
-        console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+        console.log(`${name} = ${value}`);
     }
     active.value = true
     form.value.reset()
@@ -48,7 +47,7 @@ const onSubmit = handleSubmit(values => {
                 </div>
 
                 <div class="popup__inputs">
-                    <AppInput ref="testInput" mask="phone" class="_w50" type="tel" v-model="phone" name="phone"
+                    <AppInput mask="phone" type="tel" v-model="phone" name="phone"
                               placeholder="+7(___)___-__-__" :error="errors.phone"/>
                 </div>
                 <app-button type="submit" full size="big">Отправить заявку</app-button>

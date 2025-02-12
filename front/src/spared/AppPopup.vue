@@ -32,7 +32,8 @@ const close = () => {
 </template>
 
 <style lang="scss">
-@use "@style/transition";
+@use "@style/media";
+//@use "@style/transition";
 
 .popup {
   position: fixed;
@@ -55,6 +56,9 @@ const close = () => {
     margin: auto;
     position: relative;
     transition: .3s;
+    @include media.respond-to(360) {
+        padding: 30px var(--conteiner-padding);
+    }
 
     &_right {
       margin-right: 0;
@@ -97,11 +101,23 @@ const close = () => {
 
   &__inputs {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    > * {
+      width: 100%;
+
+      &._w50 {
+        width: 40%;
+        flex-grow: 1;
+      }
+    }
   }
 
   .app-checkbox {
     margin-top: 10px;
-      justify-content: center;
+    justify-content: center;
   }
 }
 </style>

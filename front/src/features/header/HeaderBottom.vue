@@ -19,7 +19,7 @@ import {popupOpen} from "@app/store/popup.ts";
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
                 </div>
-                <div class="header-bottom__btn header-bottom__btn_auth">
+                <div class="header-bottom__btn header-bottom__btn_auth" @click="popupOpen('auth')">
                     <app-svg name="auth"></app-svg>
                 </div>
             </div>
