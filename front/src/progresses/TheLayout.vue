@@ -16,14 +16,3 @@ import ThePopupAuth from '@widgets/popup/ThePopupAuth.vue'
     <ThePopupCall/>
     <ThePopupAuth/>
 </template>
-
-<!--<div class="wrapper">-->
-<!--<TheHeader client:load/>-->
-<!--<main>-->
-<!--    <slot/>-->
-<!--</main>-->
-<!--<TheFooter client:load/>-->
-<!--<ThePopupBasket client:only/>-->
-<!--<ThePopupCall client:only/>-->
-<!--<ThePopupAuth client:only/>-->
-<!--</div>-->
