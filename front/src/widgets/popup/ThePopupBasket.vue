@@ -78,14 +78,11 @@ const promo = ref(null)
   --popup-content: 567px;
   display: flex;
   flex-direction: column;
+  padding: 60px 0 0;
   --padding: 70px;
-
-  &.popup-content {
-    padding: 60px 0 0;
-    @include media.respond-to(360) {
+  @include media.respond-to(360) {
       padding-top: 20px;
       --padding: var(--conteiner-padding);
-    }
   }
 
   &__header {

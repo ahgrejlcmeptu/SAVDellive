@@ -153,3 +153,18 @@ a {
     }
   }
 }
+
+.fixed-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  z-index: 4;
+  @include media.respond-to(960) {
+    right: 15px;
+    top: 75%;
+  }
+}
