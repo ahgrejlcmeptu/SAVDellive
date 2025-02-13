@@ -1,17 +1,4 @@
 import {computed, map} from 'nanostores';
-import {basketItems} from "@app/store/basket.ts";
-
-// interface MapType {
-//     setKey(key: string, value: any): void;
-// }
-
-// export const popupActive: MapType = map({present: true})
-// export const popupOpen = (name: string): void => {
-//     popupActive.setKey(name, name)
-// }
-// export const popupClose = (name: string): void => {
-//     popupActive.setKey(name, undefined)
-// }
 
 export const presents = map({
     1: {

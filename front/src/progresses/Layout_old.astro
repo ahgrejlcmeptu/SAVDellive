@@ -1,14 +1,10 @@
 ---
 import '@style/app.scss'
-// import '/src/app/js/app'
 import TheHeader from '@widgets/header/TheHeader.vue'
 import TheFooter from '@widgets/footer/TheFooter.vue'
 import ThePopupBasket from '@widgets/popup/ThePopupBasket.vue'
 import ThePopupCall from '@widgets/popup/ThePopupCall.vue'
 import ThePopupAuth from '@widgets/popup/ThePopupAuth.vue'
-import ThePresentPopup from '../widgets/present/ThePresentPopup.vue'
-import ThePresentBar from '../widgets/present/ThePresentBar.vue'
-import TheButtonTop from '../widgets/TheButtonTop.vue'
 
 const {title} = Astro.props
 ---
@@ -25,7 +21,7 @@ const {title} = Astro.props
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 </head>
 <body>
-<div class="wrapper" id="app">
+<div class="wrapper">
     <TheHeader client:load/>
     <main>
         <slot/>
@@ -34,12 +30,7 @@ const {title} = Astro.props
     <ThePopupBasket client:only/>
     <ThePopupCall client:only/>
     <ThePopupAuth client:only/>
-    <ThePresentPopup client:only/>
-
-    <div class="fixed-bar">
-        <ThePresentBar client:only/>
-        <TheButtonTop client:only/>
-    </div>
 </div>
 </body>
 </html>
+
