@@ -1,5 +1,10 @@
 import {computed, map} from 'nanostores';
 
+type Step = {
+    min: number | null
+    max: number | null
+}
+
 export const presents = map({
     1: {
         id: 1,
@@ -31,7 +36,7 @@ export const presents = map({
     }
 })
 export const presentsSteps = computed(presents, presents => {
-    return Object.values(presents).reduce((val, i) => {
+    return Object.values(presents).reduce((val: Step, i) => {
         return {
             min: val.min === null ? i.price : val.min > i.price ? i.price: val.min,
             max: val.max === null ? i.price : val.max < i.price ? i.price: val.min,

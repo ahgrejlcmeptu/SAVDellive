@@ -157,6 +157,7 @@ a {
 .fixed-bar {
   position: fixed;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 30px;
   top: 50%;
@@ -165,6 +166,7 @@ a {
   z-index: 4;
   @include media.respond-to(960) {
     right: 15px;
-    top: 75%;
+    top: auto;
+    bottom: 30px;
   }
 }
