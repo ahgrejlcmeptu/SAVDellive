@@ -3,7 +3,10 @@ import AppSvg from "@spared/AppSvg.vue";
 import HeaderNav from "@entites/header/HeaderNav.vue";
 import AppItemValue from "@spared/AppItemValue.vue";
 import {popupOpen} from "@app/store/popup.ts";
+import {pageInfo} from "@app/store/block.ts";
+import {useStore} from "@nanostores/vue";
 
+const $pageInfo = useStore(pageInfo)
 </script>
 
 <template>
@@ -19,8 +22,13 @@ import {popupOpen} from "@app/store/popup.ts";
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
                 </div>
-                <div class="header-bottom__btn header-bottom__btn_auth" @click="popupOpen('auth')">
+                <div v-if="!$pageInfo.user" class="header-bottom__btn header-bottom__btn_auth"
+                     @click="popupOpen('auth')">
                     <app-svg name="auth"></app-svg>
+                </div>
+                <div v-else class="header-bottom__btn header-bottom__btn_user"
+                     @click="popupOpen('auth')">
+                    <app-svg name="user"></app-svg>
                 </div>
             </div>
         </div>
@@ -70,6 +78,14 @@ import {popupOpen} from "@app/store/popup.ts";
     &_auth {
       --svg-width: 12px;
       --svg-height: 19px;
+    }
+
+    &_user {
+      --svg-width: 17px;
+      --svg-height: 19px;
+        svg {
+            stroke-width: 1.5px;
+        }
     }
 
     svg {

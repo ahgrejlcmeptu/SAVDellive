@@ -5,85 +5,10 @@ import AppDropdown from "@spared/dropdown/AppDropdown.vue";
 import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 import {SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
+import {blockNavigation} from "@app/store/block.ts";
+import {useStore} from "@nanostores/vue";
 
-const NAV = {
-    menu: [
-        {
-            id: '1',
-            name: 'Бургеры',
-        },
-        {
-            id: '2',
-            name: 'Шашлыки'
-        },
-        {
-            id: '3',
-            name: 'Салаты'
-        },
-        {
-            id: '4',
-            name: 'Супы'
-        },
-        {
-            id: '5',
-            name: 'Горячее'
-        },
-        {
-            id: '6',
-            name: 'Роллы'
-        },
-        {
-            id: '7',
-            name: 'Пицца'
-        },
-        {
-            id: '9',
-            name: 'Десерты'
-        },
-        {
-            id: '10',
-            name: 'Напитки'
-        },
-        {
-            id: '11',
-            name: 'Соусы'
-        },
-    ],
-    links: [
-        {
-            id: '1',
-            name: 'О нас',
-            href: '/about'
-        },
-        {
-            id: '2',
-            name: 'Доставка и оплата',
-            href: '/delivery'
-        },
-        {
-            id: '3',
-            name: 'Отзывы',
-            href: '/reviews'
-        },
-        {
-            id: '4',
-            name: 'Контакты',
-            href: '/contacts'
-        },
-        {
-            id: '5',
-            name: 'Новости',
-            href: '/news'
-        },
-    ],
-    highlight: [
-        {
-            id: '01',
-            name: 'Акции',
-            highlight: true
-        },
-    ]
-}
+const $blockNavigation = useStore(blockNavigation)
 const MORE_NAV = [
     {
         id: '02',
@@ -99,7 +24,7 @@ const MORE_NAV = [
 
 const full = ref(false)
 const filter = computed(() => {
-    return !full.value ? [...NAV.highlight, ...MORE_NAV, ...NAV.links] : [...NAV.highlight, ...NAV.menu]
+    return !full.value ? [...$blockNavigation.value.highlight, ...MORE_NAV, ...$blockNavigation.value.links] : [...$blockNavigation.value.highlight, ...$blockNavigation.value.menu]
 })
 const updateVisibleItemsCount = () => {
     if (typeof window !== 'undefined') { // Проверка, доступен ли window
@@ -137,7 +62,7 @@ onMounted(() => {
                     </template>
                     <template v-slot:list>
                         <app-dropdown-item
-                                v-for="item in NAV.menu"
+                                v-for="item in $blockNavigation.menu"
                                 :key="item.id"
                         ><a :href="'/catalog?categories='+item.name">{{ item.name }}</a>
                         </app-dropdown-item>
