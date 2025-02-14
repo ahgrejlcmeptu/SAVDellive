@@ -1,5 +1,7 @@
 <script setup>
-const props = defineProps(['id', 'position', 'content', 'name'])
+import {checkUndefined} from "@app/utils/verification.ts";
+
+const props = defineProps(['id', 'position', 'content', 'name', 'mobile'])
 const emits = defineEmits(['close'])
 import {useStore} from "@nanostores/vue";
 import {popupActive} from "@app/store/popup";
@@ -15,12 +17,12 @@ const close = () => {
     <transition :name="position">
         <div
                 v-if="$popupActive[name]"
-                class="popup"
+                :class="['popup', {'popup_mobile': checkUndefined(mobile)}]"
                 @mousedown="({target}) => target.classList.contains('popup') ? close() : false"
                 :id="id"
         >
             <div :class="['popup-content', 'popup-content_' + position, content]">
-                <div class="popup-close" @click="close">
+                <div :class="['popup-close', {'popup-close_mobile': checkUndefined(mobile)}]" @click="close">
                     <svg>
                         <use xlink:href="/sprite.svg#close"></use>
                     </svg>
@@ -47,6 +49,12 @@ const close = () => {
   overflow-x: hidden;
   overflow-y: auto;
 
+  &_mobile {
+    @include media.respond-to(360) {
+      padding-top: 50px;
+    }
+  }
+
   &-content {
     width: var(--popup-content, 424px);
     max-width: 100%;
@@ -57,7 +65,7 @@ const close = () => {
     position: relative;
     transition: .3s;
     @include media.respond-to(360) {
-        padding: 30px var(--conteiner-padding);
+      padding: 30px var(--conteiner-padding);
     }
 
     &_right {
@@ -73,6 +81,19 @@ const close = () => {
     top: 28px;
     right: 28px;
     transition: .3s;
+    display: flex;
+
+    &_mobile {
+      @include media.respond-to(360) {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        top: -5px;
+        right: 0;
+        transform: translateY(-100%);
+        background: var(--main-white);
+      }
+    }
 
     @media(hover) {
       &:hover {
@@ -85,6 +106,7 @@ const close = () => {
     svg {
       display: block;
       width: 14px;
+      margin: auto;
       height: 14px;
       transition: .3s;
       fill: var(--text-color-2);

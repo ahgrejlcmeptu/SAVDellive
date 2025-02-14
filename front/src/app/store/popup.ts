@@ -4,7 +4,8 @@ interface MapType {
     setKey(key: string, value: any): void;
 }
 
-export const popupActive: MapType = map({card: true})
+export const popupActive: MapType = map({})
+export const popupCard = map({})
 export const popupOpen = (name: string): void => {
     popupActive.setKey(name, name)
 }

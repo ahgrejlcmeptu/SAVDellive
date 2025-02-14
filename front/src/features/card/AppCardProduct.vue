@@ -8,6 +8,7 @@ import AppSvg from "@spared/AppSvg.vue";
 import AppAmount from "@spared/AppAmount.vue";
 import type {Card} from "@app/utils/interfaces";
 import type {PropType} from "vue";
+import {popupCard, popupOpen} from "@app/store/popup.ts";
 
 
 defineProps({
@@ -30,7 +31,7 @@ defineProps({
                 <app-status-list>
                     <app-status v-if="data.oldPrice">Акция</app-status>
                 </app-status-list>
-                <div class="card-product__img">
+                <div class="card-product__img" @click="popupCard.set(data), popupOpen('card')">
                     <img :src="data.img" :alt="data.name">
                 </div>
             </div>
@@ -40,8 +41,12 @@ defineProps({
                     <p class="text-16">{{ data.description }}</p>
                 </div>
                 <div class="card-product__main">
-                    <div class="card-product__price text-20">{{ data.price }} <AppCurrency /></div>
-                    <s class="card-product__oldPrice text-14" v-if="data.oldPrice">{{ data.oldPrice }} <AppCurrency /></s>
+                    <div class="card-product__price text-20">{{ data.price }}
+                        <AppCurrency/>
+                    </div>
+                    <s class="card-product__oldPrice text-14" v-if="data.oldPrice">{{ data.oldPrice }}
+                        <AppCurrency/>
+                    </s>
                     <div class="card-product__weight text-14" v-if="data.weight">{{ data.weight }}</div>
                 </div>
             </div>
@@ -70,20 +75,21 @@ defineProps({
     border-radius: var(--radius-30) var(--radius-30) 0 0;
 
     .card-product {
-        &__group {
-            border-bottom-width: 0;
-            border-radius: var(--radius-30) var(--radius-30) 0 0;
-            @media(hover) {
-                border-radius: var(--radius-30);
-                border-bottom-width: 1px;
-            }
+      &__group {
+        border-bottom-width: 0;
+        border-radius: var(--radius-30) var(--radius-30) 0 0;
+        @media(hover) {
+          border-radius: var(--radius-30);
+          border-bottom-width: 1px;
         }
-        &__img {
-            border-radius: var(--radius-30) var(--radius-30) 0 0;
-            @include media.respond-to(360) {
-                border-radius: var(--radius-30) 0 0 0;
-            }
+      }
+
+      &__img {
+        border-radius: var(--radius-30) var(--radius-30) 0 0;
+        @include media.respond-to(360) {
+          border-radius: var(--radius-30) 0 0 0;
         }
+      }
     }
   }
 
@@ -118,13 +124,15 @@ defineProps({
   }
 
   &__img {
+    cursor: pointer;
+
     img {
       display: block;
       width: 100%;
       border-radius: var(--radius-30) var(--radius-30) 0 0;
-        @include media.respond-to(360) {
-            border-radius: var(--radius-30) 0 0 var(--radius-30);
-        }
+      @include media.respond-to(360) {
+        border-radius: var(--radius-30) 0 0 var(--radius-30);
+      }
     }
   }
 
