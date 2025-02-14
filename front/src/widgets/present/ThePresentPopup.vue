@@ -3,7 +3,7 @@ import AppPopup from "@spared/AppPopup.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 import AppCardPresent from "@features/card/AppCardPresent.vue";
 import {SwiperSlide} from "swiper/vue";
-import {presents} from "@app/store/present.ts";
+import {presents} from "@app/store/present";
 import {useStore} from "@nanostores/vue";
 const $presents = useStore(presents)
 

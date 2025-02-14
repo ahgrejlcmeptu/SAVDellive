@@ -26,7 +26,7 @@ const input = ref(null)
         <span class="app-checkbox__box">
             <AppSvg name="check"></AppSvg>
         </span>
-        <span class="app-checkbox__text size-14"><slot/></span>
+        <span class="app-checkbox__text text-14"><slot/></span>
     </label>
 </template>
 

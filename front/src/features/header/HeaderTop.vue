@@ -5,80 +5,44 @@ import AppItemValue from "@spared/AppItemValue.vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
 import AppDropdown from "@spared/dropdown/AppDropdown.vue";
 import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
-import {ref} from "vue";
 import {popupOpen} from "@app/store/popup.ts";
+import {branches, branchesActive, branchesChange} from "@app/store/block";
+import {useStore} from "@nanostores/vue";
 
-const CITY = [
-    {
-        id: 0,
-        name: 'Иркутск'
-    },
-    {
-        id: 1,
-        name: 'Ангарск'
-    },
-    {
-        id: 2,
-        name: 'Шелехов'
-    },
-    {
-        id: 3,
-        name: 'Братск'
-    },
-    {
-        id: 4,
-        name: 'Усолье - Сибирское'
-    },
-    {
-        id: 5,
-        name: 'Москва'
-    },
-    {
-        id: 6,
-        name: 'Санкт-Петербург'
-    },
-    {
-        id: 7,
-        name: 'Черемхово'
-    },
-    {
-        id: 8,
-        name: 'Улан-Удэ'
-    }
-]
-const cityActive = ref(CITY[0])
-const onCity = (item: any) => cityActive.value = item
+const $branches = useStore(branches)
+const $branchesActive = useStore(branchesActive)
 </script>
 
 <template>
     <div class="container">
         <div class="header-top">
             <div class="header-top__wrap header-top__wrap_left">
-                <app-dropdown class="header__item_city">
+                <app-dropdown class="header__item_city" v-if="$branchesActive">
                     <template v-slot:button>
                         <div class="header__item">
                             <AppIcon name="icon-pin"/>
                             <div class="header__item-body">
                                 Ваш город <br>
-                                <span>{{ cityActive.name }} <app-svg class="dropdown-arr" name="dropdown"/></span>
+                                <span>{{ $branchesActive.city }} <app-svg class="dropdown-arr" name="dropdown"/></span>
                             </div>
                         </div>
                     </template>
                     <template v-slot:list>
                         <app-dropdown-item
-                                v-for="item in CITY"
+                                v-for="item in $branches"
                                 :key="item.id"
-                                :class="{active: item.id === cityActive.id}"
-                                @click="onCity(item)"
-                        >{{ item.name }}
+                                :class="{active: item.id === $branchesActive.id}"
+                                @click="branchesChange(item.id)"
+                        >{{ item.city }}
                         </app-dropdown-item>
                     </template>
                 </app-dropdown>
                 <div class="header__item header__item_desktop">
                     <AppIcon name="icon-clock"/>
                     <div class="header__item-body">
-                        с 10:00 до 24:00 <br>
-                        пт-сб: 10:00 до 02:00
+                        <template v-for="item in $branchesActive.mode" :key="item">
+                            {{ item }}<br>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -89,15 +53,16 @@ const onCity = (item: any) => cityActive.value = item
             </div>
             <div class="header-top__wrap header-top__wrap_right">
                 <app-socials/>
-                <a class="header__item header__item_phone header__item_desktop" href="tel:+79086509000" @click.prevent="popupOpen('call')">
+                <a class="header__item header__item_phone header__item_desktop" :href="'tel:' + $branchesActive.phone"
+                   @click.prevent="popupOpen('call')">
                     <AppIcon name="icon-phone"/>
-                    <div class="header__item-body" >
-                        <span>+7 908 650-90-00</span>
+                    <div class="header__item-body">
+                        <span>{{$branchesActive.phone}}</span>
                         <br>
                         Заказать звонок
                     </div>
                 </a>
-                <div class="header__item header__item_burger">
+                <div class="header__item header__item_burger" @click="popupOpen('burger')">
                     <AppIcon color="main" name="icon-burger"/>
                 </div>
             </div>
@@ -106,13 +71,13 @@ const onCity = (item: any) => cityActive.value = item
                     <AppIcon name="icon-favorites"/>
                     <app-item-value>1</app-item-value>
                 </div>
-                <a class="header__item header__item_basket" href="/order">
+                <div class="header__item header__item_basket" @click="popupOpen('basket')">
                     <AppIcon name="icon-basket"/>
                     <app-item-value>100</app-item-value>
-                </a>
-                <div class="header__item header__item_phone">
-                    <AppIcon name="icon-phone"/>
                 </div>
+                <a :href="'tel:' + $branchesActive.phone" class="header__item header__item_phone">
+                    <AppIcon name="icon-phone"/>
+                </a>
                 <div class="header__item header__item_user">
                     <AppIcon name="icon-user"/>
                     <app-item-value>1000Б</app-item-value>

@@ -10,6 +10,162 @@ import NewsBlock from '@progresses/NewsBlock.vue'
 import TheReviews from '@widgets/reviews/TheReviews.vue'
 import TheSeo from '@widgets/seo/TheSeo.vue'
 
+
+const PAGE = {
+    branches: [
+        {
+            id: 0,
+            city: 'Иркутск',
+            street: 'Академика Курчатова 3',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 1,
+            city: 'Ангарск',
+            street: 'Академика Курчатова 4',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 2,
+            city: 'Шелехов',
+            street: 'Академика Курчатова 5',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 3,
+            city: 'Братск',
+            street: 'Академика Курчатова 6',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 4,
+            city: 'Усолье - Сибирское',
+            street: 'Академика Курчатова 7',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 5,
+            city: 'Москва',
+            street: 'Академика Курчатова 8',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 6,
+            city: 'Санкт-Петербург',
+            street: 'Академика Курчатова 9',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 7,
+            city: 'Черемхово',
+            street: 'Академика Курчатова 0',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        },
+        {
+            id: 8,
+            city: 'Улан-Удэ',
+            street: 'Академика Курчатова 1',
+            phone: '+7 499 755 64 93',
+            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
+            email: 'info@dellive.ru'
+        }
+    ],
+    nav: {
+        menu: [
+            {
+                id: '1',
+                name: 'Бургеры',
+            },
+            {
+                id: '2',
+                name: 'Шашлыки'
+            },
+            {
+                id: '3',
+                name: 'Салаты'
+            },
+            {
+                id: '4',
+                name: 'Супы'
+            },
+            {
+                id: '5',
+                name: 'Горячее'
+            },
+            {
+                id: '6',
+                name: 'Роллы'
+            },
+            {
+                id: '7',
+                name: 'Пицца'
+            },
+            {
+                id: '9',
+                name: 'Десерты'
+            },
+            {
+                id: '10',
+                name: 'Напитки'
+            },
+            {
+                id: '11',
+                name: 'Соусы'
+            },
+        ],
+        links: [
+            {
+                id: '1',
+                name: 'О нас',
+                href: '/about'
+            },
+            {
+                id: '2',
+                name: 'Доставка и оплата',
+                href: '/delivery'
+            },
+            {
+                id: '3',
+                name: 'Отзывы',
+                href: '/reviews'
+            },
+            {
+                id: '4',
+                name: 'Контакты',
+                href: '/contacts'
+            },
+            {
+                id: '5',
+                name: 'Новости',
+                href: '/news'
+            },
+        ],
+        highlight: [
+            {
+                id: '01',
+                name: 'Акции',
+                highlight: true
+            },
+        ]
+    }
+}
+
 const BANNERS = [
     {
         id: 1,
@@ -440,7 +596,7 @@ const SEO = [
 
 ---
 
-<Layout title="Главная">
+<Layout title="Главная" data={PAGE}>
     <TheBanner data={BANNERS} class="mb-50" client:load/>
     <TheAdvantages data={ADVANTAGES} class="container mb-50" client:load/>
     <CategoriesBlock data={CATEGORIES} class="container mb-100" client:load/>

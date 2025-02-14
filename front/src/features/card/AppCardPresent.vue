@@ -29,11 +29,11 @@ const check = () => {
             <div class="card-present__footer">
                 <div v-if="status" class="card-present__status">
                     <div class="card-present__icon">
-                        <app-progress-circle :progress="50">%</app-progress-circle>
+                        <app-progress-circle :progress="$basketTotal * 100 / data.price">%</app-progress-circle>
                     </div>
                     <p class="card-present__progress text-15">
                         <span class="active">Доступно при <br> заказе от {{ data.price }}<AppCurrency/></span>
-                        <span class="hover">Не хватает <br> 720<AppCurrency/></span>
+                        <span class="hover">Не хватает <br> {{ data.price - $basketTotal }}<AppCurrency/></span>
                     </p>
                 </div>
                 <template v-else>

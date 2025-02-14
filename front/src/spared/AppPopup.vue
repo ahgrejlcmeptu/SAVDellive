@@ -33,7 +33,7 @@ const close = () => {
 
 <style lang="scss">
 @use "@style/media";
-//@use "@style/transition";
+@use "@style/transition";
 
 .popup {
   position: fixed;

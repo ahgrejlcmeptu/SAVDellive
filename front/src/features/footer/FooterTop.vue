@@ -1,73 +1,11 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
+import {useStore} from "@nanostores/vue";
+import {branchesActive, blockNavigation} from "@app/store/block";
+const $branchesActive = useStore(branchesActive)
+const $blockNavigation = useStore(blockNavigation)
 
-const NAV = {
-    menu: [
-        {
-            id: '1',
-            name: 'Роллы'
-        },
-        {
-            id: '2',
-            name: 'Наборы'
-        },
-        {
-            id: '3',
-            name: 'Суши'
-        },
-        {
-            id: '4',
-            name: 'Салаты'
-        },
-        {
-            id: '5',
-            name: 'Блюда гриль'
-        },
-        {
-            id: '6',
-            name: 'Горячие блюда'
-        },
-        {
-            id: '7',
-            name: 'Пицца'
-        },
-        {
-            id: '8',
-            name: 'Супы'
-        },
-        {
-            id: '9',
-            name: 'Десерты'
-        },
-        {
-            id: '10',
-            name: 'Напитки'
-        },
-        {
-            id: '11',
-            name: 'Соусы'
-        },
-    ],
-    links: [
-        {
-            id: '1',
-            name: 'О нас'
-        },
-        {
-            id: '2',
-            name: 'Доставка и оплата'
-        },
-        {
-            id: '3',
-            name: 'Отзывы'
-        },
-        {
-            id: '4',
-            name: 'Контакты'
-        },
-    ]
-}
 </script>
 
 <template>
@@ -83,14 +21,14 @@ const NAV = {
             <h3>Свяжитесь с нами</h3>
             <ul>
                 <li>
-                    <a href="tel:+74997556493">+7 499 755-64-93</a>
+                    <a :href="'tel:' + $branchesActive.phone">{{$branchesActive.phone}}</a>
                 </li>
                 <li>
-                    Иркутск, <br>
-                    Академика Курчатова 3
+                    {{ $branchesActive.city }}, <br>
+                    {{ $branchesActive.street }}
                 </li>
                 <li>
-                    <a href="mailto:info@dellive.ru">info@dellive.ru</a>
+                    <a :href="'mailto:' + $branchesActive.email">{{$branchesActive.email}}</a>
                 </li>
             </ul>
             <app-socials/>
@@ -103,7 +41,7 @@ const NAV = {
         <div class="footer__column_three footer-top__item footer-top__item_menu">
             <h3>Наше меню</h3>
             <ul>
-                <li v-for="item in NAV.menu" :key="item.id">
+                <li v-for="item in $blockNavigation.menu" :key="item.id">
                     <a href="#">{{ item.name }}</a>
                 </li>
             </ul>
@@ -111,7 +49,7 @@ const NAV = {
         <div class="footer__column_four footer-top__item footer-top__item_links">
             <h3>Ресторан</h3>
             <ul>
-                <li v-for="item in NAV.links" :key="item.id">
+                <li v-for="item in $blockNavigation.links" :key="item.id">
                     <a href="#">{{ item.name }}</a>
                 </li>
             </ul>
