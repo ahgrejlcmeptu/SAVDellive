@@ -4,6 +4,10 @@
   position: relative;
   z-index: 5;
 
+  &_fixed {
+
+  }
+
   &__hr {
     background: var(--border-color-1);
     height: 1px;

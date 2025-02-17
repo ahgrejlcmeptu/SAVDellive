@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppInput from "@spared/AppInput.vue";
 import AppButton from "@spared/AppButton.vue";
-import AppTooltip from "@spared/AppTooltip.vue";
+import AppTooltip from "@spared/tooltip/AppTooltip.vue";
 import {computed, reactive, ref} from "vue";
 import AppSvg from "@spared/AppSvg.vue";
 

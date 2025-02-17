@@ -5,7 +5,7 @@ import AppOrderFormList from "@spared/order/AppOrderFormList.vue";
 import AppOrderFormItem from "@spared/order/AppOrderFormItem.vue";
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import AppTooltip from "@spared/AppTooltip.vue";
+import AppTooltip from "@spared/tooltip/AppTooltip.vue";
 import AppInputSubmit from "@entites/inputSubmit/AppInputSubmit.vue";
 import AppCardBasket from "@features/card/AppCardBasket.vue";
 import BasketAdditive from "@features/basket/BasketAdditive.vue";

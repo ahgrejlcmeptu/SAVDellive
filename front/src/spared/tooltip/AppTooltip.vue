@@ -15,9 +15,11 @@ onMounted(() => {
         <div @click="isOpen = !isOpen" class="tooltip__btn">
             <slot name="btn"/>
         </div>
-        <div class="tooltip__body" v-if="isOpen">
-            <slot/>
-        </div>
+        <transition>
+            <div class="tooltip__body" v-if="isOpen">
+                <slot/>
+            </div>
+        </transition>
     </div>
 </template>
 

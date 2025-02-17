@@ -20,9 +20,9 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits(['action'])
 
 const color = computed(() => 'btn_' + props.color)
-const onClick = () => {
+const onClick = (event: Event) => {
     if (props.disabled) return;
-    emits('action')
+    emits('action', event)
 }
 </script>
 

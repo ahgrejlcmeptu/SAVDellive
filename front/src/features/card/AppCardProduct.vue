@@ -9,6 +9,7 @@ import AppAmount from "@spared/AppAmount.vue";
 import type {Card} from "@app/utils/interfaces";
 import type {PropType} from "vue";
 import {popupCard, popupOpen} from "@app/store/popup.ts";
+import {bayToCard} from "@app/utils/bayToCard.ts";
 
 
 defineProps({
@@ -52,7 +53,7 @@ defineProps({
             </div>
         </div>
         <div class="card-product__footer" v-if="!successfully">
-            <app-button full>
+            <app-button full @action="bayToCard">
                 <AppSvg name="plus"/>
                 В корзину
                 <AppAmount :value="1"/>

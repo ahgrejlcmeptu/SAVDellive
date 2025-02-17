@@ -5,7 +5,7 @@ import AppDropdown from "@spared/dropdown/AppDropdown.vue";
 import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 import {SwiperSlide} from 'swiper/vue';
 import {computed, onMounted, ref} from "vue";
-import {blockNavigation} from "@app/store/block.ts";
+import {blockNavigation} from "@app/store/block";
 import {useStore} from "@nanostores/vue";
 
 const $blockNavigation = useStore(blockNavigation)

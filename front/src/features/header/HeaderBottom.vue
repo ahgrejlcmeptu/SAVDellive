@@ -2,15 +2,29 @@
 import AppSvg from "@spared/AppSvg.vue";
 import HeaderNav from "@entites/header/HeaderNav.vue";
 import AppItemValue from "@spared/AppItemValue.vue";
-import {popupOpen} from "@app/store/popup.ts";
-import {pageInfo} from "@app/store/block.ts";
+import UserPlate from "@entites/user/UserPlate.vue";
+import UserAuth from "@entites/user/UserAuth.vue";
+import {popupOpen} from "@app/store/popup";
+import {pageInfo} from "@app/store/block";
 import {useStore} from "@nanostores/vue";
+import {onMounted, ref} from "vue";
 
 const $pageInfo = useStore(pageInfo)
+const isUser = ref(false)
+const isAuth = ref(true)
+
+onMounted(() => {
+    document.addEventListener('mousedown', closeBlock)
+})
+function closeBlock(event: Event): void  {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.header-bottom__btn_user')) isUser.value = false
+    if (!target.closest('.header-bottom__btn_auth')) isAuth.value = false
+}
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" @click="closeBlock">
         <div class="header-bottom">
             <HeaderNav/>
             <div class="header-bottom__controls">
@@ -18,17 +32,22 @@ const $pageInfo = useStore(pageInfo)
                     <app-svg name="favorites"></app-svg>
                     <app-item-value>1</app-item-value>
                 </a>
-                <div class="header-bottom__btn header-bottom__btn_basket" @click="popupOpen('basket')">
+                <div class="header-bottom__btn header-bottom__btn_basket" @click="popupOpen('basket')" data-basket>
                     <app-svg name="basket"></app-svg>
                     <app-item-value>1</app-item-value>
                 </div>
                 <div v-if="!$pageInfo.user" class="header-bottom__btn header-bottom__btn_auth"
                      @click="popupOpen('auth')">
                     <app-svg name="auth"></app-svg>
+                    <transition>
+                        <UserAuth v-if="isAuth"/>
+                    </transition>
                 </div>
-                <div v-else class="header-bottom__btn header-bottom__btn_user"
-                     @click="popupOpen('auth')">
-                    <app-svg name="user"></app-svg>
+                <div v-else class="header-bottom__btn header-bottom__btn_user">
+                    <app-svg name="user" @click="isUser = !isUser"></app-svg>
+                    <transition>
+                        <UserPlate v-if="isUser" />
+                    </transition>
                 </div>
             </div>
         </div>

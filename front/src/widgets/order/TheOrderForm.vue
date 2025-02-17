@@ -14,7 +14,7 @@ import IconOnline from "@spared/icons/IconOnline.vue";
 import AppInputSubmit from "@entites/inputSubmit/AppInputSubmit.vue";
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppNotifications from "@entites/notifications/AppNotifications.vue";
-import AppTooltip from "@spared/AppTooltip.vue";
+import AppTooltip from "@spared/tooltip/AppTooltip.vue";
 import AppSelect from "@spared/select/AppSelect.vue";
 import AppSvg from "@spared/AppSvg.vue";
 import {markRaw, reactive, ref, watch} from "vue";

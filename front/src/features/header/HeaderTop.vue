@@ -67,21 +67,21 @@ const $branchesActive = useStore(branchesActive)
                 </div>
             </div>
             <div class="header-top__wrap header-top__wrap_controls">
-                <div class="header__item header__item_favorites">
+                <a href="/favorites" class="header__item header__item_favorites">
                     <AppIcon name="icon-favorites"/>
                     <app-item-value>1</app-item-value>
-                </div>
-                <div class="header__item header__item_basket" @click="popupOpen('basket')">
+                </a>
+                <div class="header__item header__item_basket" @click="popupOpen('basket')" data-basket>
                     <AppIcon name="icon-basket"/>
                     <app-item-value>100</app-item-value>
                 </div>
                 <a :href="'tel:' + $branchesActive.phone" class="header__item header__item_phone">
                     <AppIcon name="icon-phone"/>
                 </a>
-                <div class="header__item header__item_user">
+                <a href="/lk" class="header__item header__item_user">
                     <AppIcon name="icon-user"/>
                     <app-item-value>1000Б</app-item-value>
-                </div>
+                </a>
             </div>
         </div>
     </div>
