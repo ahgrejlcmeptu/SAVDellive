@@ -1,35 +1,9 @@
 <script setup lang="ts">
 import AppCardOrder from "@features/card/AppCardOrder.vue";
+import {basketItems} from "@app/store/basket";
+import {useStore} from "@nanostores/vue";
 
-const LIST = [
-    {
-        id: '1',
-        name: 'Рыбные палочки',
-        description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-        img: '/img/products/1.jpg',
-        price: 250,
-        weight: '140 гр.',
-        amount: 1
-    },
-    {
-        id: '2',
-        name: 'Рыбные палочки',
-        description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-        img: '/img/products/2.jpg',
-        price: 250,
-        weight: '140 гр.',
-        amount: 1
-    },
-    {
-        id: '3',
-        name: 'Рыбные палочки',
-        description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-        img: '/img/products/3.jpg',
-        price: 250,
-        weight: '140 гр.',
-        amount: 1
-    },
-]
+const $basketItems = useStore(basketItems)
 </script>
 
 <template>
@@ -38,7 +12,7 @@ const LIST = [
             <h2>Состав заказа / 4 шт.</h2>
         </div>
         <AppCardOrder
-                v-for="item in LIST"
+                v-for="item in $basketItems"
                 :key="item.id"
                 :data="item"
         />

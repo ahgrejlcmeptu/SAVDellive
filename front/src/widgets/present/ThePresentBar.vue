@@ -15,9 +15,7 @@ const progress = computed(() => {
 const active = computed(() => $basketTotal.value > $presentsSteps.value.min)
 
 onMounted(() => {
-    if (active) {
-        setTimeout(() => popupOpen('present'), 500)
-    }
+    if (active.value) setTimeout(() => popupOpen('present'), 500)
 })
 </script>
 
@@ -129,12 +127,15 @@ onMounted(() => {
     background: var(--main-color-9);
     height: 1px;
     transform: translateY(50%);
+
     &:nth-child(1) {
       bottom: 25%;
     }
+
     &:nth-child(2) {
       bottom: 50%;
     }
+
     &:nth-child(3) {
       bottom: 75%;
     }

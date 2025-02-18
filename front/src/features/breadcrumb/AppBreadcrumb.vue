@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <nav class="breadcrumb" aria-label="Breadcrumb">
+    <nav class="breadcrumb" >
         <ol class="breadcrumb__list">
             <li class="breadcrumb__item">
                 <a class="breadcrumb__link" href="/">Главная</a> → 
@@ -31,10 +31,9 @@ defineProps<{
 
 <style lang="scss">
 @use "@style/media";
-
 .breadcrumb {
   margin-bottom: 10px;
-    margin-top: 20px;
+  margin-top: 20px;
 
   ol {
     list-style: none;

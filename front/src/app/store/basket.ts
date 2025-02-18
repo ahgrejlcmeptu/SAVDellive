@@ -3,32 +3,7 @@ import {atom, map, computed} from 'nanostores';
 // import {http} from "../utils/http";
 // import {updateMe, user} from "./user";
 
-export const basketItems = map({
-    1: {
-        id: 1,
-        name: 'Мисо-суп',
-        amount: 1,
-        img: '/img/products/1.jpg',
-        price: 1259,
-        info: '8 шт. 140 гр.'
-    },
-    2: {
-        id: 2,
-        name: 'test',
-        amount: 1,
-        img: '/img/products/1.jpg',
-        price: 259,
-        info: '8 шт. 140 гр.'
-    },
-    3: {
-        id: 3,
-        name: 'test',
-        amount: 2,
-        img: '/img/products/1.jpg',
-        price: 259,
-        info: '8 шт. 140 гр.'
-    }
-});
+export const basketItems = map({});
 export const basketLength = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + item.amount, 0) || 0);
 export const basketTotal = computed(basketItems, basketItems => Object.values(basketItems).reduce((val, item) => val + (item.amount * item.price), 0) || 0)
 export const basketDiscount = atom(0)
@@ -37,6 +12,10 @@ const basket = () =>  Object.values(basketItems.value).reduce((val, i) => {
     return val
 }, {})
 
+export async function basketInit(basket) {
+    basketItems.set({})
+    basket.forEach(item => basketItems.setKey(item.id, item))
+}
 export async function basketLoad(basket) {
     basketItems.set({})
     const json = basket ? JSON.parse(basket) : {}
@@ -46,7 +25,6 @@ export async function basketLoad(basket) {
 
     return basketItems.value
 }
-
 export async function basketAdd(item) {
     const existingEntry = basketItems.get()[item.id];
     if (existingEntry) {

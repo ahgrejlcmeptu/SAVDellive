@@ -10,7 +10,7 @@ export interface Card {
     img: string;
     amount?: number
 }
-export interface CardOrder {
+export type CardOrder = {
     id: string | number
     name: string
     price: number

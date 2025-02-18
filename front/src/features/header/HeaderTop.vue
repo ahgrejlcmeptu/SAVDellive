@@ -6,9 +6,14 @@ import AppSocials from "@entites/socials/AppSocials.vue";
 import AppDropdown from "@spared/dropdown/AppDropdown.vue";
 import AppDropdownItem from "@spared/dropdown/AppDropdownItem.vue";
 import {popupOpen} from "@app/store/popup.ts";
-import {branches, branchesActive, branchesChange} from "@app/store/block";
+import {branches, branchesActive, branchesChange, pageInfo} from "@app/store/block";
 import {useStore} from "@nanostores/vue";
+import {basketLength} from "@app/store/basket";
+import {favoritesLength} from "@app/store/favorites";
 
+const $basketLength = useStore(basketLength)
+const $favoritesLength = useStore(favoritesLength)
+const $pageInfo = useStore(pageInfo)
 const $branches = useStore(branches)
 const $branchesActive = useStore(branchesActive)
 </script>
@@ -57,7 +62,7 @@ const $branchesActive = useStore(branchesActive)
                    @click.prevent="popupOpen('call')">
                     <AppIcon name="icon-phone"/>
                     <div class="header__item-body">
-                        <span>{{$branchesActive.phone}}</span>
+                        <span>{{ $branchesActive.phone }}</span>
                         <br>
                         Заказать звонок
                     </div>
@@ -69,19 +74,23 @@ const $branchesActive = useStore(branchesActive)
             <div class="header-top__wrap header-top__wrap_controls">
                 <a href="/favorites" class="header__item header__item_favorites">
                     <AppIcon name="icon-favorites"/>
-                    <app-item-value>1</app-item-value>
+                    <app-item-value v-if="$favoritesLength">{{$favoritesLength}}</app-item-value>
                 </a>
                 <div class="header__item header__item_basket" @click="popupOpen('basket')" data-basket>
                     <AppIcon name="icon-basket"/>
-                    <app-item-value>100</app-item-value>
+                    <app-item-value v-if="$basketLength">{{$basketLength}}</app-item-value>
                 </div>
                 <a :href="'tel:' + $branchesActive.phone" class="header__item header__item_phone">
                     <AppIcon name="icon-phone"/>
                 </a>
-                <a href="/lk" class="header__item header__item_user">
+                <div v-if="!$pageInfo.user" class="header__item header__item_user" @click="popupOpen('auth')">
                     <AppIcon name="icon-user"/>
-                    <app-item-value>1000Б</app-item-value>
+                </div>
+                <a v-else href="/lk" class="header__item header__item_user">
+                    <AppIcon name="icon-user"/>
+                    <app-item-value>{{$pageInfo.user?.bonus}}Б</app-item-value>
                 </a>
+
             </div>
         </div>
     </div>

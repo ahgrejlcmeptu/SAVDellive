@@ -2,7 +2,7 @@
 import AppSvg from "@spared/AppSvg.vue";
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppQuantity from "@spared/AppQuantity.vue";
-import type {CardOrder} from "@app/utils/interfaces.ts";
+import type {CardOrder} from "@app/utils/interfaces";
 
 const props = defineProps<{
     data: CardOrder;

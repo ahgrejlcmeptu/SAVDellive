@@ -8,7 +8,11 @@ import {popupOpen} from "@app/store/popup";
 import {pageInfo} from "@app/store/block";
 import {useStore} from "@nanostores/vue";
 import {onMounted, ref} from "vue";
+import {basketLength} from "@app/store/basket";
+import {favoritesLength} from "@app/store/favorites";
 
+const $basketLength = useStore(basketLength)
+const $favoritesLength = useStore(favoritesLength)
 const $pageInfo = useStore(pageInfo)
 const isUser = ref(false)
 const isAuth = ref(true)
@@ -16,7 +20,8 @@ const isAuth = ref(true)
 onMounted(() => {
     document.addEventListener('mousedown', closeBlock)
 })
-function closeBlock(event: Event): void  {
+
+function closeBlock(event: Event): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.header-bottom__btn_user')) isUser.value = false
     if (!target.closest('.header-bottom__btn_auth')) isAuth.value = false
@@ -30,11 +35,11 @@ function closeBlock(event: Event): void  {
             <div class="header-bottom__controls">
                 <a href="/favorites" class="header-bottom__btn header-bottom__btn_favorites">
                     <app-svg name="favorites"></app-svg>
-                    <app-item-value>1</app-item-value>
+                    <app-item-value v-if="$favoritesLength">{{$favoritesLength}}</app-item-value>
                 </a>
                 <div class="header-bottom__btn header-bottom__btn_basket" @click="popupOpen('basket')" data-basket>
                     <app-svg name="basket"></app-svg>
-                    <app-item-value>1</app-item-value>
+                    <app-item-value v-if="$basketLength">{{ $basketLength }}</app-item-value>
                 </div>
                 <div v-if="!$pageInfo.user" class="header-bottom__btn header-bottom__btn_auth"
                      @click="popupOpen('auth')">
@@ -46,7 +51,7 @@ function closeBlock(event: Event): void  {
                 <div v-else class="header-bottom__btn header-bottom__btn_user">
                     <app-svg name="user" @click="isUser = !isUser"></app-svg>
                     <transition>
-                        <UserPlate v-if="isUser" />
+                        <UserPlate v-if="isUser"/>
                     </transition>
                 </div>
             </div>
@@ -102,9 +107,10 @@ function closeBlock(event: Event): void  {
     &_user {
       --svg-width: 17px;
       --svg-height: 19px;
-        svg {
-            stroke-width: 1.5px;
-        }
+
+      svg {
+        stroke-width: 1.5px;
+      }
     }
 
     svg {

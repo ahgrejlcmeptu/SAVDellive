@@ -11,9 +11,11 @@ import ThePresentPopup from '../widgets/present/ThePresentPopup.vue'
 import ThePresentBar from '../widgets/present/ThePresentBar.vue'
 import TheButtonTop from '../widgets/TheButtonTop.vue'
 import TheDocument from './TheDocument.vue'
+import {http} from "../app/utils/http";
 
 const {title, data} = Astro.props
 
+// то что грузиться всегда (может у юзера что то изменить)
 const PAGE = {
     branches: [
         {
@@ -88,7 +90,7 @@ const PAGE = {
             mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
             email: 'info@dellive.ru'
         }
-    ],
+    ], //филиалы
     nav: {
         menu: [
             {
@@ -166,7 +168,7 @@ const PAGE = {
                 highlight: true
             },
         ]
-    },
+    }, // навигация
     user: {
         id: 1,
         img: '/img/user.jpg',
@@ -259,9 +261,71 @@ const PAGE = {
                     }
                 ]
             }
-        ]
-    }
+        ],
+        basket: [
+            {
+                id: 1,
+                name: 'Мисо-суп',
+                description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+                amount: 1,
+                img: '/img/products/1.jpg',
+                price: 1259,
+                info: '8 шт. 140 гр.'
+            },
+            {
+                id: 2,
+                name: 'test',
+                description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+                amount: 1,
+                img: '/img/products/1.jpg',
+                price: 259,
+                info: '8 шт. 140 гр.'
+            },
+            {
+                id: 3,
+                name: 'test',
+                description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+                amount: 2,
+                img: '/img/products/1.jpg',
+                price: 259,
+                info: '8 шт. 140 гр.'
+            }
+        ],
+        favorites: []
+    }, // пользователь
+    presents: [
+        {
+            id: 1,
+            img: '/img/products/1.jpg',
+            name: 'Салат корейский',
+            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+            price: 500
+        },
+        {
+            id: 2,
+            img: '/img/products/1.jpg',
+            name: 'Бонито',
+            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+            price: 1500
+        },
+        {
+            id: 3,
+            img: '/img/products/1.jpg',
+            name: 'Цезарь эби',
+            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+            price: 2000
+        },
+        {
+            id: 4,
+            img: '/img/products/1.jpg',
+            name: 'Семга терияки',
+            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
+            price: 2500
+        }
+    ], //подарки
 }
+const setting = await http({url: '/api/setting'})
+console.log(setting)
 ---
 
 <!doctype html>
@@ -276,27 +340,24 @@ const PAGE = {
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 </head>
 <body>
-<div class="wrapper" id="app">
-    <TheDocument data={{...data, ...PAGE}} client:load>
-        <TheHeader client:load/>
-        <main>
-            <slot/>
-        </main>
-        <TheFooter client:load/>
-        <ThePopupBurger client:load/>
+<TheDocument data={{...data, ...PAGE}} client:load>
+    <TheHeader client:load/>
+    <main>
+        <slot/>
+    </main>
+    <TheFooter client:load/>
+    <ThePopupBurger client:load/>
 
-        <ThePopupBasket client:only/>
-        <ThePopupCall client:only/>
-        <ThePopupAuth client:only/>
-        <ThePresentPopup client:only/>
-        <ThePopupCard client:only />
+    <ThePopupBasket client:only/>
+    <ThePopupCall client:only/>
+    <ThePopupAuth client:only/>
+    <ThePresentPopup client:only/>
+    <ThePopupCard client:only/>
 
-        <div class="fixed-bar">
-            <ThePresentBar client:only/>
-            <TheButtonTop client:only/>
-        </div>
-    </TheDocument>
-</div>
-
+    <div class="fixed-bar">
+        <ThePresentBar client:only/>
+        <TheButtonTop client:only/>
+    </div>
+</TheDocument>
 </body>
 </html>

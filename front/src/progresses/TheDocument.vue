@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
 import {Anchors} from "@app/utils/anchors";
-import {blockInfo} from "@app/store/block.ts";
+import {blockInfo} from "@app/store/block";
 
 const anchors = new Anchors()
 const props = defineProps(['data'])
@@ -9,16 +9,16 @@ const props = defineProps(['data'])
 blockInfo(props.data)
 onMounted(() => {
     blockInfo(props.data)
-})
 
-
-onMounted(()=> {
     document.addEventListener('click', (event: Event) => {
         anchors.click(event)
     })
 })
+
 </script>
 
 <template>
-<slot></slot>
+    <div class="wrapper" id="app">
+        <slot></slot>
+    </div>
 </template>
