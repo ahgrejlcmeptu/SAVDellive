@@ -3,6 +3,7 @@ import {presentInit} from "@app/store/present.ts";
 import {basketInit} from "@app/store/basket.ts";
 
 // export const blockInfo = map({})
+export const HOST = 'http://localhost:1337'
 export const pageInfo = atom({})
 export const blockNavigation = atom({highlight: [], links: []})
 export const branches = atom(null)

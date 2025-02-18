@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="presentBar" class="present-bar" @click="popupOpen('present')"
+    <div ref="presentBar" v-if="Object.keys($presents).length" class="present-bar" @click="popupOpen('present')"
          :style="{'--present-progress': progress + '%'}">
         <div :class="['present-bar__btn', {active}]">
             <svg viewBox="0 0 62 62">

@@ -45,8 +45,8 @@ const $branchesActive = useStore(branchesActive)
                 <div class="header__item header__item_desktop">
                     <AppIcon name="icon-clock"/>
                     <div class="header__item-body">
-                        <template v-for="item in $branchesActive.mode" :key="item">
-                            {{ item }}<br>
+                        <template v-for="item in $branchesActive.mode" :key="item.id">
+                            {{ item.text }}<br>
                         </template>
                     </div>
                 </div>

@@ -17,80 +17,6 @@ const {title, data} = Astro.props
 
 // то что грузиться всегда (может у юзера что то изменить)
 const PAGE = {
-    branches: [
-        {
-            id: 0,
-            city: 'Иркутск',
-            street: 'Академика Курчатова 3',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 1,
-            city: 'Ангарск',
-            street: 'Академика Курчатова 4',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 2,
-            city: 'Шелехов',
-            street: 'Академика Курчатова 5',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 3,
-            city: 'Братск',
-            street: 'Академика Курчатова 6',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 4,
-            city: 'Усолье - Сибирское',
-            street: 'Академика Курчатова 7',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 5,
-            city: 'Москва',
-            street: 'Академика Курчатова 8',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 6,
-            city: 'Санкт-Петербург',
-            street: 'Академика Курчатова 9',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 7,
-            city: 'Черемхово',
-            street: 'Академика Курчатова 0',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        },
-        {
-            id: 8,
-            city: 'Улан-Удэ',
-            street: 'Академика Курчатова 1',
-            phone: '+7 499 755 64 93',
-            mode: ['пн-чт: с 10:00 до 24:00', 'пт-сб: c 10:00 до 02:00'],
-            email: 'info@dellive.ru'
-        }
-    ], //филиалы
     nav: {
         menu: [
             {
@@ -293,39 +219,8 @@ const PAGE = {
         ],
         favorites: []
     }, // пользователь
-    presents: [
-        {
-            id: 1,
-            img: '/img/products/1.jpg',
-            name: 'Салат корейский',
-            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-            price: 500
-        },
-        {
-            id: 2,
-            img: '/img/products/1.jpg',
-            name: 'Бонито',
-            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-            price: 1500
-        },
-        {
-            id: 3,
-            img: '/img/products/1.jpg',
-            name: 'Цезарь эби',
-            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-            price: 2000
-        },
-        {
-            id: 4,
-            img: '/img/products/1.jpg',
-            name: 'Семга терияки',
-            compound: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-            price: 2500
-        }
-    ], //подарки
 }
 const setting = await http({url: '/api/setting'})
-console.log(setting)
 ---
 
 <!doctype html>
@@ -340,20 +235,18 @@ console.log(setting)
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 </head>
 <body>
-<TheDocument data={{...data, ...PAGE}} client:load>
+<TheDocument data={{...data, ...PAGE, ...setting.data}} client:load>
     <TheHeader client:load/>
     <main>
         <slot/>
     </main>
     <TheFooter client:load/>
     <ThePopupBurger client:load/>
-
     <ThePopupBasket client:only/>
     <ThePopupCall client:only/>
     <ThePopupAuth client:only/>
     <ThePresentPopup client:only/>
     <ThePopupCard client:only/>
-
     <div class="fixed-bar">
         <ThePresentBar client:only/>
         <TheButtonTop client:only/>

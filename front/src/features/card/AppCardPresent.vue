@@ -5,11 +5,13 @@ import AppCurrency from "@spared/AppCurrency.vue";
 import AppProgressCircle from "@spared/progress/AppProgressCircle.vue";
 import {basketTotal} from "@app/store/basket";
 import {useStore} from "@nanostores/vue";
+import {HOST} from "@app/store/block.ts";
 
 const $basketTotal = useStore(basketTotal)
 const props = defineProps(['data'])
 const status = computed(() => $basketTotal.value < props.data.price)
 const active = ref(false)
+
 const check = () => {
     console.log('выбрали подарок')
 }
@@ -18,7 +20,7 @@ const check = () => {
 <template>
     <div :class="['card-present', {active}]">
         <div class="card-present__top">
-            <img class="card-present__img" :src="data.img" :alt="data.name">
+            <img class="card-present__img" :src="HOST + data.img.url" :alt="data.name">
             <img v-if="active" class="card-present__check" src="/img/present-check.svg" alt="">
         </div>
         <div class="card-present__body">

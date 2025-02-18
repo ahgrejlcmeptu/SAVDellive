@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, provide} from "vue";
 import {Anchors} from "@app/utils/anchors";
 import {blockInfo} from "@app/store/block";
 

@@ -10,7 +10,7 @@ const $presents = useStore(presents)
 </script>
 
 <template>
-    <app-popup name="present" content="present">
+    <app-popup name="present" content="present" v-if="Object.keys($presents).length">
         <div class="page-header">
             <h3>Выберите свой вкусный подарок!</h3>
             <p class="text-15">Вы можете выбрать любой подарок, который понравится. Он будет передан Вам вместе с
