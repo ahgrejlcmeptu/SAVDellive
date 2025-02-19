@@ -57,7 +57,7 @@ time
 17.01 - 2.00
 
 git add .
-git commit -m "19.02 path 1"
+git commit -m "19.02 path 2"
 git push
 
 11.06

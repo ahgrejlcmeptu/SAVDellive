@@ -1,24 +1,15 @@
 <script setup lang="ts">
 import AppReviewHeader from "@entites/reviews/AppReviewHeader.vue";
+import {ref} from "vue";
 
-interface Props {
-    data: {
-        id: string | number
-        name: string
-        date: string | number
-        description: string
-        img?: string
-        video?: string
-    },
-}
-
-defineProps<Props>()
+const props = defineProps(['data'])
+const review = ref(props.data.review)
 </script>
 
 <template>
-    <a class="card-review" :href="'/reviews#review-' + data.id">
-        <AppReviewHeader :data="data"/>
-        <p class="card-review__description">{{ data.description }}</p>
+    <a class="card-review" :href="'/reviews#review-' + data.documentId">
+        <AppReviewHeader :data="review"/>
+        <div class="card-review__description" v-html="review.description"></div>
     </a>
 </template>
 

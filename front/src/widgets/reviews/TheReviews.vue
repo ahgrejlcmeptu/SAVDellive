@@ -20,7 +20,7 @@ defineProps(['data'])
             >
                 <swiper-slide
                         v-for="item in data.list"
-                        :key="item.id"
+                        :key="item.documentId"
                 >
                     <AppCardReview
                             :data="item"

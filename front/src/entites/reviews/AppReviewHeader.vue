@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppPlay from "@spared/AppPlay.vue";
 import {checkUndefined} from "@app/utils/verification.ts";
+import {HOST} from "@app/store/block.ts";
 
 defineProps<{
     data: object,
@@ -11,7 +12,7 @@ defineProps<{
 <template>
     <div :class="['review-header', {'review-header_reverse': checkUndefined(reverse)}]">
         <div class="review-header__img">
-            <img :src="data.img" :alt="data.name">
+            <img :src="HOST + data.img.url" :alt="data.name">
             <AppPlay v-if="data.video"/>
         </div>
         <div class="review-header__right">
