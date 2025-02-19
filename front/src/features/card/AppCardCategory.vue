@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import {HOST} from "@app/store/block.ts";
+
 interface Props {
-    className?: string;
     data: {
         name: string;
         amount: string;
         img: string;
-        href: string;
-        all: boolean
+        all?: boolean
+        href?: string
     };
 
 }
@@ -15,15 +16,13 @@ defineProps<Props>()
 </script>
 
 <template>
-    <a :href="data.href" :class="['card-category', className, {'card-category_full': data.all}]">
-        <template v-if="!data.all">
-            <div class="text-16">{{ data.name }}</div>
-            <p class="text-15">{{ data.amount }}</p>
-            <img :src="data.img" alt="">
-        </template>
-        <template v-else>
-            <div class="text-16">{{ data.name }}</div>
-        </template>
+    <a v-if="!data.all" :href="'/catalog?categories=' + data.name" class="card-category">
+        <div class="text-16">{{ data.name }}</div>
+        <p class="text-15">{{ data.amount }}</p>
+        <img :src="HOST + data.img.url" alt="">
+    </a>
+    <a v-else class="card-category card-category_full" :href="data.href">
+        <span class="text-16">{{ data.name }}</span>
     </a>
 </template>
 
@@ -47,7 +46,9 @@ defineProps<Props>()
     justify-content: center;
     background-color: var(--main-color-1);
     border-color: var(--main-color-1);
-    color: var(--main-white);
+    span {
+        color: var(--main-white);
+    }
   }
 
   img {

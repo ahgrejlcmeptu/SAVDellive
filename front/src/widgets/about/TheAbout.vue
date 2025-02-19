@@ -1,24 +1,22 @@
 <script setup lang="ts">
+import AppSection from "@spared/AppSection.vue";
+import {HOST} from "@app/store/block";
 
+defineProps(['data'])
 </script>
 
 <template>
-    <div class="about">
-        <div class="about__body">
-            <h2>О нас</h2>
-            <p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее
-                осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений
-                в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей.
-                Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет
-                сделать текст более привлекательным и живым для визуально-слухового восприятия</p>
-            <p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее
-                осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений
-                в домашних</p>
+    <app-section class="block-color mb-100">
+        <div class="about">
+            <div class="about__body">
+                <h2>{{ data.title }}</h2>
+                <div class="about__description" v-html="data.description"></div>
+            </div>
+            <div class="about__img">
+                <img :src="HOST + data.img.url" alt="">
+            </div>
         </div>
-        <div class="about__img">
-            <img src="/img/about.png" alt="">
-        </div>
-    </div>
+    </app-section>
 </template>
 
 <style lang="scss">

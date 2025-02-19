@@ -5,7 +5,41 @@ import {basketInit} from "@app/store/basket.ts";
 // export const blockInfo = map({})
 export const HOST = 'http://localhost:1337'
 export const pageInfo = atom({})
-export const blockNavigation = atom({highlight: [], links: []})
+export const blockNavigation = atom({
+    links: [
+        {
+            id: '1',
+            name: 'О нас',
+            href: '/about'
+        },
+        {
+            id: '2',
+            name: 'Доставка и оплата',
+            href: '/delivery'
+        },
+        {
+            id: '3',
+            name: 'Отзывы',
+            href: '/reviews'
+        },
+        {
+            id: '4',
+            name: 'Контакты',
+            href: '/contacts'
+        },
+        {
+            id: '5',
+            name: 'Новости',
+            href: '/news'
+        },
+    ],
+    highlight: [
+        {
+            id: '01',
+            name: 'Акции',
+            highlight: true
+        },
+    ]})
 export const branches = atom(null)
 export const branchesActive = atom({})
 export const branchesChange = (id) => {
@@ -15,7 +49,7 @@ export const branchesChange = (id) => {
 
 export const blockInfo = (data: any): boolean => {
     pageInfo.set(data)
-    blockNavigation.set(data.nav)
+    blockNavigation.set({...blockNavigation.value, ...data.nav})
     branches.set(data.branches)
     branchesActive.set(branches.value[0])
     presentInit(pageInfo.value.presents || [])

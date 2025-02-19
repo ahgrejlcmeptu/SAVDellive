@@ -14,87 +14,9 @@ import TheDocument from './TheDocument.vue'
 import {http} from "../app/utils/http";
 
 const {title, data} = Astro.props
-
+let load = false
 // то что грузиться всегда (может у юзера что то изменить)
 const PAGE = {
-    nav: {
-        menu: [
-            {
-                id: '1',
-                name: 'Бургеры',
-            },
-            {
-                id: '2',
-                name: 'Шашлыки'
-            },
-            {
-                id: '3',
-                name: 'Салаты'
-            },
-            {
-                id: '4',
-                name: 'Супы'
-            },
-            {
-                id: '5',
-                name: 'Горячее'
-            },
-            {
-                id: '6',
-                name: 'Роллы'
-            },
-            {
-                id: '7',
-                name: 'Пицца'
-            },
-            {
-                id: '9',
-                name: 'Десерты'
-            },
-            {
-                id: '10',
-                name: 'Напитки'
-            },
-            {
-                id: '11',
-                name: 'Соусы'
-            },
-        ],
-        links: [
-            {
-                id: '1',
-                name: 'О нас',
-                href: '/about'
-            },
-            {
-                id: '2',
-                name: 'Доставка и оплата',
-                href: '/delivery'
-            },
-            {
-                id: '3',
-                name: 'Отзывы',
-                href: '/reviews'
-            },
-            {
-                id: '4',
-                name: 'Контакты',
-                href: '/contacts'
-            },
-            {
-                id: '5',
-                name: 'Новости',
-                href: '/news'
-            },
-        ],
-        highlight: [
-            {
-                id: '01',
-                name: 'Акции',
-                highlight: true
-            },
-        ]
-    }, // навигация
     user: {
         id: 1,
         img: '/img/user.jpg',
@@ -221,6 +143,7 @@ const PAGE = {
     }, // пользователь
 }
 const setting = await http({url: '/api/setting'})
+load = true
 ---
 
 <!doctype html>
@@ -235,22 +158,25 @@ const setting = await http({url: '/api/setting'})
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 </head>
 <body>
+
 <TheDocument data={{...data, ...PAGE, ...setting.data}} client:load>
-    <TheHeader client:load/>
-    <main>
-        <slot/>
-    </main>
-    <TheFooter client:load/>
-    <ThePopupBurger client:load/>
-    <ThePopupBasket client:only/>
-    <ThePopupCall client:only/>
-    <ThePopupAuth client:only/>
-    <ThePresentPopup client:only/>
-    <ThePopupCard client:only/>
-    <div class="fixed-bar">
-        <ThePresentBar client:only/>
-        <TheButtonTop client:only/>
-    </div>
+    {load && (
+            <TheHeader client:load/>
+            <main>
+                <slot/>
+            </main>
+            <TheFooter client:load/>
+            <ThePopupBurger client:load/>
+            <ThePopupBasket client:only/>
+            <ThePopupCall client:only/>
+            <ThePopupAuth client:only/>
+            <ThePresentPopup client:only/>
+            <ThePopupCard client:only/>
+            <div class="fixed-bar">
+                <ThePresentBar client:only/>
+                <TheButtonTop client:only/>
+            </div>
+    )}
 </TheDocument>
 </body>
 </html>

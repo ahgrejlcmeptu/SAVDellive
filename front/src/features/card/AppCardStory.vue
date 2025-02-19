@@ -1,22 +1,16 @@
 <script setup lang="ts">
-interface Props {
-    data: {
-        id: number | string
-        img: string
-        name: string
-    }
-}
+import {HOST} from "@app/store/block.ts";
 
-defineProps<Props>()
+defineProps(['data'])
 </script>
 
 <template>
-    <div class="card-story">
+    <component :is="data.href ? 'a' : 'div'" :href="data.href" target="_blank" class="card-story">
         <div class="card-story__img">
-            <img :src="data.img" :alt="data.name">
+            <img :src="HOST + data.img.url" :alt="data.name">
         </div>
         <div class="card-story__name">{{ data.name }}</div>
-    </div>
+    </component>
 </template>
 
 <style lang="scss">

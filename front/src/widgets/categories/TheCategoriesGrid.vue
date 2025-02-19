@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import AppCardCategory from "@features/card/AppCardCategory.vue";
 
-interface Props {
-    list: object;
-}
-
-defineProps<Props>()
+defineProps(['data'])
 </script>
 
 <template>
     <div class="categories_grid">
         <AppCardCategory
-            v-for="item in list"
-            :key="item.id"
+            v-for="item in data.list"
+            :key="item.documentId"
             :data="item"
+        />
+        <AppCardCategory
+            v-if="data.lastCard"
+            :data="{name: data.lastCardText, href: data.lastCardLink, all: true}"
         />
     </div>
 </template>

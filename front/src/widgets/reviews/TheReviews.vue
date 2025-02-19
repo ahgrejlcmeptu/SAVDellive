@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppSection from "@spared/AppSection.vue";
 import AppCardReview from "@features/card/AppCardReview.vue";
 import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import SwiperButton from "@spared/SwiperButton.vue";
@@ -9,24 +10,26 @@ defineProps(['data'])
 </script>
 
 <template>
-    <div class="reviews text-16">
-        <swiper-button tablet prev/>
-        <swiper-button tablet next/>
-        <app-slider
-                :slider="{loop: true}"
-                name=".reviews"
-        >
-            <swiper-slide
-                    v-for="item in data"
-                    :key="item.id"
+    <app-section class="mb-100" :title="data.title" header="center">
+        <div class="reviews text-16">
+            <swiper-button tablet prev/>
+            <swiper-button tablet next/>
+            <app-slider
+                    :slider="{loop: true}"
+                    name=".reviews"
             >
-                <AppCardReview
-                        :data="item"
-                />
-            </swiper-slide>
-        </app-slider>
-    </div>
-    <app-link-bottom><a href="#">Смотреть все</a></app-link-bottom>
+                <swiper-slide
+                        v-for="item in data.list"
+                        :key="item.id"
+                >
+                    <AppCardReview
+                            :data="item"
+                    />
+                </swiper-slide>
+            </app-slider>
+        </div>
+        <app-link-bottom v-if="data.link"><a :href="data.linkHref">{{data.linkText}}</a></app-link-bottom>
+    </app-section>
 </template>
 
 <style lang="scss">
@@ -70,6 +73,7 @@ defineProps(['data'])
     &-prev {
       transform: translateX(-160px);
     }
+
     &-next {
       + .swiper-slide {
         transform: translateX(160px);

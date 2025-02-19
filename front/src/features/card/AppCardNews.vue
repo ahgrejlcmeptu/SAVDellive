@@ -1,25 +1,18 @@
 <script setup lang="ts">
-interface Props {
-    data: {
-        id: string | number
-        href?: string
-        name: string
-        description: string
-        img: string
-    }
-}
+import {HOST} from "@app/store/block.ts";
+import {ref} from "vue";
 
-defineProps<Props>()
+const props = defineProps(['data'])
+const item = ref(props.data.card)
 </script>
 
 <template>
-    <a class="card-news" :href="'/news/' + data.href">
-<span class="card-news__img">
-    <img :src="data.img" :alt="data.name">
-</span>
-        <h6 class="card-news__name">{{ data.name }}</h6>
-        <p>{{ data.description }}</p>
-
+    <a class="card-news" :href="'/news/' + item.href">
+        <span class="card-news__img">
+            <img :src="HOST + item.img.url" :alt="item.name">
+        </span>
+        <h6 class="card-news__name">{{ item.name }}</h6>
+        <p>{{ item.subtitle }}</p>
     </a>
 </template>
 
@@ -42,6 +35,7 @@ defineProps<Props>()
   h6 {
     margin: 10px 0;
   }
+
   p {
     @include media.respond-to(960) {
       font-size: media.sizeREM(15);

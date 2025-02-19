@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import AppCardNews from "@features/card/AppCardNews.vue";
 
-interface Props {
-    data: object
-}
-
-defineProps<Props>()
+defineProps(['data'])
 </script>
 
 <template>
     <div class="news_grid">
         <AppCardNews
                 v-for="item in data"
-                :key="item.id"
+                :key="item.documentId"
                 :data="item"
         />
     </div>

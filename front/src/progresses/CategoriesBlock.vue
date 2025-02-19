@@ -27,5 +27,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <component :is="block" :list="data" class="categories"></component>
+    <component :is="block" :data="data" class="categories"></component>
 </template>

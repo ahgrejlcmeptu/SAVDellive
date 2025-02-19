@@ -1,3 +1,4 @@
+
 ---
 import Layout from '@progresses/Layout.astro';
 import TheBanner from '@widgets/banner/TheBanner.vue'
@@ -9,98 +10,9 @@ import TheAbout from '@widgets/about/TheAbout.vue'
 import NewsBlock from '@progresses/NewsBlock.vue'
 import TheReviews from '@widgets/reviews/TheReviews.vue'
 import TheSeo from '@widgets/seo/TheSeo.vue'
+import {http} from "../app/utils/http";
 
-
-const PAGE = {
-
-}
-
-const BANNERS = [
-    {
-        id: 1,
-        img: '/img/banners/desktop/1.jpg',
-        mobile: '/img/banners/mobile/1.jpg'
-    },
-    {
-        id: 2,
-        img: '/img/banners/desktop/2.jpg',
-        mobile: '/img/banners/mobile/2.jpg'
-    },
-    {
-        id: 3,
-        img: '/img/banners/desktop/3.jpg',
-        mobile: '/img/banners/mobile/3.jpg'
-    }
-]
-const ADVANTAGES = [
-    {
-        id: 1,
-        title: 'Качество ингредиентов',
-        description: 'Уделяем особое внимание качеству ингредиентов',
-        img: '/img/advantages/1.svg'
-    },
-    {
-        id: 2,
-        title: 'Опыт работы',
-        description: '10 лет работаем в сфере доставки',
-        img: '/img/advantages/2.svg'
-    },
-    {
-        id: 3,
-        title: 'Личная парковка',
-        description: 'Имеем свой собственный автопарк',
-        img: '/img/advantages/3.svg'
-    },
-    {
-        id: 4,
-        title: 'Спецпредложения',
-        description: 'Лояльная система бонусов и подарков',
-        img: '/img/advantages/4.svg'
-    }
-]
-const CATEGORIES = [
-    {
-        id: '1',
-        name: 'Шашлыки',
-        amount: '4 блюда',
-        img: '/img/categories/1.png',
-        href: "#"
-    },
-    {
-        id: '2',
-        name: 'Бургеры',
-        amount: '4 блюда',
-        img: '/img/categories/2.png',
-        href: "#"
-    },
-    {
-        id: '3',
-        name: 'Салаты',
-        amount: '4 блюда',
-        img: '/img/categories/3.png',
-        href: "#"
-    },
-    {
-        id: '4',
-        name: 'Горячие блюда',
-        amount: '4 блюда',
-        img: '/img/categories/4.png',
-        href: "#"
-    },
-    {
-        id: '5',
-        name: 'Супы',
-        amount: '4 блюда',
-        img: '/img/categories/5.png',
-        href: "#"
-    },
-    {
-        id: '6',
-        name: 'Все блюда',
-        href: "#",
-        all: true
-    },
-]
+let load = false
 const POPULAR = [
     {
         id: '1',
@@ -247,93 +159,6 @@ const STATUS_POPULAR = [
         icon: '/status.svg#new'
     }
 ]
-const STORIES = [
-    {
-        id: 1,
-        img: '/img/stories/1.jpg',
-        name: 'Счастливые\n' +
-            'часы'
-    },
-
-    {
-        id: 3,
-        img: '/img/stories/2.jpg',
-        name: 'Акции, \n' +
-            'спецпредложения…'
-    },
-    {
-        id: 4,
-        img: '/img/stories/3.jpg',
-        name: 'Отзывы'
-    },
-    {
-        id: 5,
-        img: '/img/stories/4.jpg',
-        name: 'Банкетное\n' +
-            'меню'
-    },
-    {
-        id: 6,
-        img: '/img/stories/5.jpg',
-        name: 'Доставка'
-    },
-    {
-        id: 7,
-        img: '/img/stories/6.jpg',
-        name: 'Рестораны'
-    },
-    {
-        id: 8,
-        img: '/img/stories/7.jpg',
-        name: 'Корпоративы'
-    },
-    {
-        id: 9,
-        img: '/img/stories/tg.svg',
-        name: 'Мессенджеры'
-    },
-]
-const NEWS = [
-    {
-        id: '1',
-        name: 'Скидка на первый заказ',
-        description: 'Делай первый заказ и экономь',
-        img: '/img/news/1.jpg',
-    },
-    {
-        id: '2',
-        name: 'Новое меню',
-        description: 'Запустили новое меню и приглашаем\n' +
-            'вас отведать его первыми',
-        img: '/img/news/2.jpg',
-    },
-    {
-        id: '3',
-        name: 'Две пиццы по цене одной',
-        description: 'Специальное предложение для любителей пиццы',
-        img: '/img/news/3.jpg',
-    },
-    {
-        id: '4',
-        name: 'Винный ужин',
-        description: 'Джазовая мелодия в сочетании с курсами\n' +
-            'из вина и блюд от шефа',
-        img: '/img/news/4.jpg',
-    },
-    {
-        id: '5',
-        name: 'Скидка 10% на самовывоз',
-        description: 'На все заказы действует скидка 10%\n' +
-            'при самовывозе из ресторана',
-        img: '/img/news/5.jpg',
-    },
-    {
-        id: '6',
-        name: 'Фотоотчет с корпоратива',
-        description: 'Показываем как мы отмечали корпоратив нашей большой командой',
-        img: '/img/news/6.jpg',
-    },
-]
 const REVIEWS = [
     {
         id: '1',
@@ -422,73 +247,28 @@ const REVIEWS = [
         img: '/img/reviews/2.jpg'
     },
 ]
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium at consequuntur deleniti deserunt eius eveniet ex facilis incidunt labore libero neque, officiis, pariatur praesentium quasi quis rerum velit voluptas voluptatum.</p>',
-        img: '/img/seo.jpg'
-    },
-    {
-        id: '2',
-        title: 'Условия оплаты',
-        description: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur consequuntur eligendi, enim impedit in inventore iste necessitatibus neque rem voluptatibus?</p>',
-        img: '/img/seo.jpg'
-    },
-    {
-        id: '3',
-        title: 'Связаться с оператором',
-        description: '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi asperiores, at ducimus eligendi iure laboriosam provident! Accusamus, beatae blanditiis ex fuga maxime minima necessitatibus nemo perspiciatis ratione soluta tenetur?</span><span>Alias corporis expedita laboriosam magnam minima! A assumenda at commodi cupiditate ea, est excepturi fuga id iusto maiores maxime nihil omnis optio perspiciatis possimus quia quos reprehenderit tempore voluptates, voluptatum?</span><span>A ab earum eius omnis quaerat repellat velit vero voluptas voluptatum! Aliquid molestias numquam officiis reprehenderit voluptatibus! Consequuntur et ex harum, illo ipsam nostrum, provident quibusdam saepe suscipit vero, vitae?</span><span>Ab architecto commodi corporis doloribus incidunt laborum maiores nobis officiis, pariatur porro provident qui quidem rerum saepe, sequi? Architecto, id molestiae natus officiis quibusdam ratione sint sunt tempora? Asperiores, nemo.</span><span>At culpa modi pariatur perspiciatis quia, sequi voluptas? Delectus deserunt dolorum ducimus est expedita fuga fugiat in itaque, laborum laudantium magnam, magni minima modi neque officia quis sed temporibus voluptatibus?</span><span>A adipisci alias asperiores, assumenda consectetur distinctio dolore eius eligendi ipsa laboriosam maxime minima modi natus non nulla perspiciatis praesentium provident quis, ratione rerum tempora vitae voluptatem? Laborum, odit unde.</span><span>Ab autem dolore dolorum exercitationem ipsum labore magnam neque nisi non officia, placeat quis quos repellendus sunt suscipit unde voluptatum! Ad cum distinctio ducimus illum, nisi nostrum obcaecati quibusdam repellendus.</span><span>Blanditiis harum neque perferendis perspiciatis quasi voluptas. Accusamus aliquid aspernatur at aut beatae debitis, dolor ducimus error exercitationem ipsa maiores, minima minus necessitatibus neque non quae quaerat repellat reprehenderit ullam?</span><span>Ab, debitis ea fuga magnam magni molestiae nostrum quas quisquam recusandae rem suscipit tempora, totam? Alias beatae blanditiis commodi dignissimos fugiat, ipsa ipsum neque non, recusandae reiciendis reprehenderit veniam voluptate!</span><span>Accusamus amet animi asperiores cupiditate dolorem doloremque, earum, enim excepturi harum impedit ipsa maiores necessitatibus officia, quis suscipit tempora voluptas! Beatae cum, eos excepturi facilis id perspiciatis similique temporibus totam!</span><span>A accusamus adipisci, assumenda atque commodi cumque delectus dolor eveniet exercitationem illo illum impedit inventore ipsa iusto laudantium minima, natus nihil nostrum odit quas quidem quis, rerum sequi suscipit voluptas?</span><span>Animi atque consequatur dolor expedita impedit ipsam maxime, vel. Consectetur, quis, tempora. Aliquam asperiores cum esse molestias mollitia officiis reprehenderit. Culpa deserunt harum modi molestias non, officiis repudiandae soluta vel?</span><span>Dolorum laborum quas quasi vero! A consequatur consequuntur corporis cupiditate debitis fuga ipsam iste, labore laboriosam nobis optio perferendis provident sequi voluptates voluptatum! Deserunt eaque ipsa nulla perferendis voluptas, voluptates?</span><span>A, alias animi aperiam blanditiis consectetur ducimus enim excepturi explicabo facilis necessitatibus nobis nostrum nulla officia porro possimus rerum sapiente sed totam ut voluptatibus. Accusantium cumque numquam odit quis repudiandae!</span><span>Animi eius, et facilis ipsum molestiae non obcaecati quia rerum velit veniam? Asperiores atque beatae deleniti dolorum itaque minus, nisi nobis obcaecati odit optio perferendis perspiciatis voluptates. Iste, officia, ullam?</span><span>Aliquam delectus deserunt earum eligendi eos harum itaque maiores molestias mollitia numquam omnis optio pariatur quaerat quisquam repudiandae unde, voluptas voluptates voluptatum! Doloribus esse, impedit nisi quod repellendus rerum similique!</span><span>Asperiores cumque doloremque dolorum ea enim ex facilis harum incidunt ipsum iste labore laborum maiores molestias necessitatibus nemo nisi officia, omnis pariatur quia similique sint suscipit totam veniam voluptatem voluptatum.</span><span>Doloribus ea id magni maxime nesciunt, placeat quas quisquam vel? Adipisci assumenda, delectus excepturi magnam minima molestiae molestias nihil nisi nobis numquam optio praesentium quasi rerum similique, tenetur. Labore, rerum!</span><span>Id ipsa, voluptatibus! Assumenda fugiat id inventore ipsa laboriosam saepe sed tenetur! Aliquam corporis, dignissimos, dolore excepturi, fugiat incidunt iusto libero maiores modi molestias pariatur perferendis quasi ratione repellat voluptatibus.</span><span>Aut deleniti repellendus sequi tempore ut. Ad aperiam cum ea earum eum molestiae sapiente soluta. Ad, at blanditiis eius fugit incidunt ipsam minima nihil nulla repudiandae voluptate. Laborum nobis, voluptas.</span></p>',
-        img: '/img/seo.jpg'
-    }
-]
 
+const HOME = await http({url: '/api/pages/home'})
+load = true
 ---
 
-<Layout title="Главная" data={PAGE}>
-    <TheBanner data={BANNERS} class="mb-50" client:load/>
-    <TheAdvantages data={ADVANTAGES} class="container mb-50" client:load/>
-    <CategoriesBlock data={CATEGORIES} class="container mb-100" client:load/>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Популярные блюда недели</h2>
-            </div>
-            <ThePopularGrid list={POPULAR} status={STATUS_POPULAR} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Актуальная информация</h2>
-            </div>
-            <TheStories data={STORIES} client:load/>
-        </div>
-    </section>
-    <section class="block-color mb-100">
-        <div class="container">
-            <TheAbout/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Новости и акции</h2>
-            </div>
-            <NewsBlock data={NEWS} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Отзывы наших клиентов</h2>
-            </div>
-            <TheReviews data={REVIEWS} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+<Layout title="Главная" data={HOME}>
+    {load && (
+            <TheBanner data={HOME.home.banners?.list} class="mb-50" client:load/>
+            <TheAdvantages data={HOME.home.advantages?.list} class="container mb-50" client:load/>
+            <CategoriesBlock data={HOME.home.categories} class="container mb-100" client:load/>
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header page-header_center">
+                        <h2>Популярные блюда недели</h2>
+                    </div>
+                    <ThePopularGrid list={POPULAR} status={STATUS_POPULAR} client:load/>
+                </div>
+            </section>
+            <TheStories data={HOME.home.stories} client:load/>
+            <TheAbout data={HOME.home.about}/>
+            <NewsBlock data={HOME.home.news} client:load/>
+            <TheReviews data={HOME.home.reviews} client:load/>
+            <TheSeo data={HOME.home.seo} client:load/>
+    )}
 </Layout>

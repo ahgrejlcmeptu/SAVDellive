@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
+import {HOST} from "@app/store/block.ts";
 
 defineProps(['data'])
 
@@ -17,13 +18,13 @@ defineProps(['data'])
     >
         <swiper-slide
                 v-for="item in data"
-                :key="item.id"
+                :key="item.documentId"
         >
             <picture v-if="true">
-                <source media="(min-width: 640px" :srcset="item.img">
-                <img :src="item.mobile" alt="">
+                <source media="(min-width: 640px" :srcset="HOST + item.img.url">
+                <img :src="HOST+ item.mobile.url" alt="">
             </picture>
-            <img v-else :src="item.img" alt="">
+            <img v-else :src="HOST + item.img.url" alt="">
         </swiper-slide>
     </app-slider>
 </template>

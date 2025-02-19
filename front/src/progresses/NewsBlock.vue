@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AppSection from "@spared/AppSection.vue";
 import {computed, markRaw, onMounted, ref} from "vue";
 import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
 import TheNewsSlider from "@widgets/news/TheNewsSlider.vue";
+
 defineProps(['data'])
 
 const slider = ref(false)
@@ -24,5 +26,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <component :is="block" :data="data" class="news"></component>
+    <app-section class="mb-100" header="center" :title="data.title">
+        <component :is="block" :data="data.list" class="news"></component>
+    </app-section>
 </template>

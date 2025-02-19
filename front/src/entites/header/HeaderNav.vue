@@ -18,13 +18,13 @@ const MORE_NAV = [
     {
         id: '03',
         name: 'Наше меню',
-        menu: true
+        categories: true
     },
 ]
 
 const full = ref(false)
 const filter = computed(() => {
-    return !full.value ? [...$blockNavigation.value.highlight, ...MORE_NAV, ...$blockNavigation.value.links] : [...$blockNavigation.value.highlight, ...$blockNavigation.value.menu]
+    return !full.value ? [...$blockNavigation.value.highlight, ...MORE_NAV, ...$blockNavigation.value.links] : [...$blockNavigation.value.highlight, ...$blockNavigation.value.categories]
 })
 const updateVisibleItemsCount = () => {
     if (typeof window !== 'undefined') { // Проверка, доступен ли window
@@ -49,7 +49,7 @@ onMounted(() => {
                 :class="['header-nav__item', {'header-nav__item_highlight': item.highlight}]"
                 :key="item.id"
         >
-            <a class="header-nav__link" :href="item.href" v-if="!item.menu">
+            <a class="header-nav__link" :href="item.href" v-if="!item.categories">
                 {{ item.name }}
             </a>
             <template v-else>
@@ -62,8 +62,8 @@ onMounted(() => {
                     </template>
                     <template v-slot:list>
                         <app-dropdown-item
-                                v-for="item in $blockNavigation.menu"
-                                :key="item.id"
+                                v-for="item in $blockNavigation.categories"
+                                :key="item.documentId"
                         ><a :href="'/catalog?categories='+item.name">{{ item.name }}</a>
                         </app-dropdown-item>
                     </template>

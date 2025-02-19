@@ -3,18 +3,14 @@ import AppCardNews from "@features/card/AppCardNews.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
 
-interface Props {
-    data: object
-}
-
-defineProps<Props>()
+defineProps(['data'])
 </script>
 
 <template>
     <app-slider name=".news_slider" class="news_slider">
         <swiper-slide
                 v-for="item in data"
-                :key="item.id"
+                :key="item.documentId"
         >
             <AppCardNews
                     :data="item"

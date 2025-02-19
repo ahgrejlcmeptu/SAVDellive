@@ -41,7 +41,7 @@ const $blockNavigation = useStore(blockNavigation)
         <div class="footer__column_three footer-top__item footer-top__item_menu">
             <h3>Наше меню</h3>
             <ul>
-                <li v-for="item in $blockNavigation.menu" :key="item.id">
+                <li v-for="item in $blockNavigation.categories" :key="item.id">
                     <a href="#">{{ item.name }}</a>
                 </li>
             </ul>

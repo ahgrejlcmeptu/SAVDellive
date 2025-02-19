@@ -1,24 +1,23 @@
 <script setup lang="ts">
+import AppSection from "@spared/AppSection.vue";
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
 import {computed, ref, watch} from "vue";
 import type {Swiper as SwiperType} from "swiper";
-import type {SeoTabs} from "@app/utils/interfaces.ts";
+import {HOST} from "@app/store/block.ts";
 
-
-const props = defineProps<{
-    data: SeoTabs[]
-}>()
+const props = defineProps(['data'])
+const list = ref(props.data?.list || [])
 
 const tabs = computed(() => {
-    return props.data.map(({id, title}) => ({id, name: title}))
+    return list.value.map(({id, title}) => ({id, name: title}))
 })
 
 const activeTabs = ref<string | number>(tabs.value[0].id)
 const slider = ref<SwiperType | null>(null)
 watch(activeTabs, (value): void => {
-    const index = props.data.findIndex(({id}) => id === value)
+    const index = list.value.findIndex(({id}) => id === value)
     slider.value.slideTo(index)
 })
 
@@ -26,29 +25,31 @@ const onSwiperInit = (swiper: SwiperType) => slider.value = swiper;
 </script>
 
 <template>
-    <div class="seo">
-        <AppTabsSlider v-if="tabs.length > 1" :slides="tabs" v-model="activeTabs"/>
-        <app-slider
-                @swiper="onSwiperInit"
-                class="seo__slider"
-                name=".seo"
-                :slider="{
+    <app-section class="mb-100">
+        <div class="seo">
+            <AppTabsSlider v-if="tabs.length > 1" :slides="tabs" v-model="activeTabs"/>
+            <app-slider
+                    @swiper="onSwiperInit"
+                    class="seo__slider"
+                    name=".seo"
+                    :slider="{
                     effect: 'fade',
                     'allow-touch-move': false,
                     'auto-height': true
                 }"
-        >
-            <swiper-slide class="clearfix" v-for="item in data" :key="item.id">
-                <div class="seo__img">
-                    <img :src="item.img" :alt="item.title">
-                </div>
-                <div class="seo__body">
-                    <h2>{{ item.title }}</h2>
-                    <div class="seo__description" v-html="item.description"></div>
-                </div>
-            </swiper-slide>
-        </app-slider>
-    </div>
+            >
+                <swiper-slide class="clearfix" v-for="item in list" :key="item.id">
+                    <div class="seo__img">
+                        <img :src="HOST + item.img.url" :alt="item.title">
+                    </div>
+                    <div class="seo__body">
+                        <h2>{{ item.title }}</h2>
+                        <div class="seo__description" v-html="item.description"></div>
+                    </div>
+                </swiper-slide>
+            </app-slider>
+        </div>
+    </app-section>
 </template>
 
 <style lang="scss">

@@ -3,20 +3,21 @@ import AppCardCategory from "@features/card/AppCardCategory.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
 import {SwiperSlide} from "swiper/vue";
 
-interface Props {
-    list: object;
-}
-
-defineProps<Props>()
+defineProps(['data'])
 </script>
 
 <template>
     <app-slider name=".categories_slider" class="categories_slider">
         <swiper-slide
-                v-for="item in list"
-                :key="item.id"
+                v-for="item in data.list"
+                :key="item.documentId"
         >
             <AppCardCategory :data="item"/>
+        </swiper-slide>
+        <swiper-slide v-if="data.lastCard">
+            <AppCardCategory
+                :data="{name: data.lastCardText, href: data.lastCardLink, all: true}"
+            />
         </swiper-slide>
     </app-slider>
 </template>
