@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineProps(['data'])
+defineProps(['description', 'title'])
 </script>
 
 <template>
     <div class="description-column">
-        <h3 v-if="data.title">{{ data.title }}</h3>
-        <div class="description-column__block" v-html="data.description"></div>
+        <h3 v-if="title">{{ title }}</h3>
+        <div class="description-column__block" v-html="description"></div>
     </div>
 </template>
 

@@ -6,9 +6,11 @@ defineProps(['data'])
 <template>
     <div class="socials_grid">
         <AppCardSocial
-            v-for="item in data"
-            :key="item.id"
-            :data="item"
+            v-for="(item, idx) in data.images"
+            :key="item.documentId"
+            :item
+            :data
+            :last="idx === data.images.length - 1"
         />
     </div>
 </template>

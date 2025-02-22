@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type {MapDelivery} from "@app/utils/interfaces";
+import {branchesActive, HOST} from "@app/store/block.ts";
+import {useStore} from "@nanostores/vue";
 
 defineProps<{
-    data: MapDelivery
+    label: string
 }>()
-
+const $branchesActive = useStore(branchesActive)
 </script>
 
 <template>
 <div class="map-delivery">
-    <div class="text-20">{{data.label}}</div>
-    <img :src="data.img" :alt="data.label">
+    <div class="text-20">{{label}}</div>
+    <img :src="HOST + $branchesActive.map?.url" :alt="label">
 </div>
 </template>
 

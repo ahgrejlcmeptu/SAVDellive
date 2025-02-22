@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import AppPlay from "@spared/AppPlay.vue";
+import {HOST} from "@app/store/block.ts";
+import {thumbnail} from "@app/utils/func.ts";
 
 defineProps(['data'])
 </script>
 
 <template>
     <div class="card-gallery">
-        <img :src="data.img" alt="">
-        <AppPlay v-if="data.video"/>
+        <img :src="HOST + thumbnail(data.poster.url)" alt="">
+        <AppPlay v-if="data.gallery?.mime"/>
     </div>
 </template>
 

@@ -7,54 +7,20 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../app/utils/http";
 
 let load = false
-const CONTACTS = [
-    {
-        id: 1,
-        label: 'Режим Работы',
-        value: ['с 10:00 до 24:00', 'пт- сб: 10:00 до 02:00'],
-        mode: true
-    },
-    {
-        id: 2,
-        label: 'Время ожидания',
-        value: ['пн–чт: от 30 минут', 'пт– вс: от 90 минут'],
-        mode: true
-    },
-    {
-        id: 3,
-        label: 'Реквизиты',
-        value: 'ИП «Тихонов Павел Сергеевич» <br> Адрес: 664048, г. Иркутск, <br> Ленинский округ, Баумана, 219/2, 22 <br> Тел.: +7 924 636 5121 <br> ИНН: 381607759706 <br> ОГРНИП: 315385000057281',
-        big: true
-    },
-    {
-        id: 4,
-        label: 'Доставка',
-        value: 'Доставка по городу осуществляется бесплатно при заказе от 500 рублей. Стоимость доставки по району уточняйте у оператора.',
-    },
-    {
-        id: 5,
-        label: 'Оплата',
-        value: 'Оплатить заказ можно наличными или по карте при получение заказа',
-    },
-]
-const DELIVERY = {
-    label: 'Карта доставки',
-    img: '/img/map.jpg'
-}
 const PAGE = await http({url: '/api/pages/delivery'})
 load = true
 ---
 
-<Layout title="Доставка и оплата">
+<Layout title={PAGE.delivery.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: 'Доставка и оплата'}]}/>
-                        <h1 class="text-36">Доставка и оплата</h1>
+                        <AppBreadcrumb list={[{label: PAGE.delivery.title}]}/>
+                        <h1 class="text-36">{PAGE.delivery.title}</h1>
                     </div>
-                    <TheContacts data={CONTACTS} class="mb-50"/>
-                    <MapDelivery data={DELIVERY}/>
+                    <TheContacts requisite={PAGE.delivery.requisite} delivery={PAGE.delivery.delivery} payment={PAGE.delivery.payment} class="mb-50" page="delivery" client:load/>
+                    <MapDelivery label="Карта доставки" client:load/>
                 </div>
             </section>
             <TheSeo data={PAGE.delivery.seo} client:load/>

@@ -1,37 +1,96 @@
 <script setup lang="ts">
-defineProps(['data'])
+import {branchesActive} from "@app/store/block";
+import {useStore} from "@nanostores/vue";
+import {computed, reactive} from "vue";
+
+const props = defineProps(['requisite', 'page', 'delivery', 'payment'])
+
+const $branchesActive = useStore(branchesActive)
+const pages = reactive({
+    contacts: [
+        {
+            label: 'Адрес',
+            value: $branchesActive.value.city + ', ' + $branchesActive.value.street
+        },
+        {
+            label: 'Телефон',
+            value: $branchesActive.value.phone,
+            link: 'tel'
+        },
+        {
+            label: 'Реквизиты',
+            value: props.requisite,
+            big: true
+        },
+        {
+            label: 'Режим Работы',
+            value: $branchesActive.value.mode,
+        },
+        {
+            label: 'E-Mail',
+            value: $branchesActive.value.email,
+            link: 'mailto'
+        },
+    ],
+    delivery: [
+        {
+            label: 'Режим Работы',
+            value: $branchesActive.value.mode,
+        },
+        {
+            label: 'Телефон',
+            value: $branchesActive.value.phone,
+            link: 'tel'
+        },
+        {
+            label: 'Реквизиты',
+            value: props.requisite,
+            big: true
+        },
+        {
+            label: 'Доставка',
+            value: props.delivery
+        },
+        {
+            label: 'Оплата',
+            value: props.payment
+        },
+    ],
+})
+
+const page = computed(() => pages[props.page])
+
 </script>
 
 <template>
     <div class="contacts">
         <div
                 :class="['contacts__group', {'contacts__group_big': item.big}]"
-                v-for="item in data"
-                :key="item.id"
+                v-for="item in page"
+                :key="item.label"
         >
             <div class="contacts__label">{{ item.label }}</div>
 
-            <template v-if="item.link">
-                <div class="contacts__value">
-                    <template v-for="link in item.value">
-                        <a :href="link.link + ':' + link">{{ link }}</a> <br>
-                    </template>
-                </div>
+            <template v-if="typeof item.value === 'object'">
+                <template v-for="el in item.value">
+                    <component class="contacts__value" :is="el.link ? 'a' : 'span'" :href="el.link + ':' + el.text">
+                        {{ el.text }}
+                    </component>
+                    <br>
+                </template>
             </template>
-
-            <template v-else-if="item.mode">
-                <div class="contacts__value">
-                    <template v-for="mode in item.value">
-                        {{ mode }} <br>
-                    </template>
-                </div>
-            </template>
-
             <template v-else>
-                <div class="contacts__value" v-html="item.value"></div>
+                <template v-if="item.link">
+                    <div class="contacts__value">
+                        <a :href="item.link + ':' + item.value">{{ item.value }}</a>
+                    </div>
+                </template>
+                <div v-else class="contacts__value" v-html="item.value"></div>
             </template>
+
         </div>
     </div>
+  <!--    <p>{{ page }}</p>-->
 </template>
 
 <style lang="scss">
@@ -77,6 +136,10 @@ defineProps(['data'])
     }
     @include media.respond-to(640) {
       font-size: media.sizeREM(16);
+    }
+
+    p {
+      color: var(--text-color-1);
     }
   }
 }

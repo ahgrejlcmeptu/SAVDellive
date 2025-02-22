@@ -4,18 +4,20 @@ import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheOrderAdditional from '@widgets/order/TheOrderAdditional.vue'
 import TheOrderList from '@widgets/order/TheOrderList.vue'
 import TheOrderForm from '@widgets/order/TheOrderForm.vue'
+import {http} from "../app/utils/http";
 
 let load = false
+const PAGE = await http({url: '/api/pages/order'})
 load = true
 ---
 
-<Layout title="Оформление заявки на покупку">
+<Layout title={PAGE.order.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: 'Оформление заявки на покупку'}]}/>
-                        <h1 class="text-36">Оформление заявки на покупку</h1>
+                        <AppBreadcrumb list={[{label: PAGE.order.title}]}/>
+                        <h1 class="text-36">{PAGE.order.title}</h1>
                     </div>
                     <div class="order">
                         <div class="order__left">

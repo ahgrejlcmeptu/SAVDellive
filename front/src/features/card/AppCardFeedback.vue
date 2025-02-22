@@ -9,11 +9,11 @@ defineProps(['data', 'active'])
          :id="'review-' + data.id">
         <div class="card-feedback__item card-feedback_review">
             <AppReviewHeader :data="data.review"/>
-            <p class="text-15">{{ data.review.description }}</p>
+            <div class="text-15" v-html="data.review.description"></div>
         </div>
         <div class="card-feedback__item card-feedback_ask" v-if="data.ask">
             <AppReviewHeader reverse :data="data.ask"/>
-            <p class="text-15">{{ data.ask.description }}</p>
+            <div class="text-15" v-html="data.ask.description"></div>
         </div>
     </div>
 </template>

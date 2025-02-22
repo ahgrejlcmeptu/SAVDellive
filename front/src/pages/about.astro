@@ -9,223 +9,27 @@ import TheTeam from "@widgets/team/TheTeam.vue";
 import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue";
 import {http} from "../app/utils/http";
 
+
 let load = false
-const description = {
-    description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях</p>',
-}
-const GALLERY = [
-    {
-        id: 1,
-        img: '/img/about.jpg',
-        poster: '/img/about.jpg',
-        video: '#'
-    },
-    {
-        id: 2,
-        img: '/img/about.jpg',
-        poster: '/img/about.jpg',
-    },
-    {
-        id: 3,
-        img: '/img/about.jpg',
-        poster: '/img/about.jpg',
-    }
-]
-const TEAM = [
-    {
-        id: 1,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 2,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 3,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 3,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 4,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 5,
-        img: '/img/team.jpg'
-    },
-    {
-        id: 6,
-        img: '/img/team.jpg'
-    }
-]
-const REVIEWS = [
-    {
-        id: '1',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '2',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '3',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '4',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-
-    {
-        id: '5',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '6',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg',
-        video: '/video/video.mp4'
-    },
-    {
-        id: '7',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '8',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-
-    {
-        id: '7',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/1.jpg',
-    },
-    {
-        id: '8',
-        name: 'Дмитрий Малых',
-        date: '15.05.20',
-        description: 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском\n' +
-            'языке,…',
-        img: '/img/reviews/2.jpg'
-    },
-]
-const SOCIALS = [
-    {
-        id: 1,
-        img: '/img/socials/1.jpg',
-    },
-    {
-        id: 2,
-        img: '/img/socials/2.jpg',
-    },
-    {
-        id: 3,
-        img: '/img/socials/3.jpg',
-    },
-    {
-        id: 4,
-        img: '/img/socials/4.jpg',
-    },
-    {
-        id: 5,
-        img: '/img/socials/5.jpg',
-    },
-    {
-        id: 6,
-        img: '/img/socials/6.jpg',
-        link: '#',
-        linkImg: '/img/socials/link-img.svg'
-    },
-]
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
-        img: '/img/seo.jpg'
-    }
-]
 const PAGE = await http({url: '/api/pages/about'})
 load = true
 ---
 
-<Layout title="О нас">
+<Layout title={PAGE.about.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: 'О нас'}]}/>
-                        <h1 class="text-36">Кто мы такие</h1>
+                        <AppBreadcrumb list={[{label: PAGE.about.title}]}/>
+                        <h1 class="text-36">{PAGE.about.title}</h1>
                     </div>
-                    <AppDescriptionColumn class="mb-30" data={description}/>
-                    <TheGallery data={GALLERY} client:load/>
+                    <AppDescriptionColumn class="mb-30" description={PAGE.about.description}/>
+                    <TheGallery data={PAGE.about.gallery} client:load/>
                 </div>
             </section>
-            <section class="mb-100">
-                <div class="container">
-                    <div class="page-header">
-                        <h2>Наша команда</h2>
-                    </div>
-                    <AppDescriptionColumn class="mb-30" data={description}/>
-                    <TheTeam data={TEAM} client:load/>
-                </div>
-            </section>
-            <section class="mb-100">
-                <div class="container">
-                    <div class="page-header page-header_center">
-                        <h2>Отзывы наших клиентов</h2>
-                    </div>
-                    <TheReviews data={REVIEWS} client:load/>
-                </div>
-            </section>
-            <section class="mb-100">
-                <div class="container">
-                    <div class="page-header page-header_center">
-                        <h2>Мы в Instagram</h2>
-                    </div>
-                    <SocialsBlock data={SOCIALS} client:load/>
-                </div>
-            </section>
+            <TheTeam data={PAGE.about.team} client:load/>
+            <TheReviews data={PAGE.about.reviews} client:load/>
+            <SocialsBlock data={PAGE.about.social} client:load/>
             <TheSeo data={PAGE.about.seo} client:load/>
     )}
 </Layout>

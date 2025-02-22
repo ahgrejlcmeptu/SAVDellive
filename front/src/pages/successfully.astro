@@ -111,7 +111,7 @@ load = true
                         <h1 class="text-36">Ваш заказ №32309 принят</h1>
                     </div>
                     <TheSuccessfully class="mb-30" client:only/>
-                    <AppDescriptionColumn data={description} client:only/>
+                    <AppDescriptionColumn description={description.description} title={description.title} client:only/>
                 </div>
             </section>
             <section class="mb-100">

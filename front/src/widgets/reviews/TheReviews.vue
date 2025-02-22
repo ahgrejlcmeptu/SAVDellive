@@ -10,7 +10,7 @@ defineProps(['data'])
 </script>
 
 <template>
-    <app-section class="mb-100" :title="data.title" header="center">
+    <app-section class="mb-100" :title="data.title" header="center" v-if="data">
         <div class="reviews text-16">
             <swiper-button tablet prev/>
             <swiper-button tablet next/>

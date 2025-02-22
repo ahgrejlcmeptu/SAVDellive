@@ -97,11 +97,6 @@ export interface SeoTabs {
     img: string;
 }
 
-export interface MapDelivery {
-    label?: string
-    img: string
-}
-
 export type Social = {
     id: number;
     img: string;

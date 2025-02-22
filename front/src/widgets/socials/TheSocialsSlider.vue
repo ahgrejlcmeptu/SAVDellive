@@ -7,7 +7,7 @@ import {sortByLink} from "@app/utils/sorting";
 
 const props = defineProps(['data'])
 
-const filter = computed(() => sortByLink(props.data))
+const filter = computed(() => sortByLink(props.data.images))
 </script>
 
 <template>

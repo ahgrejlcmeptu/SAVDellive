@@ -10,15 +10,15 @@ const PAGE = await http({url: '/api/pages/news'})
 load = true
 ---
 
-<Layout title="Новости и акции">
+<Layout title={PAGE.news.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: 'Новости и акции'}]}/>
-                        <h1 class="text-36">{PAGE.news.news.title}</h1>
+                        <AppBreadcrumb list={[{label: PAGE.news.title}]}/>
+                        <h1 class="text-36">{PAGE.news.title}</h1>
                     </div>
-                    <TheNewsGrid data={PAGE.news.news.list} client:load/>
+                    <TheNewsGrid data={PAGE.news.list} client:load/>
                 </div>
             </section>
             <TheSeo data={PAGE.news.seo} client:load/>

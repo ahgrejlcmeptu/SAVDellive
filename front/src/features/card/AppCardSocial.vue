@@ -1,26 +1,32 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
+import {HOST} from "@app/store/block.ts";
+import {ref} from "vue";
+import {thumbnail} from "@app/utils/func.ts";
 
-defineProps(['data'])
+const props = defineProps(['data', 'item', 'last'])
+const link = ref(props.data.link && props.last)
+// thumbnail
 </script>
 
 <template>
-    <div :class="['card-social', {'card-social_dark': data.link}]">
-        <img class="card-social__img" :src="data.img" alt="">
+    <component :is="link ? 'a' : 'div'" :href="data.link" target="_blank" :class="['card-social', {'card-social_dark': link}]">
+        <img class="card-social__img" :src="HOST + thumbnail(item.url)" alt="">
 
-        <template v-if="data.link">
-            <img :src="data.linkImg" alt="" class="card-social__text">
-            <div class="card-social__link">
+        <template v-if="link && data.linkImg">
+            <img :src="HOST + data.linkImg.url" alt="" class="card-social__text">
+            <span class="card-social__link">
                 <AppSvg name="link-arr"/>
-            </div>
+            </span>
         </template>
-    </div>
+    </component>
 </template>
 
 <style lang="scss">
 @use "@style/media";
 
 .card-social {
+  display: block;
   cursor: pointer;
   border-radius: var(--radius-30);
   overflow: hidden;

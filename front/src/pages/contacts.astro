@@ -7,50 +7,19 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../app/utils/http";
 
 let load = false
-const CONTACTS = [
-    {
-        id: 1,
-        label: 'Адрес',
-        value: 'г. Иркутск, ул. Академика Курчатова, 3, 407 офис',
-    },
-    {
-        id: 2,
-        label: 'Телефон',
-        value: ['+7 924 636 5121'],
-        link: 'tel'
-    },
-    {
-        id: 3,
-        label: 'Реквизиты',
-        value: 'ИП «Тихонов Павел Сергеевич» <br> Адрес: 664048, г. Иркутск, <br> Ленинский округ, Баумана, 219/2, 22 <br> Тел.: +7 924 636 5121 <br> ИНН: 381607759706 <br> ОГРНИП: 315385000057281',
-        big: true
-    },
-    {
-        id: 4,
-        label: 'Режим Работы',
-        value: ['пн-пт: с 09:00 до 18:00', 'пн-пт: с 09:00 до 18:00'],
-        mode: true
-    },
-    {
-        id: 5,
-        label: 'E-Mail',
-        value: ['info@mirsaitov.net'],
-        link: 'mailto'
-    },
-]
 const PAGE = await http({url: '/api/pages/contact'})
 load = true
 ---
 
-<Layout title="Контакты">
+<Layout title={PAGE.contact.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: 'Контакты'}]}/>
-                        <h1 class="text-36">Контакты</h1>
+                        <AppBreadcrumb list={[{label: PAGE.contact.title}]}/>
+                        <h1 class="text-36">{PAGE.contact.title}</h1>
                     </div>
-                    <TheContacts data={CONTACTS} class="mb-100"/>
+                    <TheContacts requisite={PAGE.contact.requisite} class="mb-100" page="contacts" client:load/>
                     <AppMap class="map_contacts" client:only/>
                 </div>
             </section>

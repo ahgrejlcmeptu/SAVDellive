@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import {SwiperSlide} from "swiper/vue";
+import AppSection from "@spared/AppSection.vue";
+import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue";
 import AppSlider from "@entites/slider/AppSlider.vue";
+import {SwiperSlide} from "swiper/vue";
 import {onMounted, ref, computed} from "vue";
+import {HOST} from "@app/store/block.ts";
+import {thumbnail} from "@app/utils/func.ts";
 
 const props = defineProps(['data'])
 const slider = ref(false)
 const items = computed(() => {
     return {
-        big: props.data[0],
-        list: props.data.slice(1, 4),
-        slide: props.data.slice(1)
+        big: props.data.images[0],
+        list: props.data.images.slice(1, 4),
+        slide: props.data.images.slice(1)
     }
 })
-const amount = computed(() => props.data.slice(4))
+const amount = computed(() => props.data.images.slice(4))
 
 const updateVisibleItemsCount = () => {
     if (typeof window !== 'undefined') {
@@ -26,28 +30,31 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="team">
-        <div class="team__big">
-            <img :src="items.big.img" alt="">
-        </div>
-        <div class="team__column" v-if="!slider">
-            <div class="team__item" v-for="(item, idx) in items.list" :key="item.id">
-                <img :src="item.img" alt="">
-                <template v-if="idx === 2 && amount.length > 0">
-                    <div class="team__amount text-55">+{{ amount.length }}</div>
-                    <!-- сюда можно добавить спан для вывода галереи -->
-                </template>
+    <app-section v-if="data" class="mb-100" :title="data.title">
+        <AppDescriptionColumn class="mb-30" :description="data.description"/>
+        <div class="team">
+            <div class="team__big">
+                <img :src="HOST + items.big.url" alt="">
             </div>
+            <div class="team__column" v-if="!slider">
+                <div class="team__item" v-for="(item, idx) in items.list" :key="item.documentId">
+                    <img :src="HOST + thumbnail(item.url)" alt="">
+                    <template v-if="idx === 2 && amount.length > 0">
+                        <div class="team__amount text-55">+{{ amount.length }}</div>
+                        <!-- сюда можно добавить спан для вывода галереи -->
+                    </template>
+                </div>
+            </div>
+            <app-slider v-else name=".team__slider" class="team__slider">
+                <swiper-slide
+                        v-for="item in items.slide"
+                        :key="item.documentId"
+                >
+                    <img :src="HOST + thumbnail(item.url)" alt="">
+                </swiper-slide>
+            </app-slider>
         </div>
-        <app-slider v-else name=".team__slider" class="team__slider">
-            <swiper-slide
-                    v-for="item in items.slide"
-                    :key="item.id"
-            >
-                <img :src="item.img" alt="">
-            </swiper-slide>
-        </app-slider>
-    </div>
+    </app-section>
 </template>
 
 <style lang="scss">
