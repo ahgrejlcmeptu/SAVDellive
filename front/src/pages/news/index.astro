@@ -3,75 +3,24 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheNewsGrid from "@widgets/news/TheNewsGrid.vue";
 import TheSeo from "@widgets/seo/TheSeo.vue";
+import {http} from "../../app/utils/http";
 
-
-const NEWS = [
-    {
-        id: '1',
-        href: 'news-1',
-        name: 'Скидка на первый заказ',
-        description: 'Делай первый заказ и экономь',
-        img: '/img/news/1.jpg',
-    },
-    {
-        id: '2',
-        href: 'news-2',
-        name: 'Новое меню',
-        description: 'Запустили новое меню и приглашаем\n' +
-            'вас отведать его первыми',
-        img: '/img/news/2.jpg',
-    },
-    {
-        id: '3',
-        href: 'news-3',
-        name: 'Две пиццы по цене одной',
-        description: 'Специальное предложение для любителей пиццы',
-        img: '/img/news/3.jpg',
-    },
-    {
-        id: '4',
-        name: 'Винный ужин',
-        description: 'Джазовая мелодия в сочетании с курсами\n' +
-            'из вина и блюд от шефа',
-        img: '/img/news/4.jpg',
-    },
-    {
-        id: '5',
-        name: 'Скидка 10% на самовывоз',
-        description: 'На все заказы действует скидка 10%\n' +
-            'при самовывозе из ресторана',
-        img: '/img/news/5.jpg',
-    },
-    {
-        id: '6',
-        name: 'Фотоотчет с корпоратива',
-        description: 'Показываем как мы отмечали корпоратив нашей большой командой',
-        img: '/img/news/6.jpg',
-    },
-]
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
-        img: '/img/seo.jpg'
-    }
-]
+let load = false
+const PAGE = await http({url: '/api/pages/news'})
+load = true
 ---
 
 <Layout title="Новости и акции">
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Новости и акции'}]}/>
-                <h1 class="text-36">Новости и акции</h1>
-            </div>
-            <TheNewsGrid data={NEWS} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Новости и акции'}]}/>
+                        <h1 class="text-36">{PAGE.news.news.title}</h1>
+                    </div>
+                    <TheNewsGrid data={PAGE.news.news.list} client:load/>
+                </div>
+            </section>
+            <TheSeo data={PAGE.news.seo} client:load/>
+    )}
 </Layout>

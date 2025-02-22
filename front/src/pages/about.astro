@@ -7,7 +7,9 @@ import TheReviews from "@widgets/reviews/TheReviews.vue";
 import TheGallery from "@widgets/gallery/TheGallery.vue";
 import TheTeam from "@widgets/team/TheTeam.vue";
 import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue";
+import {http} from "../app/utils/http";
 
+let load = false
 const description = {
     description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях</p>',
 }
@@ -183,47 +185,47 @@ const SEO = [
         img: '/img/seo.jpg'
     }
 ]
+const PAGE = await http({url: '/api/pages/about'})
+load = true
 ---
 
 <Layout title="О нас">
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'О нас'}]}/>
-                <h1 class="text-36">Кто мы такие</h1>
-            </div>
-            <AppDescriptionColumn class="mb-30" data={description}/>
-            <TheGallery data={GALLERY} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <h2>Наша команда</h2>
-            </div>
-            <AppDescriptionColumn class="mb-30" data={description}/>
-            <TheTeam data={TEAM} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Отзывы наших клиентов</h2>
-            </div>
-            <TheReviews data={REVIEWS} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header page-header_center">
-                <h2>Мы в Instagram</h2>
-            </div>
-            <SocialsBlock data={SOCIALS} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'О нас'}]}/>
+                        <h1 class="text-36">Кто мы такие</h1>
+                    </div>
+                    <AppDescriptionColumn class="mb-30" data={description}/>
+                    <TheGallery data={GALLERY} client:load/>
+                </div>
+            </section>
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <h2>Наша команда</h2>
+                    </div>
+                    <AppDescriptionColumn class="mb-30" data={description}/>
+                    <TheTeam data={TEAM} client:load/>
+                </div>
+            </section>
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header page-header_center">
+                        <h2>Отзывы наших клиентов</h2>
+                    </div>
+                    <TheReviews data={REVIEWS} client:load/>
+                </div>
+            </section>
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header page-header_center">
+                        <h2>Мы в Instagram</h2>
+                    </div>
+                    <SocialsBlock data={SOCIALS} client:load/>
+                </div>
+            </section>
+            <TheSeo data={PAGE.about.seo} client:load/>
+    )}
 </Layout>

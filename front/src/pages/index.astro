@@ -12,7 +12,6 @@ import TheReviews from '@widgets/reviews/TheReviews.vue'
 import TheSeo from '@widgets/seo/TheSeo.vue'
 import {http} from "../app/utils/http";
 
-let load = false
 const POPULAR = [
     {
         id: '1',
@@ -160,27 +159,21 @@ const STATUS_POPULAR = [
     }
 ]
 
-const HOME = await http({url: '/api/pages/home'})
+let load = false
+const PAGE = await http({url: '/api/pages/home'})
 load = true
 ---
 
-<Layout title="Главная" data={HOME}>
+<Layout title="Главная" data={PAGE}>
     {load && (
-            <TheBanner data={HOME.home.banners?.list} class="mb-50" client:load/>
-            <TheAdvantages data={HOME.home.advantages?.list} class="container mb-50" client:load/>
-            <CategoriesBlock data={HOME.home.categories} class="container mb-100" client:load/>
-            <section class="mb-100">
-                <div class="container">
-                    <div class="page-header page-header_center">
-                        <h2>Популярные блюда недели</h2>
-                    </div>
-                    <ThePopularGrid list={POPULAR} status={STATUS_POPULAR} client:load/>
-                </div>
-            </section>
-            <TheStories data={HOME.home.stories} client:load/>
-            <TheAbout data={HOME.home.about}/>
-            <NewsBlock data={HOME.home.news} client:load/>
-            <TheReviews data={HOME.home.reviews} client:load/>
-            <TheSeo data={HOME.home.seo} client:load/>
+            <TheBanner data={PAGE.home.banners?.list} class="mb-50" client:load/>
+            <TheAdvantages data={PAGE.home.advantages?.list} class="container mb-50" client:load/>
+            <CategoriesBlock data={PAGE.home.categories} class="container mb-100" client:load/>
+            <ThePopularGrid list={POPULAR} status={STATUS_POPULAR} client:load/>
+            <TheStories data={PAGE.home.stories} client:load/>
+            <TheAbout data={PAGE.home.about}/>
+            <NewsBlock data={PAGE.home.news} client:load/>
+            <TheReviews data={PAGE.home.reviews} client:load/>
+            <TheSeo data={PAGE.home.seo} client:load/>
     )}
 </Layout>

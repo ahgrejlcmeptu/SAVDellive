@@ -4,24 +4,29 @@ import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheOrderAdditional from '@widgets/order/TheOrderAdditional.vue'
 import TheOrderList from '@widgets/order/TheOrderList.vue'
 import TheOrderForm from '@widgets/order/TheOrderForm.vue'
+
+let load = false
+load = true
 ---
 
 <Layout title="Оформление заявки на покупку">
-<section class="mb-100">
-    <div class="container">
-        <div class="page-header">
-            <AppBreadcrumb list={[{label: 'Оформление заявки на покупку'}]}/>
-            <h1 class="text-36">Оформление заявки на покупку</h1>
-        </div>
-        <div class="order">
-            <div class="order__left">
-                <TheOrderList client:only/>
-                <TheOrderAdditional client:only/>
-            </div>
-            <div class="order__right">
-                <TheOrderForm client:only/>
-            </div>
-        </div>
-    </div>
-</section>
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Оформление заявки на покупку'}]}/>
+                        <h1 class="text-36">Оформление заявки на покупку</h1>
+                    </div>
+                    <div class="order">
+                        <div class="order__left">
+                            <TheOrderList client:only/>
+                            <TheOrderAdditional client:only/>
+                        </div>
+                        <div class="order__right">
+                            <TheOrderForm client:only/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    )}
 </Layout>

@@ -1,3 +1,4 @@
+
 ---
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
@@ -5,32 +6,13 @@ import TheSuccessfully from "@widgets/successfully/TheSuccessfully.vue";
 import TheSuccessfullyOrder from "@widgets/successfully/TheSuccessfullyOrder.vue";
 import NewsBlock from '@progresses/NewsBlock.vue'
 import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue"
+import {http} from "../app/utils/http";
 
+let load = false
 const description = {
     title: 'Мы уже спешим приготовить ваш заказ!',
     description: '<p>Подробности заказа мы продублировали на вашу почту. Если письмо не пришло, проверьте, пожалуйста, спам.\n\ Рекомендуем пометить письмо как не спам, для своевременного получения уведомления о новостях и скидках.</p><p>Если у вас возникли какие‑то вопросы или вы не правильно указали свои данные, то позвоните администратору по номеру +7 395 223 40 40</p>',
 }
-const NEWS = [
-    {
-        id: '1',
-        name: 'Скидка на первый заказ',
-        description: 'Делай первый заказ и экономь',
-        img: '/img/news/1.jpg',
-    },
-    {
-        id: '2',
-        name: 'Новое меню',
-        description: 'Запустили новое меню и приглашаем\n' +
-            'вас отведать его первыми',
-        img: '/img/news/2.jpg',
-    },
-    {
-        id: '3',
-        name: 'Две пиццы по цене одной',
-        description: 'Специальное предложение для любителей пиццы',
-        img: '/img/news/3.jpg',
-    }
-]
 const PERCENT = 1
 const ORDER = [
     {
@@ -115,34 +97,31 @@ const ORDER = [
         amount: 1
     }
 ]
-const length = ORDER.reduce((amount, item) => amount + +item.amount , 0)
+const length = ORDER.reduce((amount, item) => amount + +item.amount, 0)
+const PAGE = await http({url: '/api/pages/successfully'})
+load = true
 ---
 
 <Layout title="Ваш заказ принят">
-    <section class="mb-50">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Информация о заказе'}]}/>
-                <h1 class="text-36">Ваш заказ №32309 принят</h1>
-            </div>
-            <TheSuccessfully class="mb-30" client:only/>
-            <AppDescriptionColumn data={description} client:only/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <h4>Состав заказа / {length} шт.</h4>
-            </div>
-            <TheSuccessfullyOrder percent={PERCENT} data={ORDER} client:only />
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <h2>Новости и акции</h2>
-            </div>
-            <NewsBlock data={NEWS} client:only/>
-        </div>
-    </section>
+    {load && (
+            <section class="mb-50">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Информация о заказе'}]}/>
+                        <h1 class="text-36">Ваш заказ №32309 принят</h1>
+                    </div>
+                    <TheSuccessfully class="mb-30" client:only/>
+                    <AppDescriptionColumn data={description} client:only/>
+                </div>
+            </section>
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <h4>Состав заказа / {length} шт.</h4>
+                    </div>
+                    <TheSuccessfullyOrder percent={PERCENT} data={ORDER} client:only/>
+                </div>
+            </section>
+            <NewsBlock data={PAGE.successfully.news} client:load/>
+    )}
 </Layout>

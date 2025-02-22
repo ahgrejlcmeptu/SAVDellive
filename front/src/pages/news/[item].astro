@@ -3,6 +3,7 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheSeo from "@widgets/seo/TheSeo.vue";
 import TheArticle from "@widgets/article/TheArticle.vue";
+import {http} from "../../app/utils/http";
 
 export function getStaticPaths() {
     return [
@@ -33,31 +34,24 @@ const ITEMS = {
     },
 }
 
-const { item } = Astro.params;
+const {item} = Astro.params;
 
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
-        img: '/img/seo.jpg'
-    }
-]
+let load = false
+const PAGE = await http({url: '/api/pages/home'})
+load = true
 ---
 
 <Layout title={ITEMS[item].title}>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Новости и акции', href: '/news'}, {label: ITEMS[item].title}]}/>
-                <h1 class="text-36">{ITEMS[item].title}</h1>
-            </div>
-            <TheArticle data={ITEMS[item]} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Новости и акции', href: '/news'}, {label: ITEMS[item].title}]}/>
+                        <h1 class="text-36">{ITEMS[item].title}</h1>
+                    </div>
+                    <TheArticle data={ITEMS[item]} client:load/>
+                </div>
+            </section>
+            <TheSeo data={PAGE.home.seo} client:load/>
+    )}
 </Layout>

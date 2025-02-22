@@ -4,7 +4,9 @@ import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheReviewsForm from "@widgets/reviews/TheReviewsForm.vue";
 import TheReviewsList from "@widgets/reviews/TheReviewsList.vue";
 import TheSeo from "@widgets/seo/TheSeo.vue";
+import {http} from "../app/utils/http";
 
+let load = false
 const REVIEWS = [
     {
         id: '1',
@@ -54,32 +56,24 @@ const REVIEWS = [
         }
     },
 ]
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
-        img: '/img/seo.jpg'
-    }
-]
+const PAGE = await http({url: '/api/pages/review'})
+load = true
 ---
 
 <Layout title="Отзывы">
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Отзывы'}]}/>
-                <h1 class="text-36">Отзывы наших постоянных клиентов</h1>
-            </div>
-            <div class="content-flex">
-                <TheReviewsForm client:load/>
-                <TheReviewsList data={REVIEWS} client:load/>
-            </div>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Отзывы'}]}/>
+                        <h1 class="text-36">Отзывы наших постоянных клиентов</h1>
+                    </div>
+                    <div class="content-flex">
+                        <TheReviewsForm client:load/>
+                        <TheReviewsList data={REVIEWS} client:load/>
+                    </div>
+                </div>
+            </section>
+            <TheSeo data={PAGE.review.seo} client:load/>
+    )}
 </Layout>

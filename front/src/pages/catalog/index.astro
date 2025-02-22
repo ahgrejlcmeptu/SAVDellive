@@ -3,11 +3,9 @@ import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheSeo from "@widgets/seo/TheSeo.vue";
 import TheCatalog from "@widgets/catalog/TheCatalog.vue";
+import {http} from "../../app/utils/http";
 
-
-const PAGE = {
-
-}
+let load = false
 const DECLARATION = {
     type: 'declaration',
     title: 'Обновлённое летнее меню',
@@ -16,59 +14,59 @@ const DECLARATION = {
     btnHref: '#',
     btnText: 'Подробнее'
 }
-const CATALOG = [
+const LIST = [
     {
-      id: 1,
-      name: 'Бургеры',
-      products: [
-          {
-              id: '1',
-              name: 'Корейский ',
-              status: [1],
-              description: 'Мини-кукуруза, лук, морковь, капуста…',
-              price: 159,
-              oldPrice: 259,
-              weight: 140,
-              img: '/img/products/1.jpg'
-          },
-          {
-              id: '2',
-              name: 'Корейский ',
-              status: [1, 2],
-              description: 'Котлета говяжья, салат, помидор, сыр, соус…',
-              price: '259',
-              weight: 140,
-              img: '/img/products/2.jpg'
-          },
-          {
-              id: '3',
-              name: 'Корейский ',
-              status: [1, 2],
-              description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-              price: 159,
-              oldPrice: 259,
-              weight: 140,
-              img: '/img/products/3.jpg'
-          },
-          {
-              id: '4',
-              name: 'Рыбные палочки',
-              status: [1],
-              description: 'Рыбные палочки, панировка, морковь, лук…',
-              price: 159,
-              weight: 140,
-              img: '/img/products/4.jpg'
-          },
-          {
-              id: '5',
-              name: 'Рыбные палочки',
-              status: [1],
-              description: 'Рыбные палочки, панировка, морковь, лук…',
-              price: 159,
-              weight: 140,
-              img: '/img/products/4.jpg'
-          },
-      ]
+        id: 1,
+        name: 'Бургеры',
+        products: [
+            {
+                id: '1',
+                name: 'Корейский ',
+                status: [1],
+                description: 'Мини-кукуруза, лук, морковь, капуста…',
+                price: 159,
+                oldPrice: 259,
+                weight: 140,
+                img: '/img/products/1.jpg'
+            },
+            {
+                id: '2',
+                name: 'Корейский ',
+                status: [1, 2],
+                description: 'Котлета говяжья, салат, помидор, сыр, соус…',
+                price: '259',
+                weight: 140,
+                img: '/img/products/2.jpg'
+            },
+            {
+                id: '3',
+                name: 'Корейский ',
+                status: [1, 2],
+                description: 'Суп с сёмгой, луком, морковью, картофелем и…',
+                price: 159,
+                oldPrice: 259,
+                weight: 140,
+                img: '/img/products/3.jpg'
+            },
+            {
+                id: '4',
+                name: 'Рыбные палочки',
+                status: [1],
+                description: 'Рыбные палочки, панировка, морковь, лук…',
+                price: 159,
+                weight: 140,
+                img: '/img/products/4.jpg'
+            },
+            {
+                id: '5',
+                name: 'Рыбные палочки',
+                status: [1],
+                description: 'Рыбные палочки, панировка, морковь, лук…',
+                price: 159,
+                weight: 140,
+                img: '/img/products/4.jpg'
+            },
+        ]
     },
     {
         id: 2,
@@ -335,29 +333,22 @@ const CATALOG = [
         ]
     },
 ]
-const SEO = [
-    {
-        id: '1',
-        title: 'Условия доставки',
-        description: '<p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым.</p><p>Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних.</p>',
-        img: '/img/seo.jpg'
-    }
-]
+
+const PAGE = await http({url: '/api/pages/catalog'})
+load = true
 ---
 
-<Layout title="Каталог товаров" data={PAGE}>
-    <section class="mb-100">
-        <div class="container">
-            <div class="page-header">
-                <AppBreadcrumb list={[{label: 'Каталог товаров'}]}/>
-                <h1 class="text-36">Каталог товаров</h1>
-            </div>
-            <TheCatalog catalog={CATALOG} declaration={DECLARATION} client:load/>
-        </div>
-    </section>
-    <section class="mb-100">
-        <div class="container">
-            <TheSeo data={SEO} client:load/>
-        </div>
-    </section>
+<Layout title="Каталог товаров">
+    {load && (
+            <section class="mb-100">
+                <div class="container">
+                    <div class="page-header">
+                        <AppBreadcrumb list={[{label: 'Каталог товаров'}]}/>
+                        <h1 class="text-36">Каталог товаров</h1>
+                    </div>
+                    <TheCatalog catalog={LIST} declaration={DECLARATION} client:load/>
+                </div>
+            </section>
+            <TheSeo data={PAGE.catalog.seo} client:load/>
+    )}
 </Layout>
