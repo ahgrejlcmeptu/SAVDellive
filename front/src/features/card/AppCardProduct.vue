@@ -6,15 +6,13 @@ import AppStatusList from "@spared/status/AppStatusList.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
 import AppAmount from "@spared/AppAmount.vue";
-import type {Card} from "@app/utils/interfaces";
-import type {PropType} from "vue";
 import {popupCard, popupOpen} from "@app/store/popup.ts";
 import {bayToCard} from "@app/utils/bayToCard.ts";
-
+import {HOST} from "@app/store/block.ts";
 
 defineProps({
     data: {
-        type: Object as PropType<Card>,
+        type: Object,
         required: true
     },
     successfully: {
@@ -33,13 +31,13 @@ defineProps({
                     <app-status v-if="data.oldPrice">Акция</app-status>
                 </app-status-list>
                 <div class="card-product__img" @click="popupCard.set(data), popupOpen('card')">
-                    <img :src="data.img" :alt="data.name">
+                    <img :src="HOST + data.img.url" :alt="data.name">
                 </div>
             </div>
             <div class="card-product__body">
                 <div class="card-product__header">
                     <h6>{{ data.name }}</h6>
-                    <p class="text-16">{{ data.description }}</p>
+                    <p class="text-16">{{ data.compound }}</p>
                 </div>
                 <div class="card-product__main">
                     <div class="card-product__price text-20">{{ data.price }}

@@ -98,7 +98,7 @@ const ORDER = [
     }
 ]
 const length = ORDER.reduce((amount, item) => amount + +item.amount, 0)
-const PAGE = await http({url: '/api/pages/successfully'})
+const successfully = await http({url: '/api/pages/successfully'})
 load = true
 ---
 
@@ -122,6 +122,6 @@ load = true
                     <TheSuccessfullyOrder percent={PERCENT} data={ORDER} client:only/>
                 </div>
             </section>
-            <NewsBlock data={PAGE.successfully.news} client:load/>
+            <NewsBlock data={successfully.news} client:load/>
     )}
 </Layout>

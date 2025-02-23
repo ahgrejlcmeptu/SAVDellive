@@ -7,24 +7,24 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../app/utils/http";
 
 let load = false
-const PAGE = await http({url: '/api/pages/review'})
+const review = await http({url: '/api/pages/review'})
 load = true
 ---
 
-<Layout title={PAGE.review.title}>
+<Layout title={review.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: PAGE.review.title}]}/>
-                        <h1 class="text-36">{PAGE.review.title}}</h1>
+                        <AppBreadcrumb list={[{label: review.title}]}/>
+                        <h1 class="text-36">{review.title}}</h1>
                     </div>
                     <div class="content-flex">
                         <TheReviewsForm client:load/>
-                        <TheReviewsList data={PAGE.review.list} client:load/>
+                        <TheReviewsList data={review.list} client:load/>
                     </div>
                 </div>
             </section>
-            <TheSeo data={PAGE.review.seo} client:load/>
+            <TheSeo data={review.seo} client:load/>
     )}
 </Layout>

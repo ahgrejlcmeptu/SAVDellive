@@ -7,22 +7,22 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../app/utils/http";
 
 let load = false
-const PAGE = await http({url: '/api/pages/delivery'})
+const delivery = await http({url: '/api/pages/delivery'})
 load = true
 ---
 
-<Layout title={PAGE.delivery.title}>
+<Layout title={delivery.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: PAGE.delivery.title}]}/>
-                        <h1 class="text-36">{PAGE.delivery.title}</h1>
+                        <AppBreadcrumb list={[{label: delivery.title}]}/>
+                        <h1 class="text-36">{delivery.title}</h1>
                     </div>
-                    <TheContacts requisite={PAGE.delivery.requisite} delivery={PAGE.delivery.delivery} payment={PAGE.delivery.payment} class="mb-50" page="delivery" client:load/>
+                    <TheContacts requisite={delivery.requisite} delivery={delivery.delivery} payment={delivery.payment} class="mb-50" page="delivery" client:load/>
                     <MapDelivery label="Карта доставки" client:load/>
                 </div>
             </section>
-            <TheSeo data={PAGE.delivery.seo} client:load/>
+            <TheSeo data={delivery.seo} client:load/>
     )}
 </Layout>

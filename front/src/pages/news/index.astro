@@ -6,21 +6,21 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../../app/utils/http";
 
 let load = false
-const PAGE = await http({url: '/api/pages/news'})
+const news = await http({url: '/api/pages/news'})
 load = true
 ---
 
-<Layout title={PAGE.news.title}>
+<Layout title={news.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: PAGE.news.title}]}/>
-                        <h1 class="text-36">{PAGE.news.title}</h1>
+                        <AppBreadcrumb list={[{label: news.title}]}/>
+                        <h1 class="text-36">{news.title}</h1>
                     </div>
-                    <TheNewsGrid data={PAGE.news.list} client:load/>
+                    <TheNewsGrid data={news.list} client:load/>
                 </div>
             </section>
-            <TheSeo data={PAGE.news.seo} client:load/>
+            <TheSeo data={news.seo} client:load/>
     )}
 </Layout>

@@ -1,4 +1,3 @@
-
 ---
 import Layout from '@progresses/Layout.astro';
 import TheBanner from '@widgets/banner/TheBanner.vue'
@@ -12,168 +11,21 @@ import TheReviews from '@widgets/reviews/TheReviews.vue'
 import TheSeo from '@widgets/seo/TheSeo.vue'
 import {http} from "../app/utils/http";
 
-const POPULAR = [
-    {
-        id: '1',
-        name: 'Корейский ',
-        category: '1',
-        status: [1],
-        description: 'Мини-кукуруза, лук, морковь, капуста…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/1.jpg'
-    },
-    {
-        id: '2',
-        name: 'Бургер',
-        category: '1',
-        status: [1, 2],
-        description: 'Котлета говяжья, салат, помидор, сыр, соус…',
-        price: '259',
-        weight: 140,
-        img: '/img/products/2.jpg'
-    },
-    {
-        id: '3',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/3.jpg'
-    },
-    {
-        id: '4',
-        name: 'Рыбные палочки',
-        category: '1',
-        status: [1],
-        description: 'Рыбные палочки, панировка, морковь, лук…',
-        price: 159,
-        weight: 140,
-        img: '/img/products/4.jpg'
-    },
-    {
-        id: '5',
-        name: 'Wok',
-        category: '1',
-        status: [1],
-        description: 'Пшеничная лапша, курица, шампиньоны, перец…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/5.jpg'
-    },
-    {
-        id: '6',
-        name: 'Рис с курицей',
-        category: '1',
-        status: [1, 2],
-        description: 'Рис, курица, лук, петрушка, соус терияки…',
-        price: 159,
-        weight: 140,
-        img: '/img/products/6.jpg'
-    },
-    {
-        id: '7',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/7.jpg'
-    },
-    {
-        id: '8',
-        name: 'Рис по‑тайски',
-        category: '1',
-        status: [1],
-        description: 'Рис, креветки, красный перец, лук, стручковая…',
-        price: 159,
-        weight: 140,
-        img: '/img/products/8.jpg'
-    },
-
-    {
-        id: '9',
-        name: 'Корейский ',
-        category: '1',
-        status: [1, 2],
-        description: 'Мини-кукуруза, лук, морковь, капуста…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/1.jpg'
-    },
-    {
-        id: '10',
-        name: 'Бургер',
-        category: '1',
-        status: [1, 2],
-        description: 'Котлета говяжья, салат, помидор, сыр, соус…',
-        price: '259',
-        weight: 140,
-        img: '/img/products/2.jpg'
-    },
-    {
-        id: '11',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/3.jpg'
-    },
-    {
-        id: '12',
-        name: 'Рыбные палочки',
-        category: '1',
-        status: [1, 2, 3],
-        description: 'Рыбные палочки, панировка, морковь, лук…',
-        price: 159,
-        weight: 140,
-        img: '/img/products/4.jpg'
-    },
-]
-const STATUS_POPULAR = [
-    {
-        id: 1,
-        name: 'Популярные',
-        icon: '/status.svg#popular'
-    },
-    {
-        id: 2,
-        name: 'Рекомендованные',
-        icon: '/status.svg#recommended'
-    },
-    {
-        id: 3,
-        name: 'Новинки',
-        icon: '/status.svg#new'
-    }
-]
-
 let load = false
-const PAGE = await http({url: '/api/pages/home'})
+const home = await http({url: '/api/pages/home'})
 load = true
 ---
 
-<Layout title="Главная" data={PAGE}>
+<Layout title="Главная">
     {load && (
-            <TheBanner data={PAGE.home.banners?.list} class="mb-50" client:load/>
-            <TheAdvantages data={PAGE.home.advantages?.list} class="container mb-50" client:load/>
-            <CategoriesBlock data={PAGE.home.categories} class="container mb-100" client:load/>
-            <ThePopularGrid list={POPULAR} status={STATUS_POPULAR} client:load/>
-            <TheStories data={PAGE.home.stories} client:load/>
-            <TheAbout data={PAGE.home.about}/>
-            <NewsBlock data={PAGE.home.news} client:load/>
-            <TheReviews data={PAGE.home.reviews} client:load/>
-            <TheSeo data={PAGE.home.seo} client:load/>
+            <TheBanner data={home.banners?.list} class="mb-50" client:load/>
+            <TheAdvantages data={home.advantages?.list} class="container mb-50" client:load/>
+            <CategoriesBlock data={home.categories} class="container mb-100" client:load/>
+            <ThePopularGrid data={home.popular} client:load/>
+            <TheStories data={home.stories} client:load/>
+            <TheAbout data={home.about}/>
+            <NewsBlock data={home.news} client:load/>
+            <TheReviews data={home.reviews} client:load/>
+            <TheSeo data={home.seo} client:load/>
     )}
 </Layout>

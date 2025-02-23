@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {HOST} from "@app/store/block.ts";
 
-interface Props {
+type Props = {
     data: {
         name: string;
-        amount: string;
+        products: string;
         img: string;
         all?: boolean
         href?: string
@@ -12,13 +12,16 @@ interface Props {
 
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+const amount = (length: number): string => {
+    return length === 1 ? 'блюдо' : length < 5 && length > 1 ? 'блюда' : 'блюд'
+}
 </script>
 
 <template>
     <a v-if="!data.all" :href="'/catalog?categories=' + data.name" class="card-category">
         <div class="text-16">{{ data.name }}</div>
-        <p class="text-15">{{ data.amount }}</p>
+        <p class="text-15">{{ data.products.length }} {{amount(data.products.length)}}</p>
         <img :src="HOST + data.img.url" alt="">
     </a>
     <a v-else class="card-category card-category_full" :href="data.href">

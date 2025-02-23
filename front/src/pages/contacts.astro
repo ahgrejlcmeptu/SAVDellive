@@ -7,22 +7,22 @@ import TheSeo from "@widgets/seo/TheSeo.vue";
 import {http} from "../app/utils/http";
 
 let load = false
-const PAGE = await http({url: '/api/pages/contact'})
+const contact = await http({url: '/api/pages/contact'})
 load = true
 ---
 
-<Layout title={PAGE.contact.title}>
+<Layout title={contact.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: PAGE.contact.title}]}/>
-                        <h1 class="text-36">{PAGE.contact.title}</h1>
+                        <AppBreadcrumb list={[{label: contact.title}]}/>
+                        <h1 class="text-36">{contact.title}</h1>
                     </div>
-                    <TheContacts requisite={PAGE.contact.requisite} class="mb-100" page="contacts" client:load/>
+                    <TheContacts requisite={contact.requisite} class="mb-100" page="contacts" client:load/>
                     <AppMap class="map_contacts" client:only/>
                 </div>
             </section>
-            <TheSeo data={PAGE.contact.seo} client:load/>
+            <TheSeo data={contact.seo} client:load/>
     )}
 </Layout>

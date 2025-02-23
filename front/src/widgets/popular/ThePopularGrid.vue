@@ -6,21 +6,21 @@ import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
 import {computed, ref} from "vue";
 
-const props = defineProps(['list', 'status', 'link'])
+const props = defineProps(['data'])
 
+const statuses = ref(props.data.statuses)
+const products = ref(props.data.products)
 
-const active = props.status ? ref(props.status[0].id) : ref(null)
+const active = ref(statuses.value[0].documentId)
 const filter = computed(() => {
-    if (!props.status) return props.list
-    return props.list.filter(({status}) => status.includes(active.value)).slice(0, 8)
+    return products.value.filter(({statuses}) => statuses.find(i => i.documentId === active.value)).slice(0, 8)
 })
 
 </script>
 
 <template>
-<!--    -->
-    <app-section class="mb-100" title="Популярные блюда недели" header="center">
-        <AppTabsSlider v-if="status" :slides="status" v-model="active"/>
+    <app-section class="mb-100" :title="data.title" header="center">
+        <AppTabsSlider v-if="statuses.length > 1" :slides="statuses" v-model="active"/>
         <TransitionGroup tag="div" class="popular-grid" name="cards">
             <template
                     v-for="item in filter"
@@ -34,7 +34,7 @@ const filter = computed(() => {
                 <AppCardDeclaration v-else :data="item"/>
             </template>
         </TransitionGroup>
-        <app-link-bottom v-if="status"><a :href="link || '/catalog'">Смотреть все</a></app-link-bottom>
+        <app-link-bottom v-if="data.linkBottom"><a :href="data.linkBottomHref || '/catalog'">{{ data.linkBottomText || 'Смотретьвсе' }}</a></app-link-bottom>
     </app-section>
 </template>
 

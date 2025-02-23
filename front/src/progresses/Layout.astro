@@ -158,9 +158,8 @@ load = true
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 </head>
 <body>
-
-<TheDocument data={{...data, ...PAGE, ...setting.data}} client:load>
-    {load && (
+{load && (
+        <TheDocument data={{...data, ...PAGE, ...setting.data}} client:load>
             <TheHeader client:load/>
             <main>
                 <slot/>
@@ -176,7 +175,8 @@ load = true
                 <ThePresentBar client:only/>
                 <TheButtonTop client:only/>
             </div>
-    )}
-</TheDocument>
+
+        </TheDocument>
+)}
 </body>
 </html>

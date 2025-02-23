@@ -7,7 +7,7 @@ import {computed} from "vue";
 
 interface Data {
     data: {
-        id: string | number;
+        documentId: string | number;
         name: string;
         icon: string;
     }
@@ -33,12 +33,12 @@ const model = computed({
 
 <template>
     <app-slider name=".tabs-slider" class="tabs-slider">
-        <swiper-slide v-for="item in slides" :key="item.id">
+        <swiper-slide v-for="item in slides" :key="item.documentId">
             <app-tabs-button
-                    :class="[{'active': model === item.id}]"
-                    @action="model = item.id"
+                    :class="[{'active': model === item.documentId}]"
+                    @action="model = item.documentId"
             >
-                <AppSvg v-if="item.icon" :href="item.icon"/>
+                <i v-if="item.icon" v-html="item.icon"></i>
                 <span>{{ item.name }}</span>
             </app-tabs-button>
         </swiper-slide>

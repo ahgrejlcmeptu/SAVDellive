@@ -11,25 +11,25 @@ import {http} from "../app/utils/http";
 
 
 let load = false
-const PAGE = await http({url: '/api/pages/about'})
+const about = await http({url: '/api/pages/about'})
 load = true
 ---
 
-<Layout title={PAGE.about.title}>
+<Layout title={about.title}>
     {load && (
             <section class="mb-100">
                 <div class="container">
                     <div class="page-header">
-                        <AppBreadcrumb list={[{label: PAGE.about.title}]}/>
-                        <h1 class="text-36">{PAGE.about.title}</h1>
+                        <AppBreadcrumb list={[{label: about.title}]}/>
+                        <h1 class="text-36">{about.title}</h1>
                     </div>
-                    <AppDescriptionColumn class="mb-30" description={PAGE.about.description}/>
-                    <TheGallery data={PAGE.about.gallery} client:load/>
+                    <AppDescriptionColumn class="mb-30" description={about.description}/>
+                    <TheGallery data={about.gallery} client:load/>
                 </div>
             </section>
-            <TheTeam data={PAGE.about.team} client:load/>
-            <TheReviews data={PAGE.about.reviews} client:load/>
-            <SocialsBlock data={PAGE.about.social} client:load/>
-            <TheSeo data={PAGE.about.seo} client:load/>
+            <TheTeam data={about.team} client:load/>
+            <TheReviews data={about.reviews} client:load/>
+            <SocialsBlock data={about.social} client:load/>
+            <TheSeo data={about.seo} client:load/>
     )}
 </Layout>

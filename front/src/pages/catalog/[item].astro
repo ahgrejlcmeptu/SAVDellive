@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const {item} = Astro.params;
 
 let load = false
-const PAGE = await http({url: '/api/pages/home'})
+const home = await http({url: '/api/pages/home'})
 load = true
 ---
 
@@ -29,6 +29,6 @@ load = true
                     <TheProduct/>
                 </div>
             </section>
-            <TheSeo data={PAGE.home.seo} client:load/>
+            <TheSeo data={home.seo} client:load/>
     )}
 </Layout>
