@@ -6,12 +6,12 @@ import AppLinkBottom from "@spared/AppLinkBottom.vue";
 import AppTabsSlider from "@features/tabs/AppTabsSlider.vue";
 import {computed, ref} from "vue";
 
-const props = defineProps(['data'])
+const props = defineProps(['data', 'list'])
 
-const statuses = ref(props.data.statuses)
-const products = ref(props.data.products)
+const statuses = ref(props.data?.statuses)
+const products = ref(props.data?.products)
 
-const active = ref(statuses.value[0].documentId)
+const active = ref(statuses.value ? statuses.value[0].documentId : null)
 const filter = computed(() => {
     return products.value.filter(({statuses}) => statuses.find(i => i.documentId === active.value)).slice(0, 8)
 })
@@ -19,22 +19,39 @@ const filter = computed(() => {
 </script>
 
 <template>
-    <app-section class="mb-100" :title="data.title" header="center">
-        <AppTabsSlider v-if="statuses.length > 1" :slides="statuses" v-model="active"/>
-        <TransitionGroup tag="div" class="popular-grid" name="cards">
-            <template
+    <app-section class="mb-100" :title="data?.title" header="center">
+        <template v-if="data">
+            <AppTabsSlider v-if="statuses.length > 1" :slides="statuses" v-model="active"/>
+            <TransitionGroup tag="div" class="popular-grid" name="cards">
+                <template
                     v-for="item in filter"
                     :key="item.id"
-            >
-                <AppCardProduct
+                >
+                    <AppCardProduct
                         v-if="item.type !== 'declaration'"
                         class="card-product_mobile"
                         :data="item"
-                />
-                <AppCardDeclaration v-else :data="item"/>
-            </template>
-        </TransitionGroup>
-        <app-link-bottom v-if="data.linkBottom"><a :href="data.linkBottomHref || '/catalog'">{{ data.linkBottomText || 'Смотретьвсе' }}</a></app-link-bottom>
+                    />
+                    <AppCardDeclaration v-else :data="item"/>
+                </template>
+            </TransitionGroup>
+            <app-link-bottom v-if="data.linkBottom"><a :href="data.linkBottomHref || '/catalog'">{{ data.linkBottomText || 'Смотретьвсе' }}</a></app-link-bottom>
+        </template>
+        <template v-if="list">
+            <TransitionGroup tag="div" class="popular-grid" name="cards">
+                <template
+                    v-for="item in list"
+                    :key="item.id"
+                >
+                    <AppCardProduct
+                        v-if="item.type !== 'declaration'"
+                        class="card-product_mobile"
+                        :data="item"
+                    />
+                    <AppCardDeclaration v-else :data="item"/>
+                </template>
+            </TransitionGroup>
+        </template>
     </app-section>
 </template>
 

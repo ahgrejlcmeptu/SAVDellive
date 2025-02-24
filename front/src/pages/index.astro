@@ -14,6 +14,7 @@ import {http} from "../app/utils/http";
 let load = false
 const home = await http({url: '/api/pages/home'})
 load = true
+console.log({Astro: Astro.cookies.get('favorites')})
 ---
 
 <Layout title="Главная">

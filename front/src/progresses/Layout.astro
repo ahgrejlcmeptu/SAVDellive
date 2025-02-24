@@ -12,6 +12,7 @@ import ThePresentBar from '../widgets/present/ThePresentBar.vue'
 import TheButtonTop from '../widgets/TheButtonTop.vue'
 import TheDocument from './TheDocument.vue'
 import {http} from "../app/utils/http";
+import {apiGlobal} from "../app/utils/apiGlobal";
 
 const {title, data} = Astro.props
 let load = false
@@ -142,6 +143,8 @@ const PAGE = {
         favorites: []
     }
 }
+
+const global = await apiGlobal(Astro.cookies)
 const setting = await http({url: '/api/setting'})
 load = true
 ---
@@ -159,7 +162,7 @@ load = true
 </head>
 <body>
 {load && (
-        <TheDocument data={{...data, ...PAGE, ...setting.data}} client:load>
+        <TheDocument data={{...data, ...PAGE, ...setting.data, ...global}} client:load>
             <TheHeader client:load/>
             <main>
                 <slot/>

@@ -138,7 +138,7 @@ const reset = () => {
             <div class="page-header">
                 <h2>{{ group.name }}</h2>
             </div>
-            <ThePopularGrid :list="[declaration, ...group.products]" v-if="declaration && idx === 0"/>
+            <ThePopularGrid :list="[{...declaration, type: 'declaration'}, ...group.products]" v-if="declaration && idx === 0"/>
             <ThePopularGrid :list="group.products" v-else/>
         </div>
     </div>

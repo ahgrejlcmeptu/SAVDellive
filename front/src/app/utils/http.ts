@@ -4,7 +4,7 @@ type TYPE_HTTP = {
     token?: string,
     method: string
 }
-export async function http({url, body, token, method = "GET"}) {
+export async function http<TYPE_HTTP>({url, body, token, method = "GET"}) {
     try {
         const config = {
             method,

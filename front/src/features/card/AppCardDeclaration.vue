@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import AppButton from "@spared/AppButton.vue";
+import {HOST} from "@app/store/block.ts";
 
 defineProps(['data'])
 </script>
 
 <template>
     <div class="card-declaration">
-        <img :src="data.img" alt="">
+        <img :src="HOST + data.img.url" alt="">
         <div class="text-26">{{ data.title }}</div>
         <div class="text-14">{{ data.description }}</div>
-        <app-button :href="data.btnHref">{{ data.btnText }}</app-button>
+        <app-button v-if="data.link" :href="data.linkHref">{{ data.linkText }}</app-button>
     </div>
 </template>
 

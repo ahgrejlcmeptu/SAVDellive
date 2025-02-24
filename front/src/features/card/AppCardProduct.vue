@@ -24,7 +24,7 @@ defineProps({
 
 <template>
     <div class="card-product">
-        <AppFavorites/>
+        <AppFavorites :id="data.documentId"/>
         <div class="card-product__group">
             <div class="card-product__top">
                 <app-status-list>

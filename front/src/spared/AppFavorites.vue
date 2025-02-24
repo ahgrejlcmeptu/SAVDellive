@@ -1,8 +1,13 @@
 <script setup>
 import AppSvg from "./AppSvg.vue";
+import {favoritesToggle, favoritesList} from "@app/store/favorites";
+import {useStore} from "@nanostores/vue";
+defineProps(['id'])
+const $favoritesList = useStore(favoritesList)
+
 </script>
 <template>
-    <div class="app-favorites">
+    <div :class="['app-favorites', {active: $favoritesList[id]}]" @click="favoritesToggle(id)">
         <AppSvg name="card-favorites"/>
     </div>
 </template>
