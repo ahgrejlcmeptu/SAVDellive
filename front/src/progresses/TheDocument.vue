@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import {onMounted, provide} from "vue";
+import {onMounted} from "vue";
 import {Anchors} from "@app/utils/anchors";
 import {blockInfo} from "@app/store/block";
-import {favoritesList} from "@app/store/favorites.ts";
+import {favoritesCookie} from "@app/store/favorites";
 
 const anchors = new Anchors()
-const props = defineProps(['data'])
+const props = defineProps(['data', 'cookies'])
 
 blockInfo(props.data)
 onMounted(async () => {
+    favoritesCookie(props.cookies.favorites)
     blockInfo(props.data)
-    await favoritesList.set(props.data.favorites)
     document.addEventListener('click', (event: Event) => {
         anchors.click(event)
     })

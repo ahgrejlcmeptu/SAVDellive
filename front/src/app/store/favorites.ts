@@ -7,15 +7,15 @@ import {setCookie} from "@app/utils/func.ts";
 
 export const favoritesItems = map({});
 export const favoritesList = map({})
-export const favoritesLength = computed(favoritesList, favoritesList => Object.keys(favoritesList).length);
+export const favoritesLength = computed(favoritesList, $favoritesList => {
+    return  Object.keys($favoritesList).length
+});
 
-export const favoritesCookie = async (cookie: string = '') => {
+export const favoritesCookie = (cookie: string = ''): string => {
     favoritesList.set({})
     const json = cookie ? JSON.parse(cookie) : []
-    if (!json.length) return ''
-    json.forEach((id: never) => favoritesList.setKey(id, id))
-
-    // return favoritesList.value
+    json.forEach((id) => favoritesList.setKey(id, id))
+    return cookie
 }
 //
 // export async function favoritesLoad() {

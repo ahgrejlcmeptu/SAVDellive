@@ -5,145 +5,145 @@ import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
 import TheProducts from '@widgets/products/TheProducts.vue'
 
 
-const USER = {
-    id: 1,
-    img: '/img/user.jpg',
-    name: 'Екатерина',
-    surname: 'Золинa',
-    phone: '+7(914)88-88-888',
-    email: 'info@dellive.ru',
-    login: 'testLogin',
-    bonus: 200,
-    discount: 1,
-    history: [
-        {
-            id: 1,
-            date: 1619280000000,
-            number: 1245,
-            total: 968,
-            status: 'Завершён',
-            bonus: {
-                increment: 123,
-                decrement: 90
-            },
-            list: [
-                {
-                    id: 1,
-                    img: '/img/products/1.jpg',
-                    name: 'Бургер',
-                    price: 238,
-                    amount: 2
-                },
-                {
-                    id: 2,
-                    img: '/img/products/2.jpg',
-                    name: 'Wok',
-                    price: 238,
-                    amount: 1
-                }
-            ]
-        },
-        {
-            id: 2,
-            date: 1619280000000,
-            number: 1245,
-            total: 968,
-            status: 'Завершён',
-            bonus: {
-                increment: 123,
-                decrement: 90
-            },
-            list: [
-                {
-                    id: 1,
-                    img: '/img/products/1.jpg',
-                    name: 'Бургер',
-                    price: 238,
-                    amount: 2
-                },
-                {
-                    id: 2,
-                    img: '/img/products/2.jpg',
-                    name: 'Wok',
-                    price: 238,
-                    amount: 1
-                }
-            ]
-        },
-        {
-            id: 3,
-            date: 1619280000000,
-            number: 1245,
-            total: 968,
-            status: 'Завершён',
-            bonus: {
-                increment: 123,
-                decrement: 90
-            },
-            list: [
-                {
-                    id: 1,
-                    img: '/img/products/1.jpg',
-                    name: 'Бургер',
-                    price: 238,
-                    amount: 2
-                },
-                {
-                    id: 2,
-                    img: '/img/products/2.jpg',
-                    name: 'Wok',
-                    price: 238,
-                    amount: 1
-                }
-            ]
-        }
-    ]
-}
+// const USER = {
+//     id: 1,
+//     img: '/img/user.jpg',
+//     name: 'Екатерина',
+//     surname: 'Золинa',
+//     phone: '+7(914)88-88-888',
+//     email: 'info@dellive.ru',
+//     login: 'testLogin',
+//     bonus: 200,
+//     discount: 1,
+//     history: [
+//         {
+//             id: 1,
+//             date: 1619280000000,
+//             number: 1245,
+//             total: 968,
+//             status: 'Завершён',
+//             bonus: {
+//                 increment: 123,
+//                 decrement: 90
+//             },
+//             list: [
+//                 {
+//                     id: 1,
+//                     img: '/img/products/1.jpg',
+//                     name: 'Бургер',
+//                     price: 238,
+//                     amount: 2
+//                 },
+//                 {
+//                     id: 2,
+//                     img: '/img/products/2.jpg',
+//                     name: 'Wok',
+//                     price: 238,
+//                     amount: 1
+//                 }
+//             ]
+//         },
+//         {
+//             id: 2,
+//             date: 1619280000000,
+//             number: 1245,
+//             total: 968,
+//             status: 'Завершён',
+//             bonus: {
+//                 increment: 123,
+//                 decrement: 90
+//             },
+//             list: [
+//                 {
+//                     id: 1,
+//                     img: '/img/products/1.jpg',
+//                     name: 'Бургер',
+//                     price: 238,
+//                     amount: 2
+//                 },
+//                 {
+//                     id: 2,
+//                     img: '/img/products/2.jpg',
+//                     name: 'Wok',
+//                     price: 238,
+//                     amount: 1
+//                 }
+//             ]
+//         },
+//         {
+//             id: 3,
+//             date: 1619280000000,
+//             number: 1245,
+//             total: 968,
+//             status: 'Завершён',
+//             bonus: {
+//                 increment: 123,
+//                 decrement: 90
+//             },
+//             list: [
+//                 {
+//                     id: 1,
+//                     img: '/img/products/1.jpg',
+//                     name: 'Бургер',
+//                     price: 238,
+//                     amount: 2
+//                 },
+//                 {
+//                     id: 2,
+//                     img: '/img/products/2.jpg',
+//                     name: 'Wok',
+//                     price: 238,
+//                     amount: 1
+//                 }
+//             ]
+//         }
+//     ]
+// }
 // const USER = null
-const POPULAR = [
-    {
-        id: '1',
-        name: 'Корейский ',
-        category: '1',
-        status: [1],
-        description: 'Мини-кукуруза, лук, морковь, капуста…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/1.jpg'
-    },
-    {
-        id: '2',
-        name: 'Бургер',
-        category: '1',
-        status: [1, 2],
-        description: 'Котлета говяжья, салат, помидор, сыр, соус…',
-        price: '259',
-        weight: 140,
-        img: '/img/products/2.jpg'
-    },
-    {
-        id: '3',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: 140,
-        img: '/img/products/3.jpg'
-    },
-    {
-        id: '4',
-        name: 'Рыбные палочки',
-        category: '1',
-        status: [1],
-        description: 'Рыбные палочки, панировка, морковь, лук…',
-        price: 159,
-        weight: 140,
-        img: '/img/products/4.jpg'
-    }
-]
+// const POPULAR = [
+//     {
+//         id: '1',
+//         name: 'Корейский ',
+//         category: '1',
+//         status: [1],
+//         description: 'Мини-кукуруза, лук, морковь, капуста…',
+//         price: 159,
+//         oldPrice: 259,
+//         weight: 140,
+//         img: '/img/products/1.jpg'
+//     },
+//     {
+//         id: '2',
+//         name: 'Бургер',
+//         category: '1',
+//         status: [1, 2],
+//         description: 'Котлета говяжья, салат, помидор, сыр, соус…',
+//         price: '259',
+//         weight: 140,
+//         img: '/img/products/2.jpg'
+//     },
+//     {
+//         id: '3',
+//         name: 'Мисо-суп',
+//         category: '1',
+//         status: [1, 2],
+//         description: 'Суп с сёмгой, луком, морковью, картофелем и…',
+//         price: 159,
+//         oldPrice: 259,
+//         weight: 140,
+//         img: '/img/products/3.jpg'
+//     },
+//     {
+//         id: '4',
+//         name: 'Рыбные палочки',
+//         category: '1',
+//         status: [1],
+//         description: 'Рыбные палочки, панировка, морковь, лук…',
+//         price: 159,
+//         weight: 140,
+//         img: '/img/products/4.jpg'
+//     }
+// ]
 ---
 
 <Layout title="Избранные товары">

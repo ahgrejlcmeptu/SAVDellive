@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.1.1",
     "@astrojs/vue": "^5.0.2",
     "@nanostores/vue": "^0.11.0",
     "@vee-validate/zod": "^4.15.0",
