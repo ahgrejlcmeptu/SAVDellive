@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "catalogs",
+  "info": {
+    "singularName": "catalog",
+    "pluralName": "catalogs",
+    "displayName": "Каталог",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo"
+    },
+    "declaration": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::declaration.declaration"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

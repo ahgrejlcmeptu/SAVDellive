@@ -147,8 +147,6 @@ const PAGE = {
 const cookies = serverCookies(Astro.cookies)
 const setting = await http({url: '/api/setting'})
 load = true
-// const favorites = Astro.cookies.get('favorites')?.value
-// console.log({global: Astro.cookies.get('favorites')?.value})
 ---
 
 <!doctype html>

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advantages",
+  "info": {
+    "singularName": "advantage",
+    "pluralName": "advantages",
+    "displayName": "Премущества",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    }
+  }
+}

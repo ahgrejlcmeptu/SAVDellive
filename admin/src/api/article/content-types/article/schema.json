@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Новости и Акции",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "card": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.article-card",
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Новости",
+        "Акции"
+      ],
+      "default": "Новости",
+      "required": true
+    }
+  }
+}

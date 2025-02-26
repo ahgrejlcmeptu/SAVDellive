@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import AppCardProduct from "@features/card/AppCardProduct.vue";
+import {onMounted} from "vue";
+import {favoritesItems, favoritesLoad} from "@app/store/favorites";
+import {useStore} from "@nanostores/vue";
 
+const $favoritesItems = useStore(favoritesItems)
 const props = defineProps(['data'])
+onMounted(() => {
+    favoritesLoad(props.data)
+})
 </script>
 
 <template>
-    <TransitionGroup tag="div" class="products" name="cards">
-        <AppCardProduct
-                class="card-product_mobile"
-                v-for="item in data"
-                :key="item.id"
-                :data="item"
-        />
-    </TransitionGroup>
+    <template v-if="Object.keys($favoritesItems).length">
+        <TransitionGroup tag="div" class="products" name="cards">
+            <AppCardProduct
+                    class="card-product_mobile"
+                    v-for="item in $favoritesItems"
+                    :key="item.id"
+                    :data="item"
+            />
+        </TransitionGroup>
+    </template>
+    <p v-else class="text-18">Товаров в избранном нет</p>
 </template>
 
 <style lang="scss">

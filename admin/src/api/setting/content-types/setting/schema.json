@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "settings",
+  "info": {
+    "singularName": "setting",
+    "pluralName": "settings",
+    "displayName": "Настройки",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "presents": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}

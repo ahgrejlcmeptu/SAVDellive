@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_block_populars",
+  "info": {
+    "displayName": "Popular",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "statuses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::status.status"
+    },
+    "linkBottom": {
+      "type": "boolean"
+    },
+    "linkBottomText": {
+      "type": "string"
+    },
+    "linkBottomHref": {
+      "type": "string"
+    }
+  }
+}

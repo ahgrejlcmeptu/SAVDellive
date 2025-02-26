@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_block_categories",
+  "info": {
+    "displayName": "categories",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "list": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "lastCard": {
+      "type": "boolean"
+    },
+    "lastCardText": {
+      "type": "string"
+    },
+    "lastCardLink": {
+      "type": "string"
+    }
+  }
+}

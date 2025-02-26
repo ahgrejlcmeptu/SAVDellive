@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_block_reviews",
+  "info": {
+    "displayName": "reviews"
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "link": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "linkText": {
+      "type": "string"
+    },
+    "linkHref": {
+      "type": "string"
+    }
+  }
+}

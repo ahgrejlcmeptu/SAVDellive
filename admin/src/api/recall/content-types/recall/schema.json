@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "recalls",
+  "info": {
+    "singularName": "recall",
+    "pluralName": "recalls",
+    "displayName": "Отзывы",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

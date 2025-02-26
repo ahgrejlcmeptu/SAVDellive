@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_block_advantages",
+  "info": {
+    "displayName": "advantages",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "index": {
+      "type": "integer"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "list": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::advantage.advantage"
+    }
+  }
+}

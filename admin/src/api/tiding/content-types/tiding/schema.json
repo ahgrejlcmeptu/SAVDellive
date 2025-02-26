@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "tidings",
+  "info": {
+    "singularName": "tiding",
+    "pluralName": "tidings",
+    "displayName": "Новости и акции",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

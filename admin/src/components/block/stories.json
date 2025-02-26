@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_block_stories",
+  "info": {
+    "displayName": "stories",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean"
+    },
+    "index": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

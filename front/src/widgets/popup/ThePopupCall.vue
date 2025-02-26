@@ -8,6 +8,7 @@ import {toTypedSchema} from '@vee-validate/zod';
 import {z} from 'zod';
 import {ref} from "vue";
 import AppSocials from "@entites/socials/AppSocials.vue";
+import {http} from "@app/utils/http.ts";
 
 const form = ref<null | HTMLElement>(null)
 const active = ref<boolean>(false)
@@ -24,10 +25,11 @@ const {handleSubmit, errors} = useForm({
 const {value: phone} = useField('phone');
 const {value: politic} = useField('politic');
 
-const onSubmit = handleSubmit(values => {
+const onSubmit = handleSubmit(async values => {
     for (let [name, value] of new FormData(form.value)) {
         console.log(`${name} = ${value}`);
     }
+    await http({url: '/api/pages/favorites'})
     active.value = true
     form.value.reset()
     setTimeout(() => {

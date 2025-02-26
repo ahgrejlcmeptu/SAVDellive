@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "О нас",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo"
+    },
+    "reviews": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.reviews"
+    },
+    "social": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social"
+    },
+    "team": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.team"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "gallery": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui.gallery"
+    }
+  }
+}

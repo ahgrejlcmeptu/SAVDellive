@@ -1,0 +1,69 @@
+{
+  "kind": "singleType",
+  "collectionName": "homes",
+  "info": {
+    "singularName": "home",
+    "pluralName": "homes",
+    "displayName": "Главная",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "advantages": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.advantages",
+      "required": true
+    },
+    "banners": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.banners",
+      "required": true
+    },
+    "categories": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.categories",
+      "required": true
+    },
+    "about": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.about",
+      "required": true
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo",
+      "required": true
+    },
+    "stories": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.stories",
+      "required": true
+    },
+    "news": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.news",
+      "required": true
+    },
+    "reviews": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.reviews",
+      "required": true
+    },
+    "popular": {
+      "displayName": "Popular",
+      "type": "component",
+      "repeatable": false,
+      "component": "block.popular"
+    }
+  }
+}

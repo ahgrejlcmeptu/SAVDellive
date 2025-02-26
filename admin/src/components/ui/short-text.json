@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_ui_short_texts",
+  "info": {
+    "displayName": "short-text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

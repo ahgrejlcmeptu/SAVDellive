@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "deliveries",
+  "info": {
+    "singularName": "delivery",
+    "pluralName": "deliveries",
+    "displayName": "Доставка и оплата",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.seo"
+    },
+    "title": {
+      "type": "string"
+    },
+    "delivery": {
+      "type": "blocks"
+    },
+    "payment": {
+      "type": "blocks"
+    }
+  }
+}

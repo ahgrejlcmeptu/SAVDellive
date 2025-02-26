@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_block_socials",
+  "info": {
+    "displayName": "Social",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "visible": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "link": {
+      "type": "string"
+    },
+    "linkImg": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_block_news",
+  "info": {
+    "displayName": "news"
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

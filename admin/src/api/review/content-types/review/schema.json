@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Отзывы",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "review": {
+      "displayName": "review",
+      "type": "component",
+      "repeatable": false,
+      "component": "component.review"
+    },
+    "ask": {
+      "displayName": "ask",
+      "type": "component",
+      "repeatable": false,
+      "component": "component.ask"
+    }
+  }
+}

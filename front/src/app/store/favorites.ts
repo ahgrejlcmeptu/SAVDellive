@@ -14,19 +14,19 @@ export const favoritesLength = computed(favoritesList, $favoritesList => {
 export const favoritesCookie = (cookie: string = ''): string => {
     favoritesList.set({})
     const json = cookie ? JSON.parse(cookie) : []
-    json.forEach((id) => favoritesList.setKey(id, id))
+    if (Array.isArray(json)) {
+        json.forEach((id) => favoritesList.setKey(id, id));
+    } else {
+        console.warn('JSON из cookie не является массивом');
+    }
     return cookie
 }
-//
-// export async function favoritesLoad() {
-//     favoritesItems.set({})
-//     const list = Object.keys(favoritesList.value)
-//     if (!list.length) return
-//     const products = await http({url: `/api/products?get=${list.join(',')}`})
-//     products.forEach(item => favoritesItems.setKey(item.id, item))
-//     return favoritesItems.value
-// }
-//
+
+export async function favoritesLoad(products) {
+    favoritesItems.set({})
+    products.forEach(item => favoritesItems.setKey(item.documentId, item))
+}
+
 export async function favoritesToggle(id) {
     favoritesList.get()[id] ? favoritesList.setKey(id, undefined) : favoritesList.setKey(id, id);
     if (favoritesItems.get()[id]) favoritesItems.setKey(id, undefined)

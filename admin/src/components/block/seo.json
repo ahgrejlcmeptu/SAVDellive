@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_block_seos",
+  "info": {
+    "displayName": "seo"
+  },
+  "options": {},
+  "attributes": {
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "index": {
+      "type": "integer"
+    },
+    "list": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::seo.seo"
+    }
+  }
+}

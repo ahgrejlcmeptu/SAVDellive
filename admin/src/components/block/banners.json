@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_block_banners",
+  "info": {
+    "displayName": "Banners"
+  },
+  "options": {},
+  "attributes": {
+    "index": {
+      "type": "integer"
+    },
+    "visible": {
+      "type": "boolean"
+    }
+  }
+}

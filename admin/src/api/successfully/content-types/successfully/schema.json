@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "successfullies",
+  "info": {
+    "singularName": "successfully",
+    "pluralName": "successfullies",
+    "displayName": "Успешное оформление",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "news": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.news"
+    }
+  }
+}
