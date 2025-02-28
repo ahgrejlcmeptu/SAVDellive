@@ -2,21 +2,17 @@
 import AppSvg from "@spared/AppSvg.vue";
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppQuantity from "@spared/AppQuantity.vue";
-import type {CardOrder} from "@app/utils/interfaces";
+import {HOST} from "@app/store/block.ts";
+import {basketDecrement, basketIncrement, basketRemove} from "@app/store/basket";
 
-const props = defineProps<{
-    data: CardOrder;
-}>();
+defineProps(['data']);
 
-const onRemove = async () => {
-    console.log(props.data.id)
-}
 </script>
 
 <template>
     <div class="card-order">
         <div class="card-order__img">
-            <img :src="data.img" :alt="data.name">
+            <img :src="HOST + data.img.url" :alt="data.name">
         </div>
         <div class="card-order__body">
             <div class="card-order__main">
@@ -30,13 +26,13 @@ const onRemove = async () => {
                 <div class="card-order__price text-20">{{ data.price }}
                     <AppCurrency/>
                 </div>
-                <AppQuantity v-model="data.amount"/>
+                <AppQuantity :value="data.amount" @decrement="basketDecrement(data.documentId)" @increment="basketIncrement(data.documentId)"/>
                 <div class="card-order__total text-20">{{ data.price * data.amount }}
                     <AppCurrency/>
                 </div>
             </div>
         </div>
-        <div class="card-order__remove" @click="onRemove">
+        <div class="card-order__remove" @click="basketRemove(data.documentId)">
             <AppSvg name='close'/>
         </div>
     </div>

@@ -31,7 +31,7 @@ const promo = ref(null)
             <div class="basket__item basket__list">
                 <AppCardBasket
                         v-for="item in $basketItems"
-                        :key="item.id"
+                        :key="item.documentId"
                         :data="item"
                 />
             </div>

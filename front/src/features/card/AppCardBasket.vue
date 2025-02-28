@@ -2,27 +2,27 @@
 import AppSvg from "@spared/AppSvg.vue";
 import AppCurrency from "@spared/AppCurrency.vue";
 import AppQuantity from "@spared/AppQuantity.vue";
-import {ref} from "vue";
 import {localeNumber} from "@app/utils/toLocale.ts";
+import {basketDecrement, basketIncrement, basketRemove} from "@app/store/basket";
+import {HOST} from "@app/store/block";
 
-const props = defineProps(['data'])
-const amount = ref(props.data.amount)
+defineProps(['data'])
 </script>
 
 <template>
     <div class="card-basket">
         <div class="card-basket__img">
-            <img :src="data.img" :alt="data.name">
+            <img :src="HOST + data.img.url" :alt="data.name">
         </div>
         <div class="card-basket__body">
             <div class="text-15">{{data.name}}</div>
             <div class="text-14">{{data.info}}</div>
         </div>
-        <AppQuantity v-model="amount"/>
+        <AppQuantity :value="data.amount" @decrement="basketDecrement(data.documentId)" @increment="basketIncrement(data.documentId)"/>
         <div class="card-basket__price text-18">
             {{ localeNumber(data.price) }} <AppCurrency/>
         </div>
-        <div class="card-basket__remove">
+        <div class="card-basket__remove" @click="basketRemove(data.documentId)">
             <AppSvg name="remove"/>
         </div>
     </div>

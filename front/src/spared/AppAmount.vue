@@ -13,7 +13,7 @@ defineProps(['value'])
   height: 18px;
   padding: 3px 6px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 9px;
   background-color: #EDE4FF;
   font-size: media.sizeREM(11);
   font-weight: 500;

@@ -10,6 +10,7 @@ const props = defineProps(['data', 'cookies'])
 blockInfo(props.data)
 onMounted(async () => {
     favoritesCookie(props.cookies.favorites)
+    favoritesCookie(props.cookies.favorites)
     blockInfo(props.data)
     document.addEventListener('click', (event: Event) => {
         anchors.click(event)

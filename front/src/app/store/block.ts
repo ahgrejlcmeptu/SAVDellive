@@ -1,6 +1,6 @@
 import {map, atom} from 'nanostores';
 import {presentInit} from "@app/store/present.ts";
-import {basketInit} from "@app/store/basket.ts";
+import {basketInit} from "@app/store/basket";
 
 // export const blockInfo = map({})
 export const HOST = 'http://localhost:1337'
@@ -52,7 +52,8 @@ export const blockInfo = (data: any): boolean => {
     blockNavigation.set({...blockNavigation.value, ...data.nav})
     branches.set(data.branches)
     branchesActive.set(branches.value[0])
+    basketInit(data.basket)
     presentInit(pageInfo.value.presents || [])
-    if (pageInfo.value.user) basketInit(pageInfo.value.user.basket || [])
+
     return true
 }

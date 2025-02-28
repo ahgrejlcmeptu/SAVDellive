@@ -1,37 +1,22 @@
 <script setup lang="ts">
 import AppSvg from "@spared/AppSvg.vue";
-import {computed} from "vue";
 
 interface Props {
-    modelValue: number
+    value: number
 }
 
 const props = defineProps<Props>()
-const emits = defineEmits(["update:modelValue"])
+defineEmits(['increment', 'decrement'])
 
-const model = computed({
-    get() {
-        return props.modelValue;
-    },
-    set(value) {
-        emits("update:modelValue", value);
-    }
-})
-const increment = () => {
-    model.value++
-}
-const decrement = () => {
-    model.value--
-}
 </script>
 
 <template>
     <div class="app-quantity">
-        <div class="app-quantity__button app-quantity__button_decrement" v-if="model > 1" @click="decrement">
+        <div class="app-quantity__button app-quantity__button_decrement" v-if="value > 1" @click="$emit('decrement')">
             <AppSvg name="minus"/>
         </div>
-        <div class="app-quantity__value text-18">{{model}}</div>
-        <div class="app-quantity__button app-quantity__button_increment" @click="increment">
+        <div class="app-quantity__value text-18">{{value}}</div>
+        <div class="app-quantity__button app-quantity__button_increment" @click="$emit('increment')">
             <AppSvg name="plus"/>
         </div>
     </div>

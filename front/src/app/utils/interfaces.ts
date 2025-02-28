@@ -1,25 +1,3 @@
-export interface Card {
-    id: string | number;
-    name: string;
-    category: any;
-    status: any;
-    description: string;
-    price: number;
-    oldPrice?: number;
-    weight: number | string;
-    img: string;
-    amount?: number
-}
-export type CardOrder = {
-    id: string | number
-    name: string
-    price: number
-    amount: number
-    description?: string
-    img?: string
-    weight?: string
-}
-
 export interface CardAdditional {
     id: string | number
     name: string

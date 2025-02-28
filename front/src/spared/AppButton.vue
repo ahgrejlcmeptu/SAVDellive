@@ -11,6 +11,7 @@ interface Props {
     href?: string;
     color?: Color | undefined;
     disabled?: boolean | undefined
+    wait?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +30,7 @@ const onClick = (event: Event) => {
 <template>
     <button
             :type="type"
-            :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big'}]"
+            :class="['btn', color, {'btn_full': checkUndefined(full), 'btn_big': size === 'big', 'btn_wait': wait}]"
             @click="onClick"
             :disabled="disabled"
             v-if="!href"
@@ -76,6 +77,10 @@ const onClick = (event: Event) => {
     opacity: .5;
     filter: grayscale(1);
     cursor: no-drop;
+  }
+
+  &_wait {
+    cursor: wait!important;
   }
 
   &_full {

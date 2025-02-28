@@ -6,11 +6,16 @@ import AppStatusList from "@spared/status/AppStatusList.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppSvg from "@spared/AppSvg.vue";
 import AppAmount from "@spared/AppAmount.vue";
-import {popupCard, popupOpen} from "@app/store/popup.ts";
-import {bayToCard} from "@app/utils/bayToCard.ts";
-import {HOST} from "@app/store/block.ts";
+import {popupCard, popupOpen} from "@app/store/popup";
+import {bayToCard} from "@app/utils/bayToCard";
+import {HOST} from "@app/store/block";
+import {basketAdd, basketItems} from "@app/store/basket";
+import {useStore} from "@nanostores/vue";
+import {ref} from "vue";
 
-defineProps({
+const $basketItems = useStore(basketItems)
+
+const props = defineProps({
     data: {
         type: Object,
         required: true
@@ -20,6 +25,16 @@ defineProps({
         required: false
     }
 })
+const waiting = ref(false)
+
+const add = async (event) => {
+    waiting.value = true
+    bayToCard(event)
+    await basketAdd(props.data)
+    setTimeout(() => {
+        waiting.value = false
+    }, 300)
+}
 </script>
 
 <template>
@@ -51,10 +66,10 @@ defineProps({
             </div>
         </div>
         <div class="card-product__footer" v-if="!successfully">
-            <app-button full @action="bayToCard">
+            <app-button full @action="add" :disabled="waiting" :wait="waiting">
                 <AppSvg name="plus"/>
                 В корзину
-                <AppAmount :value="1"/>
+<!--                <AppAmount v-if="$basketItems[data.documentId]" :value="$basketItems[data.documentId].amount"/>-->
             </app-button>
         </div>
     </div>
