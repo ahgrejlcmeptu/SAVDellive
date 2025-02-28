@@ -5,7 +5,7 @@ import {
     blockStories,
     contactsRequisite,
     renderBlockBr,
-    blockPopular, blockCatalog, blockFavorites
+    blockPopular, blockCatalog, blockProducts
 } from "../admin/app.block";
 import {
     About,
@@ -150,7 +150,7 @@ const pages = {
         return block
     },
     async order() {
-        const block: any = await strapi.documents('api::order.order').findFirst({
+        const block: any = await strapi.documents('api::placing.placing').findFirst({
             fields: ['title']
         });
 
@@ -158,7 +158,7 @@ const pages = {
     },
     async favorites(cookies) {
         const favorites = cookies.favorites ? JSON.parse(cookies.favorites): null
-        return favorites && favorites.length ? await blockFavorites(favorites) : []
+        return favorites && favorites.length ? await blockProducts(favorites) : []
     },
 
 }

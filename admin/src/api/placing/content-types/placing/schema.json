@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "placings",
+  "info": {
+    "singularName": "placing",
+    "pluralName": "placings",
+    "displayName": "Оформление"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

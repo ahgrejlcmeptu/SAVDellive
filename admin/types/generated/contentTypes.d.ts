@@ -747,13 +747,66 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiOrderOrder extends Struct.SingleTypeSchema {
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
-    description: '';
-    displayName: '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435';
+    displayName: 'order';
     pluralName: 'orders';
     singularName: 'order';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    comment: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    day: Schema.Attribute.Date;
+    hour: Schema.Attribute.Time;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    method: Schema.Attribute.Enumeration<
+      [
+        '\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430',
+        '\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430'>;
+    name: Schema.Attribute.String;
+    payment: Schema.Attribute.Enumeration<
+      [
+        '\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438 \u043A\u0443\u0440\u044C\u0435\u0440\u0443',
+        '\u041A\u0430\u0440\u0442\u043E\u0439 \u043A\u0443\u0440\u044C\u0435\u0440\u0443',
+        '\u041E\u043F\u043B\u0430\u0442\u0430 \u043E\u043D\u043B\u0430\u0439\u043D',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438 \u043A\u0443\u0440\u044C\u0435\u0440\u0443'>;
+    persons: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    promo: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    time: Schema.Attribute.Enumeration<
+      [
+        '\u0411\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435',
+        '\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0440\u0435\u043C\u044F',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'\u0411\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPlacingPlacing extends Struct.SingleTypeSchema {
+  collectionName: 'placings';
+  info: {
+    displayName: '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435';
+    pluralName: 'placings';
+    singularName: 'placing';
   };
   options: {
     draftAndPublish: false;
@@ -763,7 +816,10 @@ export interface ApiOrderOrder extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::placing.placing'
+    > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
@@ -1603,6 +1659,7 @@ declare module '@strapi/strapi' {
       'api::delivery.delivery': ApiDeliveryDelivery;
       'api::home.home': ApiHomeHome;
       'api::order.order': ApiOrderOrder;
+      'api::placing.placing': ApiPlacingPlacing;
       'api::present.present': ApiPresentPresent;
       'api::product.product': ApiProductProduct;
       'api::recall.recall': ApiRecallRecall;

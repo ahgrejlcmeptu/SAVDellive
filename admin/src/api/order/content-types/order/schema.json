@@ -1,17 +1,62 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "orders",
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Оформление",
-    "description": ""
+    "displayName": "order"
   },
   "options": {
     "draftAndPublish": false
   },
   "attributes": {
-    "title": {
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "method": {
+      "type": "enumeration",
+      "enum": [
+        "Доставка",
+        "Самовывоз"
+      ],
+      "default": "Доставка"
+    },
+    "address": {
+      "type": "string"
+    },
+    "payment": {
+      "type": "enumeration",
+      "enum": [
+        "Наличными курьеру",
+        "Картой курьеру",
+        "Оплата онлайн"
+      ],
+      "default": "Наличными курьеру"
+    },
+    "time": {
+      "type": "enumeration",
+      "enum": [
+        "Ближайшее",
+        "Выбрать время"
+      ],
+      "default": "Ближайшее"
+    },
+    "day": {
+      "type": "date"
+    },
+    "hour": {
+      "type": "time"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "persons": {
+      "type": "string"
+    },
+    "promo": {
       "type": "string"
     }
   }

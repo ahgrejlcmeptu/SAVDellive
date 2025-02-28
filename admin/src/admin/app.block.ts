@@ -108,7 +108,7 @@ export const blockPopular = (block: any) => {
     })
     return {...block, statuses, products: Object.values(cards)}
 }
-export const blockFavorites = async (arr: any) => {
+export const blockProducts = async (arr: any) => {
     return await strapi.documents('api::product.product').findMany({
         ...Products.base,
         filters: {
