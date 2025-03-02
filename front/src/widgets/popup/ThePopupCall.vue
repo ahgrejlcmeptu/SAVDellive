@@ -3,39 +3,21 @@ import AppPopup from "@spared/AppPopup.vue";
 import AppInput from "@spared/AppInput.vue";
 import AppButton from "@spared/AppButton.vue";
 import AppCheckbox from "@spared/AppCheckbox.vue";
+import AppSocials from "@entites/socials/AppSocials.vue";
 import {useField, useForm} from 'vee-validate';
 import {toTypedSchema} from '@vee-validate/zod';
 import {z} from 'zod';
 import {ref} from "vue";
-import AppSocials from "@entites/socials/AppSocials.vue";
 import {http} from "@app/utils/http.ts";
 
 const form = ref<null | HTMLElement>(null)
 const active = ref<boolean>(false)
 const validationSchema = toTypedSchema(
     z.object({
-        phone: z.string()
-            .optional()
-            .refine((value, context) => {
-                // Проверяем значение politic перед выполнением проверки
-                // console.log(context)
-                // const { politic } = context.parent;
-                // Если politic false, то phone может быть пустым
-                return true
-                // return politic || (!!value && value.length >= 16);
-            }, {
-                message: 'Обязательное поле',
-                path: ['phone'], // Указываем поле, для которого конкретное сообщение об ошибке
-            }),
+        phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
         politic: z.boolean().default(true)
     })
 );
-// const validationSchema = toTypedSchema(
-//     z.object({
-//         phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
-//         politic: z.boolean().default(true)
-//     })
-// );
 const {handleSubmit, errors} = useForm({
     validationSchema,
 });

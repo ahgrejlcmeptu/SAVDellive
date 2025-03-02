@@ -69,7 +69,7 @@ const add = async (event) => {
             <app-button full @action="add" :disabled="waiting" :wait="waiting">
                 <AppSvg name="plus"/>
                 В корзину
-<!--                <AppAmount v-if="$basketItems[data.documentId]" :value="$basketItems[data.documentId].amount"/>-->
+                <AppAmount v-if="$basketItems[data.documentId]" :value="$basketItems[data.documentId].amount"/>
             </app-button>
         </div>
     </div>

@@ -15,3 +15,11 @@ export function setCookie({name, value, time}) {
     date.setDate(date.getDate() + (+time || 1))
     document.cookie = `${name}=${value || true}; path=/; expires=${date.toUTCString()}`
 }
+
+export function formEmptyValue(data: object) {
+    const newDate = data
+    for (let key in newDate) {
+        if (newDate[key] === undefined) delete newDate[key]
+    }
+    return newDate
+}

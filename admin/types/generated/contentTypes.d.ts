@@ -750,6 +750,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
+    description: '';
     displayName: 'order';
     pluralName: 'orders';
     singularName: 'order';
@@ -786,6 +787,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438 \u043A\u0443\u0440\u044C\u0435\u0440\u0443'>;
     persons: Schema.Attribute.String;
     phone: Schema.Attribute.String;
+    products: Schema.Attribute.JSON;
     promo: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     time: Schema.Attribute.Enumeration<

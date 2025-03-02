@@ -17,12 +17,20 @@ import AppNotifications from "@entites/notifications/AppNotifications.vue";
 import AppTooltip from "@spared/tooltip/AppTooltip.vue";
 import AppSelect from "@spared/select/AppSelect.vue";
 import AppSvg from "@spared/AppSvg.vue";
-import {markRaw, reactive, ref, watch} from "vue";
-import type {FormOrder} from "@app/utils/interfaces";
 import AppSelectItem from "@spared/select/AppSelectItem.vue";
 import AppOrderFormList from "@spared/order/AppOrderFormList.vue";
 import AppOrderFormItem from "@spared/order/AppOrderFormItem.vue";
+import {markRaw, reactive, ref, watch} from "vue";
+import type {FormOrder} from "@app/utils/interfaces";
+import {toTypedSchema} from "@vee-validate/zod";
+import {z} from "zod";
+import {useField, useForm} from "vee-validate";
+import {http} from "@app/utils/http.ts";
+import {formEmptyValue} from "@app/utils/func.ts";
+import {orderCreate} from "@app/store/orders.ts";
 
+
+const USER = ref(false)
 const FILIALS = [
     {
         id: '1',
@@ -122,64 +130,105 @@ const HOUR = [
         value: '18:00'
     },
 ]
-
-const form = reactive<FormOrder>({
-    name: '',
-    phone: '',
-    method: 'Доставка',
-    address: '',
-    payment: 'Наличными курьеру',
-    time: 'Ближайшее',
-    promo: '',
-    bonus: ''
-})
-const additional = ref(false)
+const additional = ref<boolean>(false)
+const form = ref<null | HTMLElement>(null)
 const icons = markRaw({
     cash: IconCash,
     card: IconCard,
     online: IconOnline
 })
+// const form = reactive<FormOrder>({
+//     name: '',
+//     phone: '',
+//     method: 'Доставка',
+//     address: '',
+//     payment: 'Наличными курьеру',
+//     time: 'Ближайшее',
+//     promo: '',
+//     bonus: ''
+// })
+
+//
+// watch(additional, (value) => {
+//     if (value) {
+//         form.comment = ''
+//         form.persons = ''
+//     } else {
+//         delete form.comment
+//         delete form.persons
+//     }
+// })
+// watch(
+//     () => form.method,
+//     (value) => {
+//         delete form.address
+//         delete form.filial
+//
+//         if (value === 'Доставка') return form.address = ''
+//         if (value === 'Самовывоз') return form.filial = FILIALS[0].name
+//     }
+// )
+// watch(
+//     () => form.time,
+//     (value) => {
+//         delete form.day
+//         delete form.hour
+//
+//         if (value === 'Ближайшее') return;
+//         if (value === 'Выбрать время') {
+//             form.day = ''
+//             form.hour = ''
+//         }
+//     }
+// )
+
+const validationSchema = toTypedSchema(
+    z.object({
+        name: z.string().optional(),
+        phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
+        method: z.string().default('Доставка'),
+        address: z.string().optional(),
+        payment: z.string().default('Наличными курьеру'),
+        time: z.string().default('Ближайшее'),
+        promo: z.string().optional(),
+        // bonus: z.string()
+    })
+);
 
 
+// const validationSchema = toTypedSchema(
+//     z.object({
+//         phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
+//         name: z.string().optional().default('123')
+//     })
+// );
+const {handleSubmit, errors} = useForm({
+    validationSchema,
+});
 
-watch(additional, (value) => {
-    if (value) {
-        form.comment = ''
-        form.persons = ''
-    } else {
-        delete form.comment
-        delete form.persons
+const {value: name} = useField('name');
+const {value: phone} = useField('phone');
+const {value: method} = useField('method');
+const {value: address} = useField('address');
+const {value: payment} = useField('payment');
+const {value: time} = useField('time');
+const {value: promo} = useField('promo');
+// const {value: bonus} = useField('bonus');
+
+const onSubmit = handleSubmit(async values => {
+    console.log()
+    for (let [name, value] of new FormData(form.value)) {
+        console.log(`${name} = ${value}`);
     }
-})
-
-watch(
-    () => form.method,
-    (value) => {
-        delete form.address
-        delete form.filial
-
-        if (value === 'Доставка') return form.address = ''
-        if (value === 'Самовывоз') return form.filial = FILIALS[0].name
-    }
-)
-watch(
-    () => form.time,
-    (value) => {
-        delete form.day
-        delete form.hour
-
-        if (value === 'Ближайшее') return;
-        if (value === 'Выбрать время') {
-            form.day = ''
-            form.hour = ''
-        }
-    }
-)
+    const val = formEmptyValue(values)
+    const result = await orderCreate(val)
+    if (result) location.href = '/successfully?id=' + result.documentId
+});
 
 </script>
 
 <template>
-    <div class="order-form">
+    <form ref="form" class="order-form" @submit="onSubmit">
         <div class="order-form__body">
             <div class="order-form__header">
                 <h3>Оформление заявки</h3>
@@ -188,8 +237,9 @@ watch(
             </div>
             <div class="order-form__group">
                 <div class="order-form__column order-form__column_tablet">
-                    <AppInput v-model="form.name" label="Ваше имя"/>
-                    <AppInput mask="phone" type="tel" v-model="form.phone" placeholder="+7(___)___-__-__"/>
+                    <AppInput v-model="name" label="Ваше имя"/>
+                    <AppInput mask="phone" type="tel" name="phone" v-model="phone" placeholder="+7(___)___-__-__"
+                              :error="errors.phone"/>
                 </div>
             </div>
             <div class="order-form__group">
@@ -200,19 +250,19 @@ watch(
                     <app-tabs-item
                             v-for="item in [{name: 'Доставка'}, {name: 'Самовывоз'}]"
                             :key="item.name"
-                            v-model="form.method"
+                            v-model="method"
                             :value="item.name"
                     >{{ item.name }}
                     </app-tabs-item>
                 </app-tabs>
-                <template v-if="form.method === 'Доставка'">
-                    <AppInput v-model="form.address" label="Адрес доставки"/>
+                <template v-if="method === 'Доставка'">
+                    <AppInput v-model="address" label="Адрес доставки"/>
                 </template>
-                <template v-if="form.method === 'Самовывоз'">
+                <template v-if="method === 'Самовывоз'">
                     <app-radio-list>
                         <app-radio
                                 v-for="item in FILIALS"
-                                v-model="form.filial"
+                                v-model="filial"
                                 :value="item.name"
                                 name="method"
                                 :key="item.id"
@@ -227,7 +277,7 @@ watch(
                             v-for="item in PAYMENT"
                             :key="item.id"
                             name="payment"
-                            v-model="form.payment"
+                            v-model="payment"
                             :value="item.name"
                     >
                         <component :is="icons[item.icon]"></component>
@@ -243,37 +293,37 @@ watch(
                     <app-tabs-item
                             v-for="item in [{name: 'Ближайшее'}, {name: 'Выбрать время'}]"
                             :key="item.name"
-                            v-model="form.time"
+                            v-model="time"
                             :value="item.name"
                     >{{ item.name }}
                     </app-tabs-item>
                 </app-tabs>
-                <template v-if="form.time === 'Ближайшее'">
+                <template v-if="time === 'Ближайшее'">
                     <p>В течении часа ожидайте доставку</p>
                 </template>
-                <template v-if="form.time === 'Выбрать время'">
+                <template v-if="time === 'Выбрать время'">
                     <div class="order-form__column">
                         <app-select
-                                v-model="form.day"
+                                v-model="day"
                                 placeholder="День"
                         >
                             <app-select-item
-                                    :class="{active: form.day === item.value}"
+                                    :class="{active: day === item.value}"
                                     v-for="item in DAY"
                                     :key="item.id"
-                                    @click="form.day = item.value"
+                                    @click="day = item.value"
                             >{{ item.value }}
                             </app-select-item>
                         </app-select>
                         <app-select
-                                v-model="form.hour"
+                                v-model="hour"
                                 placeholder="Время"
                         >
                             <app-select-item
-                                    :class="{active: form.hour === item.value}"
+                                    :class="{active: hour === item.value}"
                                     v-for="item in HOUR"
                                     :key="item.id"
-                                    @click="form.hour = item.value"
+                                    @click="hour = item.value"
                             >{{ item.value }}
                             </app-select-item>
                         </app-select>
@@ -287,8 +337,8 @@ watch(
                 </div>
                 <template v-if="additional">
                     <div class="order-form__column order-form__column_tablet">
-                        <AppInput v-model="form.comment" label="Комментарий"/>
-                        <AppInput v-model="form.persons" label="Количество персон"/>
+                        <AppInput v-model="comment" label="Комментарий"/>
+                        <AppInput v-model="persons" label="Количество персон"/>
                     </div>
                 </template>
             </div>
@@ -296,42 +346,45 @@ watch(
                 <div class="order-form__group-header">
                     <div class="order-form__label">Сделаем скидку по промокоду</div>
                 </div>
-                <AppInputSubmit v-model="form.promo" label="Промокод"/>
+                <AppInputSubmit v-model="promo" label="Промокод"/>
             </div>
         </div>
         <div class="order-form__footer">
-            <div class="order-form__bonus">
-                <app-tooltip>
-                    <template v-slot:btn>
-                        <AppSvg name="question"/>
-                    </template>
-                    <template v-slot:default>
-                        <h6>Общее количество Ваших бонусов: <span>259 Б</span></h6>
-                        <p>Ознакомиться с условиями начисления
-                            и списания бонусных баллов можно <a href="#" target="_blank">по ссылке</a>
-                        </p>
-                    </template>
-                </app-tooltip>
-                259 Б доступно для списания
-            </div>
-            <AppInputSubmit v-model="form.bonus" label="Сколько списать?"/>
+            <template v-if="USER">
+                <div class="order-form__bonus">
+                    <app-tooltip>
+                        <template v-slot:btn>
+                            <AppSvg name="question"/>
+                        </template>
+                        <template v-slot:default>
+                            <h6>Общее количество Ваших бонусов: <span>259 Б</span></h6>
+                            <p>Ознакомиться с условиями начисления
+                                и списания бонусных баллов можно <a href="#" target="_blank">по ссылке</a>
+                            </p>
+                        </template>
+                    </app-tooltip>
+                    259 Б доступно для списания
+                </div>
+                <AppInputSubmit v-model="form.bonus" label="Сколько списать?"/>
+            </template>
             <app-order-form-list>
                 <app-order-form-item><span>3 товара</span><span>2120 <AppCurrency/></span></app-order-form-item>
-                <app-order-form-item><span>Начислим бонусы</span><span>+10 Б</span></app-order-form-item>
+                <app-order-form-item v-if="USER"><span>Начислим бонусы</span><span>+10 Б</span></app-order-form-item>
                 <app-order-form-item><span>Скидка</span><span>-150 <AppCurrency/></span></app-order-form-item>
-                <app-order-form-item><span>Бонусы</span><span>-50 Б</span></app-order-form-item>
+                <app-order-form-item v-if="USER"><span>Бонусы</span><span>-50 Б</span></app-order-form-item>
                 <app-order-form-item><span>Доставка</span><span>0 <AppCurrency/></span></app-order-form-item>
-                <app-order-form-item class="order-form__list-item_total"><span class="text-18">Итог</span><span class="text-20">1920 <AppCurrency/></span>
+                <app-order-form-item class="order-form__list-item_total"><span class="text-18">Итог</span><span
+                        class="text-20">1920 <AppCurrency/></span>
                 </app-order-form-item>
             </app-order-form-list>
             <app-notifications type="error">Бесплатная доставка осуществляется от 1000 ₽.
                 С условиями доставки вы можете ознакомиться
                 <a href="#" target="_blank">по ссылке</a></app-notifications>
             <div class="order-form__submit">
-                <app-button full>Оформить заказ</app-button>
+                <app-button type="submit" full>Оформить заказ</app-button>
             </div>
         </div>
-    </div>
+    </form>
 </template>
 
 <style lang="scss">
