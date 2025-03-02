@@ -3,6 +3,7 @@ import {computed, ref, onMounted} from "vue";
 import AppSvg from "@spared/AppSvg.vue";
 import type {Select} from "@app/utils/interfaces.ts";
 import {closeTheWindow} from "@app/utils/closeTheWindow.ts";
+import AppErrorText from "@spared/AppErrorText.vue";
 
 const select = ref(null)
 const isOpen = ref(false)
@@ -26,15 +27,18 @@ onMounted(() => {
 
 <template>
     <div ref="select" :class="['select', {'select_show': isOpen}]">
-        <div class="select__header" @click="isOpen = !isOpen">
-            <span>{{ model || placeholder }}</span>
-            <AppSvg name="dropdown"/>
-        </div>
-        <div class="select__body" v-if="isOpen">
-            <div class="select__scroll scroll-container" @click="isOpen = false">
-                <slot/>
+        <div class="select__content">
+            <div class="select__header" @click="isOpen = !isOpen">
+                <span>{{ model || placeholder }}</span>
+                <AppSvg name="dropdown"/>
+            </div>
+            <div class="select__body" v-if="isOpen">
+                <div class="select__scroll scroll-container" @click="isOpen = false">
+                    <slot/>
+                </div>
             </div>
         </div>
+        <app-error-text v-if="error">{{error}}</app-error-text>
     </div>
 </template>
 
@@ -42,7 +46,10 @@ onMounted(() => {
 @use "@style/media";
 
 .select {
-  position: relative;
+
+  &__content {
+    position: relative;
+  }
 
   &__header {
     cursor: pointer;
@@ -89,7 +96,8 @@ onMounted(() => {
 
   &_show {
     .select__header {
-      color: var(--main-color-1 );
+      color: var(--main-color-1);
+
       svg {
         transform: rotate(180deg);
         stroke: var(--main-color-1);

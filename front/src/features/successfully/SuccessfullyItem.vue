@@ -25,7 +25,8 @@ defineProps({
         <div class="successfully-item__circle">
             <template v-if="!big">
                 <div class="successfully-item__value">{{ item.id }}</div>
-                <div class="successfully-item__name">{{ item.name }}</div>
+                <div class="successfully-item__name">Заказ <br>
+                    {{ item.value }}</div>
             </template>
             <template v-else>
                 <img class="successfully-item__img" :src="item.img" alt="">

@@ -61,7 +61,12 @@ const add = async (event) => {
                     <s class="card-product__oldPrice text-14" v-if="data.oldPrice">{{ data.oldPrice }}
                         <AppCurrency/>
                     </s>
-                    <div class="card-product__weight text-14" v-if="data.weight">{{ data.weight }}</div>
+                    <template v-if="successfully">
+                        <div class="card-product__weight text-14" v-if="data.amount">{{ data.amount }} шт.</div>
+                    </template>
+                    <template v-else>
+                        <div class="card-product__weight text-14" v-if="data.weight">{{ data.weight }}</div>
+                    </template>
                 </div>
             </div>
         </div>

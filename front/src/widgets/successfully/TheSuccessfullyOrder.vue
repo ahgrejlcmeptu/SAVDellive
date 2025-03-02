@@ -13,7 +13,7 @@ const bonus = computed(() => {
 
 <template>
     <div class="successfully-order">
-        <AppCardSuccessfully :percent="percent" :bonus="bonus"/>
+        <AppCardSuccessfully v-if="false" :percent="percent" :bonus="bonus"/>
         <AppCardProduct
                 class="card-product_mobile"
                 v-for="item in data"

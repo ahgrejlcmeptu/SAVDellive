@@ -2,6 +2,7 @@
 import type {Input} from "@app/utils/interfaces";
 import {vMaska} from "maska/vue"
 import {computed, ref} from "vue";
+import AppErrorText from "@spared/AppErrorText.vue";
 
 const props = withDefaults(defineProps<Input>(), {
     type: 'text'
@@ -71,7 +72,7 @@ const onBlur = () => isFocus.value = false
                     v-maska="options[mask]"
             >
         </div>
-        <div class="input__error" v-if="error">{{ error }}</div>
+        <app-error-text v-if="error">{{ error }}</app-error-text>
     </div>
 </template>
 
@@ -126,12 +127,6 @@ const onBlur = () => isFocus.value = false
   textarea {
     height: 120px;
     resize: none;
-  }
-
-  &__error {
-    font-size: 12px;
-    color: var(--main-error-2);
-    margin-top: 3px;
   }
 
   &_focus {

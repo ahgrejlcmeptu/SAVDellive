@@ -21,98 +21,19 @@ import AppSelectItem from "@spared/select/AppSelectItem.vue";
 import AppOrderFormList from "@spared/order/AppOrderFormList.vue";
 import AppOrderFormItem from "@spared/order/AppOrderFormItem.vue";
 import {markRaw, reactive, ref, watch} from "vue";
-import type {FormOrder} from "@app/utils/interfaces";
 import {toTypedSchema} from "@vee-validate/zod";
 import {z} from "zod";
 import {useField, useForm} from "vee-validate";
-import {http} from "@app/utils/http.ts";
 import {formEmptyValue} from "@app/utils/func.ts";
 import {orderCreate} from "@app/store/orders.ts";
-import {branches} from "@app/store/block.ts";
+import {branches, pageInfo} from "@app/store/block.ts";
 import {useStore} from "@nanostores/vue";
 import AppErrorText from "@spared/AppErrorText.vue";
+import {PAYMENT, DAY, HOUR} from "@app/store/globalItems.ts";
 
+const $pageInfo = useStore(pageInfo)
 const $branches = useStore(branches)
-
-
 const USER = ref(false)
-const PAYMENT = [
-    {
-        id: '1',
-        name: 'Наличными курьеру',
-        icon: 'cash'
-    },
-    {
-        id: '2',
-        name: 'Картой курьеру',
-        icon: 'card'
-    },
-    {
-        id: '3',
-        name: 'Оплата онлайн',
-        icon: 'online'
-    },
-]
-const DAY = [
-    {
-        id: '1',
-        value: '17 января'
-    },
-    {
-        id: '2',
-        value: '18 января'
-    },
-    {
-        id: '3',
-        value: '19 января'
-    },
-    {
-        id: '4',
-        value: '20 января'
-    },
-    {
-        id: '5',
-        value: '21 января'
-    },
-    {
-        id: '6',
-        value: '22 января'
-    },
-    {
-        id: '7',
-        value: '23 января'
-    },
-]
-const HOUR = [
-    {
-        id: '1',
-        value: '15:00'
-    },
-    {
-        id: '2',
-        value: '15:30'
-    },
-    {
-        id: '3',
-        value: '16:00'
-    },
-    {
-        id: '4',
-        value: '16:30'
-    },
-    {
-        id: '5',
-        value: '17:00'
-    },
-    {
-        id: '6',
-        value: '17:30'
-    },
-    {
-        id: '7',
-        value: '18:00'
-    },
-]
 const additional = ref<boolean>(false)
 const form = ref<null | HTMLElement>(null)
 const icons = markRaw({
@@ -120,65 +41,38 @@ const icons = markRaw({
     card: IconCard,
     online: IconOnline
 })
-// const form = reactive<FormOrder>({
-//     name: '',
-//     phone: '',
-//     method: 'Доставка',
-//     address: '',
-//     payment: 'Наличными курьеру',
-//     time: 'Ближайшее',
-//     promo: '',
-//     bonus: ''
-// })
-
-//
-// watch(additional, (value) => {
-//     if (value) {
-//         form.comment = ''
-//         form.persons = ''
-//     } else {
-//         delete form.comment
-//         delete form.persons
-//     }
-// })
-
-// watch(
-//     () => form.time,
-//     (value) => {
-//         delete form.day
-//         delete form.hour
-//
-//         if (value === 'Ближайшее') return;
-//         if (value === 'Выбрать время') {
-//             form.day = ''
-//             form.hour = ''
-//         }
-//     }
-// )
+const formLoad = ref(false)
 
 const validationSchema = toTypedSchema(
     z
         .object({
             name: z.string().optional(),
-            phone: z.string({ message: 'Обязательное поле' }).nonempty({ message: 'Обязательное поле' }).min(16, 'Введите номер полностью'),
+            phone: z.string({message: 'Обязательное поле'}).nonempty({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
             method: z.string().default('Доставка'),
-            address: z.string({ message: 'Обязательное поле' }).nonempty({ message: 'Обязательное поле' }),
+            address: z.string({message: 'Обязательное поле'}).nonempty({message: 'Обязательное поле'}),
             payment: z.string().default('Наличными курьеру'),
             time: z.string().default('Ближайшее'),
-            day: z.string().optional(),
-            hour: z.string().optional(),
+            day: z.string().optional().refine(
+                (val) => {
+                    if (time.value === 'Ближайшее') return true
+                    return val
+                },
+                () => ({message: 'Обязательное поле'})
+            ),
+            hour: z.string().optional().refine(
+                (val) => {
+                    if (time.value === 'Ближайшее') return true
+                    return val
+                },
+                () => ({message: 'Обязательное поле'})
+            ),
             promo: z.string().optional(),
             comment: z.string().optional(),
             persons: z.string().optional(),
             // bonus: z.string()
         })
 );
-// .optional().refine(
-//     (val) => {
-//         return method.value !== 'Доставка'
-//     },
-//     () => ()
-// )
+
 
 const {handleSubmit, errors} = useForm({validationSchema});
 
@@ -189,8 +83,8 @@ const {value: address} = useField('address');
 const {value: payment} = useField('payment');
 const {value: time} = useField('time');
 const {value: day} = useField('day');
-const {value: promo} = useField('promo');
 const {value: hour} = useField('hour');
+const {value: promo} = useField('promo');
 const {value: comment} = useField('comment');
 const {value: persons} = useField('persons');
 // const {value: bonus} = useField('bonus');
@@ -198,6 +92,10 @@ const {value: persons} = useField('persons');
 const methodTabs = reactive({
     address: undefined,
     filial: undefined
+})
+const timeTabs = reactive({
+    day: '',
+    hour: ''
 })
 
 watch(
@@ -220,12 +118,36 @@ watch(
         address.value = value
     }
 )
+watch(
+    () => time.value,
+    (value) => {
+        day.value = undefined
+        hour.value = undefined
+        if (value !== 'Ближайшее') {
+            day.value = timeTabs.day
+            hour.value = timeTabs.hour
+        }
+    }
+)
+watch(
+    () => timeTabs.day,
+    (value) => {
+        day.value = value
+    }
+)
+watch(
+    () => timeTabs.hour,
+    (value) => {
+        hour.value = value
+    }
+)
 
 const onSubmit = handleSubmit(async values => {
-    console.log(values)
-    // const val = formEmptyValue(values)
-    // const result = await orderCreate(val)
-    // if (result) location.href = '/successfully?id=' + result.documentId
+    formLoad.value = true
+    const val = formEmptyValue(values)
+    const result = await orderCreate(val)
+    if (result) location.href = '/successfully?id=' + result.documentId
+    formLoad.value = false
 });
 
 </script>
@@ -273,7 +195,7 @@ const onSubmit = handleSubmit(async values => {
                         </app-radio>
                     </app-radio-list>
                 </template>
-                <app-error-text>{{errors.address}}</app-error-text>
+                <app-error-text>{{ errors.address }}</app-error-text>
             </div>
             <div class="order-form__group">
                 <app-payment-list>
@@ -308,26 +230,28 @@ const onSubmit = handleSubmit(async values => {
                 <template v-if="time === 'Выбрать время'">
                     <div class="order-form__column">
                         <app-select
-                                v-model="day"
+                                v-model="timeTabs.day"
                                 placeholder="День"
+                                :error="errors.day"
                         >
                             <app-select-item
                                     :class="{active: day === item.value}"
                                     v-for="item in DAY"
                                     :key="item.id"
-                                    @click="day = item.value"
+                                    @click="timeTabs.day = item.value"
                             >{{ item.value }}
                             </app-select-item>
                         </app-select>
                         <app-select
-                                v-model="hour"
+                                v-model="timeTabs.hour"
+                                :error="errors.hour"
                                 placeholder="Время"
                         >
                             <app-select-item
-                                    :class="{active: hour === item.value}"
+                                    :class="{active: timeTabs.hour === item.value}"
                                     v-for="item in HOUR"
                                     :key="item.id"
-                                    @click="hour = item.value"
+                                    @click="timeTabs.hour = item.value"
                             >{{ item.value }}
                             </app-select-item>
                         </app-select>
@@ -346,7 +270,7 @@ const onSubmit = handleSubmit(async values => {
                     </div>
                 </template>
             </div>
-            <div class="order-form__group">
+            <div class="order-form__group" v-if="$pageInfo.promo">
                 <div class="order-form__group-header">
                     <div class="order-form__label">Сделаем скидку по промокоду</div>
                 </div>
@@ -385,7 +309,7 @@ const onSubmit = handleSubmit(async values => {
                 С условиями доставки вы можете ознакомиться
                 <a href="#" target="_blank">по ссылке</a></app-notifications>
             <div class="order-form__submit">
-                <app-button type="submit" full>Оформить заказ</app-button>
+                <app-button type="submit" full :disabled="formLoad">Оформить заказ</app-button>
             </div>
         </div>
     </form>

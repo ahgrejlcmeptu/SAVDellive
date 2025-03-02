@@ -13,7 +13,9 @@ import {ref} from "vue";
 import {useStore} from "@nanostores/vue";
 import {basketTotal, basketItems} from "@app/store/basket";
 import {localeNumber} from "@app/utils/toLocale.ts";
+import {pageInfo} from "@app/store/block";
 
+const $pageInfo = useStore(pageInfo)
 const $basketTotal = useStore(basketTotal)
 const $basketItems = useStore(basketItems)
 
@@ -41,14 +43,14 @@ const promo = ref(null)
                 </div>
                 <BasketAdditive/>
             </div>
-            <div class="basket__item basket__item_container">
+            <div class="basket__item basket__item_container" v-if="$pageInfo.promo">
                 <span>Промокод</span>
                 <AppInputSubmit v-model="promo" label="Напишите промокод"/>
             </div>
         </div>
         <div class="basket__footer">
             <app-order-form-list>
-                <app-order-form-item><span>Промокод</span><span>-150 <AppCurrency/></span></app-order-form-item>
+                <app-order-form-item><span>Скидка</span><span>-150 <AppCurrency/></span></app-order-form-item>
                 <app-order-form-item><span>Начислим бонусы
                   <app-tooltip>
                     <template v-slot:btn>

@@ -3,12 +3,6 @@ import {http} from '../utils/http';
 import {basketClear, basketItems} from './basket';
 // import {token, user} from "./user";
 
-// export const ordersLoadOne = async (id) => {
-//     const order = await http({url: `/api/orders/${id}`})
-//
-//     return order
-// }
-
 export const orderCreate = async (data: object) => {
     const body = {
         products: JSON.stringify(Object.values(basketItems.value)),
@@ -20,6 +14,12 @@ export const orderCreate = async (data: object) => {
     const result = await http({url: `/api/orders`, method: "POST", body})
     if (result.error) return false
     await basketClear()
+    return result.data
+}
+export const orderSuccessfully = async (id: string | null) => {
+    const result = await http({url: `/api/orders/${id}?fields=products,state`})
+    if (result.error) return false
+
     return result.data
 }
 

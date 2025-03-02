@@ -1,30 +1,34 @@
 <script setup lang="ts">
 import SuccessfullyItem from "@features/successfully/SuccessfullyItem.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import type {Successfully} from "@app/utils/interfaces";
+
+const props = defineProps(['status'])
 
 const status = ref<Successfully[]>([
     {
         id: 1,
-        name: 'Заказ\n\ на кухне',
-        img: '/img/successfully-video.jpg',
-        video: 'true',
-        circle: '/img/successfully-circle.svg',
+        value: 'в обработке'
     },
     {
         id: 2,
-        name: 'Заказ передан\n\ курьеру'
+        img: '/img/successfully-video.jpg',
+        video: 'true',
+        circle: '/img/successfully-circle.svg',
+        value: 'на кухне'
     },
     {
         id: 3,
-        name: 'Заказ\n\ в пути'
+        value: 'в пути',
     },
     {
         id: 4,
-        name: 'Заказ\n\ доставлен'
+        value: 'доставлен',
     }
 ])
-const active = ref<number>(3)
+const active = computed(() => {
+    return status.value.find(i => props.status === i.value)?.id
+})
 
 </script>
 

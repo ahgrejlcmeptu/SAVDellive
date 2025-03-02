@@ -30,6 +30,7 @@ export interface Checkbox {
 export interface Select {
     placeholder?: string
     modelValue: string | number | undefined
+    error?: string
 }
 
 export interface Radio {
@@ -62,7 +63,7 @@ export interface FormOrder {
 
 export interface Successfully {
     id: string | number
-    name: string
+    value: string
     img?: string
     video?: string
     circle?: string

@@ -1,4 +1,3 @@
-
 ---
 import Layout from '@progresses/Layout.astro';
 import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
@@ -7,6 +6,7 @@ import TheSuccessfullyOrder from "@widgets/successfully/TheSuccessfullyOrder.vue
 import NewsBlock from '@progresses/NewsBlock.vue'
 import AppDescriptionColumn from "@features/description/AppDescriptionColumn.vue"
 import {http} from "../app/utils/http";
+import {orderSuccessfully} from "../app/store/orders";
 
 let load = false
 const description = {
@@ -14,91 +14,13 @@ const description = {
     description: '<p>Подробности заказа мы продублировали на вашу почту. Если письмо не пришло, проверьте, пожалуйста, спам.\n\ Рекомендуем пометить письмо как не спам, для своевременного получения уведомления о новостях и скидках.</p><p>Если у вас возникли какие‑то вопросы или вы не правильно указали свои данные, то позвоните администратору по номеру +7 395 223 40 40</p>',
 }
 const PERCENT = 1
-const ORDER = [
-    {
-        id: '1',
-        name: 'Корейский ',
-        category: '1',
-        status: [1],
-        description: 'Мини-кукуруза, лук, морковь, капуста…',
-        price: 159,
-        oldPrice: 259,
-        weight: '140 гр.',
-        img: '/img/products/1.jpg',
-        amount: 3
-    },
-    {
-        id: '2',
-        name: 'Бургер',
-        category: '1',
-        status: [1, 2],
-        description: 'Котлета говяжья, салат, помидор, сыр, соус…',
-        price: '259',
-        weight: '140 гр.',
-        img: '/img/products/2.jpg',
-        amount: 1
-    },
-    {
-        id: '3',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: '140 гр.',
-        img: '/img/products/3.jpg',
-        amount: 1
-    },
-    {
-        id: '4',
-        name: 'Рыбные палочки',
-        category: '1',
-        status: [1],
-        description: 'Рыбные палочки, панировка, морковь, лук…',
-        price: 159,
-        weight: '140 гр.',
-        img: '/img/products/4.jpg',
-        amount: 1
-    },
-    {
-        id: '5',
-        name: 'Wok',
-        category: '1',
-        status: [1],
-        description: 'Пшеничная лапша, курица, шампиньоны, перец…',
-        price: 159,
-        oldPrice: 259,
-        weight: '140 гр.',
-        img: '/img/products/5.jpg',
-        amount: 1
-    },
-    {
-        id: '6',
-        name: 'Рис с курицей',
-        category: '1',
-        status: [1, 2],
-        description: 'Рис, курица, лук, петрушка, соус терияки…',
-        price: 159,
-        weight: '140 гр.',
-        img: '/img/products/6.jpg',
-        amount: 1
-    },
-    {
-        id: '7',
-        name: 'Мисо-суп',
-        category: '1',
-        status: [1, 2],
-        description: 'Суп с сёмгой, луком, морковью, картофелем и…',
-        price: 159,
-        oldPrice: 259,
-        weight: '140 гр.',
-        img: '/img/products/7.jpg',
-        amount: 1
-    }
-]
-const length = ORDER.reduce((amount, item) => amount + +item.amount, 0)
 const successfully = await http({url: '/api/pages/successfully'})
+const result = await orderSuccessfully(Astro.url.searchParams.get('id'))
+if (!result) return Astro.redirect('/404');
+
+const order = result.products || []
+const status = result.state
+const length = order.reduce((amount, item) => amount + +item.amount, 0)
 load = true
 ---
 
@@ -110,7 +32,7 @@ load = true
                         <AppBreadcrumb list={[{label: 'Информация о заказе'}]}/>
                         <h1 class="text-36">Ваш заказ №32309 принят</h1>
                     </div>
-                    <TheSuccessfully class="mb-30" client:only/>
+                    <TheSuccessfully class="mb-30" status={status} client:only/>
                     <AppDescriptionColumn description={description.description} title={description.title} client:only/>
                 </div>
             </section>
@@ -119,7 +41,7 @@ load = true
                     <div class="page-header">
                         <h4>Состав заказа / {length} шт.</h4>
                     </div>
-                    <TheSuccessfullyOrder percent={PERCENT} data={ORDER} client:only/>
+                    <TheSuccessfullyOrder percent={PERCENT} data={order} client:only/>
                 </div>
             </section>
             <NewsBlock data={successfully.news} client:load/>
