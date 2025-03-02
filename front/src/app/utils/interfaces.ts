@@ -29,13 +29,13 @@ export interface Checkbox {
 
 export interface Select {
     placeholder?: string
-    modelValue: string | number
+    modelValue: string | number | undefined
 }
 
 export interface Radio {
     name?: string
     value: string
-    modelValue: string | number
+    modelValue: string | number | undefined
     readonly?: boolean
 }
 

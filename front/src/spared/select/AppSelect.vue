@@ -13,7 +13,7 @@ const props = defineProps<Select>()
 const emits = defineEmits(['update:modelValue'])
 const model = computed({
     get() {
-        return props.modelValue;
+        return props.modelValue || null;
     },
     set(value) {
         emits("update:modelValue", value);

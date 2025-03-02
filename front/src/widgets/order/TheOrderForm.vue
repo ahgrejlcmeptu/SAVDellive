@@ -28,31 +28,14 @@ import {useField, useForm} from "vee-validate";
 import {http} from "@app/utils/http.ts";
 import {formEmptyValue} from "@app/utils/func.ts";
 import {orderCreate} from "@app/store/orders.ts";
+import {branches} from "@app/store/block.ts";
+import {useStore} from "@nanostores/vue";
+import AppErrorText from "@spared/AppErrorText.vue";
+
+const $branches = useStore(branches)
 
 
 const USER = ref(false)
-const FILIALS = [
-    {
-        id: '1',
-        name: 'ул. Байкальская, 289/2'
-    },
-    {
-        id: '2',
-        name: 'ул. Чернышевского, 8'
-    },
-    {
-        id: '3',
-        name: 'ул. Верхняя Набережная, 145/15'
-    },
-    {
-        id: '4',
-        name: 'ул. Чернышевского, 88'
-    },
-    {
-        id: '5',
-        name: 'ул. Верхняя Набережная, 145/156'
-    }
-]
 const PAYMENT = [
     {
         id: '1',
@@ -158,16 +141,7 @@ const icons = markRaw({
 //         delete form.persons
 //     }
 // })
-// watch(
-//     () => form.method,
-//     (value) => {
-//         delete form.address
-//         delete form.filial
-//
-//         if (value === 'Доставка') return form.address = ''
-//         if (value === 'Самовывоз') return form.filial = FILIALS[0].name
-//     }
-// )
+
 // watch(
 //     () => form.time,
 //     (value) => {
@@ -183,28 +157,30 @@ const icons = markRaw({
 // )
 
 const validationSchema = toTypedSchema(
-    z.object({
-        name: z.string().optional(),
-        phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
-        method: z.string().default('Доставка'),
-        address: z.string().optional(),
-        payment: z.string().default('Наличными курьеру'),
-        time: z.string().default('Ближайшее'),
-        promo: z.string().optional(),
-        // bonus: z.string()
-    })
+    z
+        .object({
+            name: z.string().optional(),
+            phone: z.string({ message: 'Обязательное поле' }).nonempty({ message: 'Обязательное поле' }).min(16, 'Введите номер полностью'),
+            method: z.string().default('Доставка'),
+            address: z.string({ message: 'Обязательное поле' }).nonempty({ message: 'Обязательное поле' }),
+            payment: z.string().default('Наличными курьеру'),
+            time: z.string().default('Ближайшее'),
+            day: z.string().optional(),
+            hour: z.string().optional(),
+            promo: z.string().optional(),
+            comment: z.string().optional(),
+            persons: z.string().optional(),
+            // bonus: z.string()
+        })
 );
+// .optional().refine(
+//     (val) => {
+//         return method.value !== 'Доставка'
+//     },
+//     () => ()
+// )
 
-
-// const validationSchema = toTypedSchema(
-//     z.object({
-//         phone: z.string({message: 'Обязательное поле'}).min(16, 'Введите номер полностью'),
-//         name: z.string().optional().default('123')
-//     })
-// );
-const {handleSubmit, errors} = useForm({
-    validationSchema,
-});
+const {handleSubmit, errors} = useForm({validationSchema});
 
 const {value: name} = useField('name');
 const {value: phone} = useField('phone');
@@ -212,17 +188,44 @@ const {value: method} = useField('method');
 const {value: address} = useField('address');
 const {value: payment} = useField('payment');
 const {value: time} = useField('time');
+const {value: day} = useField('day');
 const {value: promo} = useField('promo');
+const {value: hour} = useField('hour');
+const {value: comment} = useField('comment');
+const {value: persons} = useField('persons');
 // const {value: bonus} = useField('bonus');
 
-const onSubmit = handleSubmit(async values => {
-    console.log()
-    for (let [name, value] of new FormData(form.value)) {
-        console.log(`${name} = ${value}`);
+const methodTabs = reactive({
+    address: undefined,
+    filial: undefined
+})
+
+watch(
+    () => method.value,
+    (value) => {
+        address.value = null
+        if (value === 'Доставка') address.value = methodTabs.address
+        if (value === 'Самовывоз') address.value = methodTabs.filial
     }
-    const val = formEmptyValue(values)
-    const result = await orderCreate(val)
-    if (result) location.href = '/successfully?id=' + result.documentId
+)
+watch(
+    () => methodTabs.address,
+    (value) => {
+        address.value = value
+    }
+)
+watch(
+    () => methodTabs.filial,
+    (value) => {
+        address.value = value
+    }
+)
+
+const onSubmit = handleSubmit(async values => {
+    console.log(values)
+    // const val = formEmptyValue(values)
+    // const result = await orderCreate(val)
+    // if (result) location.href = '/successfully?id=' + result.documentId
 });
 
 </script>
@@ -256,20 +259,21 @@ const onSubmit = handleSubmit(async values => {
                     </app-tabs-item>
                 </app-tabs>
                 <template v-if="method === 'Доставка'">
-                    <AppInput v-model="address" label="Адрес доставки"/>
+                    <AppInput v-model="methodTabs.address" label="Адрес доставки"/>
                 </template>
                 <template v-if="method === 'Самовывоз'">
                     <app-radio-list>
                         <app-radio
-                                v-for="item in FILIALS"
-                                v-model="filial"
-                                :value="item.name"
+                                v-for="item in $branches"
+                                v-model="methodTabs.filial"
+                                :value="item.city + ', ' + item.street"
                                 name="method"
-                                :key="item.id"
-                        >{{ item.name }}
+                                :key="item.documentId"
+                        >{{ item.city + ', ' + item.street }}
                         </app-radio>
                     </app-radio-list>
                 </template>
+                <app-error-text>{{errors.address}}</app-error-text>
             </div>
             <div class="order-form__group">
                 <app-payment-list>
