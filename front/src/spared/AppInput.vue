@@ -34,6 +34,7 @@ const model = computed({
 })
 const onFocus = () => isFocus.value = true
 const onBlur = () => isFocus.value = false
+const passwordVisible = ref<boolean>(false)
 </script>
 
 <template>
@@ -52,7 +53,7 @@ const onBlur = () => isFocus.value = false
             ></textarea>
                 <input
                         v-else
-                        :type="type"
+                        :type="passwordVisible ? 'text' : type"
                         :name="name"
                         :placeholder="placeholder"
                         v-model.trim="model"
@@ -63,7 +64,7 @@ const onBlur = () => isFocus.value = false
             </template>
             <input
                     v-else
-                    :type="type"
+                    :type="passwordVisible ? 'text' : type"
                     :name="name"
                     :placeholder="placeholder"
                     v-model.trim="model"
@@ -71,6 +72,8 @@ const onBlur = () => isFocus.value = false
                     @blur="onBlur"
                     v-maska="options[mask]"
             >
+
+            <div v-if="type === 'password'" @click="passwordVisible = !passwordVisible" class="input__visible"></div>
         </div>
         <app-error-text v-if="error">{{ error }}</app-error-text>
     </div>
@@ -103,6 +106,17 @@ const onBlur = () => isFocus.value = false
     color: var(--text-color-2);
     transition: .3s;
     pointer-events: none;
+  }
+
+  &__visible {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    border: 1px solid;
   }
 
   input, textarea {

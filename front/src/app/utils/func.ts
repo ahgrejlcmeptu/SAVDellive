@@ -23,3 +23,13 @@ export function formEmptyValue(data: object) {
     }
     return newDate
 }
+
+export function checkPassword(password: string): boolean {
+    const isUpperCase = /[A-Z]/.test(password);
+    const isLowerCase = /[a-z]/.test(password);
+    const isNumber = /\d/.test(password);
+    const isSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isCyrillic = /[А-Яа-яЁё]/.test(password);
+
+    return isUpperCase && isLowerCase && isNumber && !isSymbol && !isCyrillic; // Все условия должны выполниться
+}

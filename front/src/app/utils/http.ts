@@ -13,7 +13,7 @@ export async function http({url, body, token, method = "GET", cookies}) {
             credentials: 'include'
         }
         if (token) config.headers['Authorization'] = 'Bearer ' + token
-        if (body) config.body = JSON.stringify({data: body})
+        if (body) config.body = JSON.stringify(body)
         if (cookies) config.headers.Cookie = cookies
 
         const response = await fetch(`${import.meta.env.SERVER_VITE_API_SERVER || import.meta.env.PUBLIC_VITE_API_SERVER}${url}`, config)

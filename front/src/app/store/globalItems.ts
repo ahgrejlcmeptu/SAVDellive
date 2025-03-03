@@ -75,3 +75,7 @@ export const HOUR = [
         value: '18:00'
     },
 ]
+export const ERROR = {
+    'Email or Username are already taken': 'E-mail или Логин уже заняты',
+    'Invalid identifier or password': 'Неверный Логин/E-mail или пароль'
+}
