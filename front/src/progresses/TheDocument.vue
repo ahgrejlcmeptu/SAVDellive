@@ -3,13 +3,16 @@ import {onMounted} from "vue";
 import {Anchors} from "@app/utils/anchors";
 import {blockInfo} from "@app/store/block";
 import {favoritesCookie} from "@app/store/favorites";
+import {User} from "@app/store/user.ts";
 
 const anchors = new Anchors()
 const props = defineProps(['data', 'cookies'])
 
 blockInfo(props.data)
+User.init(props.data.user, props.cookies.token)
+
 onMounted(async () => {
-    favoritesCookie(props.cookies.favorites)
+    User.init(props.data.user, props.cookies.token)
     favoritesCookie(props.cookies.favorites)
     blockInfo(props.data)
     document.addEventListener('click', (event: Event) => {

@@ -145,7 +145,7 @@ const PAGE = {
 }
 
 const cookies = serverCookies(Astro.cookies)
-const setting = await http({url: '/api/setting', cookies: JSON.stringify(cookies)})
+const setting = await http({url: '/api/setting', cookies: JSON.stringify(cookies), token: cookies.token})
 load = true
 ---
 

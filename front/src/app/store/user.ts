@@ -48,3 +48,17 @@ export const Auth = {
     //
     // }
 }
+
+export const User = {
+    init(data: any, jwt: any) {
+        user.set(data)
+        token.set(jwt)
+    },
+    async updateBasket() {
+        return await http({url: `/api/users/${user.value.id}`, token: token.value, method: 'PUT', body: {basket: user.value.basket}})
+    },
+    async updateFavorites() {
+        return await http({url: `/api/users/${user.value.id}`, token: token.value, method: 'PUT', body: {favorites: user.value.favorites}})
+    }
+
+}

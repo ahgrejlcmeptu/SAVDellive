@@ -24,5 +24,5 @@ export function serverCookies(cookies) {
     }
     // categories = await categoriesLoad()
     // return {basket, favorites, categories, user, token}
-    return {favorites, basket}
+    return {favorites, basket, token}
 }
