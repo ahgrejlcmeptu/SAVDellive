@@ -1,9 +1,6 @@
 import {computed, map} from 'nanostores';
-import {basketItems} from "@app/store/basket.ts";
 import {setCookie} from "@app/utils/func.ts";
-// import {setCookie} from '../utils/cookie';
-// import {http} from '../utils/http';
-// import {updateMe, user} from "./user";
+import {User, user} from "./user";
 
 export const favoritesItems = map({});
 export const favoritesList = map({})
@@ -13,13 +10,17 @@ export const favoritesLength = computed(favoritesList, $favoritesList => {
 
 export const favoritesCookie = (cookie: string = ''): string => {
     favoritesList.set({})
+
+    if (user.value) {
+        user.value?.favorites.forEach((id) => favoritesList.setKey(id, id));
+        return
+    }
     const json = cookie ? JSON.parse(cookie) : []
     if (Array.isArray(json)) {
         json.forEach((id) => favoritesList.setKey(id, id));
     } else {
         console.warn('JSON из cookie не является массивом');
     }
-    return cookie
 }
 
 export async function favoritesLoad(products) {
@@ -31,14 +32,14 @@ export async function favoritesToggle(id) {
     favoritesList.get()[id] ? favoritesList.setKey(id, undefined) : favoritesList.setKey(id, id);
     if (favoritesItems.get()[id]) favoritesItems.setKey(id, undefined)
     favoritesSave()
-    // if (user.value) {
-    //     user.value.favorites = JSON.stringify(Object.values(favoritesList.value))
-    //     await updateMe('favorites')
-    // } else {
-    //     favoritesSave()
-    // }
 }
-//
-const favoritesSave = () => {
-    setCookie({name: 'favorites', value: JSON.stringify(Object.values(favoritesList.value)), time: 30})
+
+const favoritesSave = async () => {
+    if (user.value) {
+        user.value.favorites = Object.values(favoritesList.value)
+        await User.updateFavorites()
+    } else {
+        setCookie({name: 'favorites', value: JSON.stringify(Object.values(favoritesList.value)), time: 30})
+    }
+
 }

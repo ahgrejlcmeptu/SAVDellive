@@ -1,5 +1,7 @@
 ---
 import '@style/app.scss'
+import { ViewTransitions } from 'astro:transitions';
+// <ViewTransitions />
 import TheHeader from '@widgets/header/TheHeader.vue'
 import TheFooter from '@widgets/footer/TheFooter.vue'
 import ThePopupBasket from '@widgets/popup/ThePopupBasket.vue'
@@ -17,132 +19,6 @@ import {serverCookies} from "../app/utils/apiGlobal";
 const {title, data} = Astro.props
 let load = false
 // то что грузиться всегда (может у юзера что то изменить)
-const PAGE = {
-    // user: {
-    //     id: 1,
-    //     img: '/img/user.jpg',
-    //     name: 'Екатерина',
-    //     surname: 'Золинa',
-    //     phone: '+7(914)88-88-888',
-    //     email: 'info@dellive.ru',
-    //     login: 'testLogin',
-    //     bonus: 200,
-    //     discount: 1,
-    //     history: [
-    //         {
-    //             id: 1,
-    //             date: 1619280000000,
-    //             number: 1245,
-    //             total: 968,
-    //             status: 'Завершён',
-    //             bonus: {
-    //                 increment: 123,
-    //                 decrement: 90
-    //             },
-    //             list: [
-    //                 {
-    //                     id: 1,
-    //                     img: '/img/products/1.jpg',
-    //                     name: 'Бургер',
-    //                     price: 238,
-    //                     amount: 2
-    //                 },
-    //                 {
-    //                     id: 2,
-    //                     img: '/img/products/2.jpg',
-    //                     name: 'Wok',
-    //                     price: 238,
-    //                     amount: 1
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             id: 2,
-    //             date: 1619280000000,
-    //             number: 1245,
-    //             total: 968,
-    //             status: 'Завершён',
-    //             bonus: {
-    //                 increment: 123,
-    //                 decrement: 90
-    //             },
-    //             list: [
-    //                 {
-    //                     id: 1,
-    //                     img: '/img/products/1.jpg',
-    //                     name: 'Бургер',
-    //                     price: 238,
-    //                     amount: 2
-    //                 },
-    //                 {
-    //                     id: 2,
-    //                     img: '/img/products/2.jpg',
-    //                     name: 'Wok',
-    //                     price: 238,
-    //                     amount: 1
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             id: 3,
-    //             date: 1619280000000,
-    //             number: 1245,
-    //             total: 968,
-    //             status: 'Завершён',
-    //             bonus: {
-    //                 increment: 123,
-    //                 decrement: 90
-    //             },
-    //             list: [
-    //                 {
-    //                     id: 1,
-    //                     img: '/img/products/1.jpg',
-    //                     name: 'Бургер',
-    //                     price: 238,
-    //                     amount: 2
-    //                 },
-    //                 {
-    //                     id: 2,
-    //                     img: '/img/products/2.jpg',
-    //                     name: 'Wok',
-    //                     price: 238,
-    //                     amount: 1
-    //                 }
-    //             ]
-    //         }
-    //     ],
-    //     basket: [
-    //         {
-    //             id: 1,
-    //             name: 'Мисо-суп',
-    //             description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-    //             amount: 1,
-    //             img: '/img/products/1.jpg',
-    //             price: 1259,
-    //             info: '8 шт. 140 гр.'
-    //         },
-    //         {
-    //             id: 2,
-    //             name: 'test',
-    //             description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-    //             amount: 1,
-    //             img: '/img/products/1.jpg',
-    //             price: 259,
-    //             info: '8 шт. 140 гр.'
-    //         },
-    //         {
-    //             id: 3,
-    //             name: 'test',
-    //             description: 'Семга терияки, сливочный сыр, огурец, стружка тунца',
-    //             amount: 2,
-    //             img: '/img/products/1.jpg',
-    //             price: 259,
-    //             info: '8 шт. 140 гр.'
-    //         }
-    //     ],
-    //     favorites: []
-    // }
-}
 
 const cookies = serverCookies(Astro.cookies)
 const setting = await http({url: '/api/setting', cookies: JSON.stringify(cookies), token: cookies.token})
@@ -159,10 +35,11 @@ load = true
     <meta name="generator" content={Astro.generator}/>
     <title>{title}</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+    <ViewTransitions />
 </head>
 <body>
 {load && (
-        <TheDocument data={{...data, ...PAGE, ...setting.data}} cookies={cookies}} client:load>
+        <TheDocument data={{...data, ...setting.data}} cookies={cookies}} client:load>
             <TheHeader client:load/>
             <main>
                 <slot/>

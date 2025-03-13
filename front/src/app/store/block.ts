@@ -2,7 +2,6 @@ import {map, atom} from 'nanostores';
 import {presentInit} from "@app/store/present.ts";
 import {basketInit} from "@app/store/basket";
 
-// export const blockInfo = map({})
 export const HOST = 'http://localhost:1337'
 export const pageInfo = atom({})
 export const blockNavigation = atom({
@@ -39,7 +38,8 @@ export const blockNavigation = atom({
             name: 'Акции',
             highlight: true
         },
-    ]})
+    ]
+})
 export const branches = atom(null)
 export const branchesActive = atom({})
 export const branchesChange = (id) => {
@@ -51,7 +51,7 @@ export const blockInfo = (data: any): boolean => {
     pageInfo.set(data)
     blockNavigation.set({...blockNavigation.value, ...data.nav})
     branches.set(data.branches)
-    branchesActive.set(branches.value[0])
+    if (branches.value) branchesActive.set(branches.value[0])
     basketInit(data.basket)
     presentInit(pageInfo.value.presents || [])
 

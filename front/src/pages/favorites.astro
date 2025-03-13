@@ -4,13 +4,11 @@ import AppBreadcrumb from '@features/breadcrumb/AppBreadcrumb.vue'
 import TheLkNavbar from '@widgets/lk/TheLkNavbar.vue'
 import TheProducts from '@widgets/products/TheProducts.vue'
 import {http} from "../app/utils/http";
+import {serverCookies} from "../app/utils/apiGlobal";
 
 let load = false
-const cookies = []
-if (Astro.cookies.get('favorites')?.value) {
-    cookies.push('favorites='+ Astro.cookies.get('favorites')?.value)
-}
-const favorites = await http({url: '/api/pages/favorites', cookies: cookies.join('; ')})
+const cookies = serverCookies(Astro.cookies)
+const favorites = await http({url: '/api/pages/favorites', cookies: JSON.stringify(cookies), token: cookies.token})
 load = true
 ---
 

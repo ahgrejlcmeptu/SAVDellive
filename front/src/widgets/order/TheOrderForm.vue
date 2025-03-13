@@ -145,8 +145,8 @@ watch(
 const onSubmit = handleSubmit(async values => {
     formLoad.value = true
     const val = formEmptyValue(values)
-    const result = await orderCreate({data: val})
-    if (result) location.href = '/successfully?id=' + result.documentId
+    const result = await orderCreate(val)
+    // if (result) location.href = '/successfully?id=' + result.documentId
     formLoad.value = false
 });
 

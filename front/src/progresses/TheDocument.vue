@@ -10,6 +10,7 @@ const props = defineProps(['data', 'cookies'])
 
 blockInfo(props.data)
 User.init(props.data.user, props.cookies.token)
+favoritesCookie(props.cookies.favorites)
 
 onMounted(async () => {
     User.init(props.data.user, props.cookies.token)

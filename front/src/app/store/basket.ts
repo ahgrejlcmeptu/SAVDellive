@@ -26,7 +26,7 @@ export async function basketAdd(item) {
         });
     }
 
-    basketUpdate()
+    basketSave()
 }
 
 export async function basketIncrement(documentId) {
@@ -35,7 +35,7 @@ export async function basketIncrement(documentId) {
         ...existingEntry,
         amount: existingEntry.amount + 1,
     });
-    basketUpdate()
+    basketSave()
 }
 
 export async function basketDecrement(documentId) {
@@ -46,17 +46,17 @@ export async function basketDecrement(documentId) {
         ...existingEntry,
         amount: existingEntry.amount - 1,
     });
-    basketUpdate()
+    basketSave()
 }
 
 export async function basketRemove(documentId) {
     basketItems.setKey(documentId, undefined);
-    basketUpdate()
+    basketSave()
 }
 
 export async function basketClear() {
     basketItems.set({})
-    basketUpdate(true)
+    basketSave(true)
 }
 
 const basketTransformCookie = () => Object.values(basketItems.value).reduce((val, i) => {
@@ -64,7 +64,7 @@ const basketTransformCookie = () => Object.values(basketItems.value).reduce((val
     return val
 }, {})
 
-const basketUpdate = async (clear: boolean = false) => {
+const basketSave = async (clear: boolean = false) => {
     if (user.value) {
         user.value.basket = basketTransformCookie()
         await User.updateBasket()
