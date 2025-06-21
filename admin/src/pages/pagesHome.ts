@@ -21,6 +21,8 @@ import {
     Team,
     Popular, Declaration
 } from "../admin/populates";
+import * as cookie from "cookie";
+import {USER} from "../utils/user";
 
 const pages = {
     async home() {
@@ -156,13 +158,25 @@ const pages = {
 
         return block
     },
-    async favorites(cookies) {
-        const favorites = cookies.favorites ? JSON.parse(cookies.favorites): null
+    async favorites() {
+        const ctx = strapi.requestContext.get();
+        const authHeader = ctx.request.headers['authorization'];
+        const cookies = cookie.parse(ctx.request.header.cookie || '')
+
+        let favorites = []
+        let user = null;
+        if (authHeader) {
+            const token = authHeader.split(' ')[1];
+            user = await USER.find(token);
+            favorites = user.favorites
+        } else {
+            favorites = cookies.favorites ? JSON.parse(cookies.favorites): null
+        }
         return favorites && favorites.length ? await blockProducts(favorites) : []
     },
 
 }
-export const pageName = async (name, cookies) => {
-    return await pages[name](cookies)
+export const pageName = async (name) => {
+    return await pages[name]()
 }
 

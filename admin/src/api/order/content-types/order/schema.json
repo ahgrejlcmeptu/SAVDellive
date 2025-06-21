@@ -4,7 +4,7 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "order",
+    "displayName": "Заказы",
     "description": ""
   },
   "options": {
@@ -62,6 +62,23 @@
     },
     "products": {
       "type": "json"
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "в обработке",
+        "на кухне",
+        "в пути",
+        "доставлен"
+      ],
+      "default": "в обработке",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
     }
   }
 }
